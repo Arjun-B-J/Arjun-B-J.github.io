@@ -1,42 +1,45 @@
-let clicked = false;
-document.getElementById("sun").addEventListener("click", sunClicked);
-function sunClicked(){
-  var first = document.getElementsByClassName("first-row");
-  var second = document.getElementsByClassName("second-row");
-  var third = document.getElementsByClassName("third-row");
-  if(clicked===false){
-    document.getElementById("sun").style.backgroundColor="#FFAA54";
-    document.getElementById("sun").style.marginTop="130vh";
-    document.getElementById("sun").style.width="300px";
-    document.getElementById("sun").style.height="300px";
-    document.getElementById("sun").style.boxShadow="0 0 100px #fff";
-    document.getElementById("sky").style.marginTop="-100vh";
-    Array.prototype.forEach.call(first, function(el) {
-      el.style.borderBottom="40vh solid #FF9A1F";
-    });
-    Array.prototype.forEach.call(second, function(el) {
-      el.style.borderBottom="30vh solid #E86710";
-    });
-    Array.prototype.forEach.call(third, function(el) {
-      el.style.borderBottom="20vh solid #692E07";
-    });
-    clicked=true;
-  }else{
-    document.getElementById("sun").style.backgroundColor="#FFCD47";
-    document.getElementById("sun").style.marginTop="60px";
-    document.getElementById("sun").style.width="250px";
-    document.getElementById("sun").style.height="250px";
-    document.getElementById("sun").style.boxShadow="none";
-    document.getElementById("sky").style.marginTop="0";
-    Array.prototype.forEach.call(first, function(el) {
-      el.style.borderBottom="40vh solid #BE87FA";
-    });
-    Array.prototype.forEach.call(second, function(el) {
-      el.style.borderBottom="30vh solid #9781F0";
-    });
-    Array.prototype.forEach.call(third, function(el) {
-      el.style.borderBottom="20vh solid #6A72D9";
-    });
-    clicked=false;
-  }
+// Reveal-on-scroll via IntersectionObserver
+const reveals = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
+  );
+  reveals.forEach((el) => io.observe(el));
+} else {
+  // Fallback: just show everything
+  reveals.forEach((el) => el.classList.add('in-view'));
+}
+
+// Hero items reveal immediately on load (don't wait for scroll)
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero .reveal').forEach((el) => {
+    el.classList.add('in-view');
+  });
+});
+
+// Footer year
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Subtle nav background intensification on scroll
+const nav = document.querySelector('.nav');
+if (nav) {
+  const updateNav = () => {
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(10, 14, 26, 0.85)';
+    } else {
+      nav.style.background = 'rgba(10, 14, 26, 0.6)';
+    }
+  };
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 }

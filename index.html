@@ -1,43 +1,339 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Arjun BJ-Sunset</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Arjun Bindu Jayachandran — Senior Software Engineer at Wells Fargo. Building GenAI and backend platforms for regulated fintech." />
+  <meta name="theme-color" content="#0a0e1a" />
 
+  <meta property="og:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
+  <meta property="og:description" content="Building GenAI and backend platforms for regulated fintech — two-tower retrievers, LangGraph agents, PnL microservices at scale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://arjun-b-j.github.io" />
+
+  <title>Arjun Bindu Jayachandran · Senior Software Engineer</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2306b6d4'/><stop offset='100%25' stop-color='%23a855f7'/></linearGradient></defs><rect width='32' height='32' rx='7' fill='url(%23g)'/><text x='16' y='22' font-family='Arial,sans-serif' font-weight='700' font-size='15' text-anchor='middle' fill='white'>A</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<!-- partial:index.partial.html -->
+  <div class="bg-mesh" aria-hidden="true"></div>
 
-  <div id="info">
-  ARJUN BJ
-  NITC CSE
-  </div>
+  <nav class="nav">
+    <a href="#top" class="nav__logo" aria-label="Home">ABJ</a>
+    <ul class="nav__links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<div id="sky">
-  <div id="sun">
-  </div>
-</div>
-<div class="first-row" id="moun1">
-</div>
-<div class="first-row" id="moun2">
-</div>
-<div class="first-row" id="moun3">
-</div>
-<div class="second-row" id="moun4">
-</div>
-<div class="second-row" id="moun5">
-</div>
-<div class="second-row" id="moun6">
-</div>
-<div class="third-row" id="moun7">
-</div>
-<div class="third-row" id="moun8">
-</div>
-<div class="third-row" id="moun9">
-</div>
-<!-- partial -->
-  <script  src="./script.js"></script>
+  <main>
+    <section class="hero" id="top">
+      <div class="hero__content">
+        <p class="hero__greeting reveal">— Hello, I'm</p>
+        <h1 class="hero__name reveal">Arjun Bindu <span class="grad">Jayachandran</span></h1>
+        <p class="hero__title reveal">Senior Software Engineer · <span class="hero__org">Wells Fargo</span> · Bengaluru</p>
+        <p class="hero__tagline reveal">
+          Building <span class="accent">GenAI</span> and <span class="accent">backend platforms</span> for regulated fintech — two-tower retrievers, LangGraph agents, and PnL microservices that hold up under real trade load.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#projects" class="btn btn--primary">See my work</a>
+          <a href="https://github.com/Arjun-B-J" class="btn btn--ghost" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.594 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="hero__badges reveal">
+          <span class="badge"><span class="badge__dot"></span>Top Achievers Award · Wells Fargo 2025</span>
+          <span class="badge"><span class="badge__dot"></span>Published · Journal of Supercomputing 2023</span>
+        </div>
+      </div>
+      <div class="hero__scroll-cue" aria-hidden="true"><span></span></div>
+    </section>
 
+    <section class="section" id="about">
+      <h2 class="section__heading">About</h2>
+      <div class="about__grid">
+        <div class="about__bio reveal">
+          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of GenAI and high-throughput backend systems for fixed-income trading. My work spans <strong>agentic LLM pipelines</strong> (LangGraph orchestrator + validator with MCP tool-use and governance), <strong>neural retrieval</strong> (two-tower dual-encoders with InfoNCE contrastive training, FAISS ANN, ONNX-runtime serving), and <strong>distributed PnL microservices</strong> hardened for replay-safety, exactly-once Kafka semantics, and idempotent ingestion.</p>
+          <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up a Top Achievers Award, an Innovation Pitch Day finalist spot, and an IEEE-published paper on metaheuristic feature selection.</p>
+          <p>Outside of work I tinker — PyQt6 desktop AI, Linux kernel modules, Verilog FPGAs, GANs in Keras. The portfolio below has a slice.</p>
+        </div>
+        <aside class="about__facts reveal">
+          <div class="fact">
+            <span class="fact__label">Role</span>
+            <span class="fact__value">Senior Software Engineer</span>
+          </div>
+          <div class="fact">
+            <span class="fact__label">Company</span>
+            <span class="fact__value">Wells Fargo</span>
+          </div>
+          <div class="fact">
+            <span class="fact__label">Based in</span>
+            <span class="fact__value">Bengaluru, India</span>
+          </div>
+          <div class="fact">
+            <span class="fact__label">Education</span>
+            <span class="fact__value">NIT Calicut · B.Tech CSE '22</span>
+          </div>
+          <div class="fact">
+            <span class="fact__label">Languages</span>
+            <span class="fact__value">English · Malayalam</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <h2 class="section__heading">Experience</h2>
+      <ol class="timeline">
+        <li class="timeline__item reveal">
+          <div class="timeline__date">Jan 2026 – Present</div>
+          <div class="timeline__content">
+            <h3>Senior Software Engineer</h3>
+            <p class="timeline__org">Wells Fargo · Bengaluru</p>
+            <ul class="bullet-list">
+              <li><strong>Initiated a Bond Recommendation Engine</strong> for fixed-income sales-analyst augmentation — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN bond-similarity search, plus an LLM agent layer that converses with traders and orchestrates similarity search and free-form queries. Drove from PoC to a funded production build; now architecting the deployment with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from trader accept/dismiss signals.</li>
+              <li><strong>Shipped a replay-safe historical rerun API for the PnL Service</strong> — async Camel endpoint with context-propagation headers (recalc-flag, snapshot-date) flowing through trade / position / publish routes, with date-correct MongoDB persistence and Kafka-publication suppression for backfills, so corrected snapshots never leak into live downstream consumers.</li>
+              <li><strong>Drove reliability hardening across PnL reporting services</strong> — led root-cause analysis on data mismatches, decoupled fragile upstream dependencies, and added fail-fast integrity guards, shifting services from patch-driven fixes to a resilient-by-design posture.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="timeline__item reveal">
+          <div class="timeline__date">Jul 2022 – Dec 2025</div>
+          <div class="timeline__content">
+            <h3>Software Engineer</h3>
+            <p class="timeline__org">Wells Fargo · Bengaluru</p>
+            <ul class="bullet-list">
+              <li><strong>Designed a LangGraph Orchestrator + Validator agentic pipeline</strong> for natural-language → MongoDB query translation — backed by an MMR-RAG retrieval layer (dual vector stores for schema + user-context injection), an MCP server exposing DB-read primitives to the LLM, and a governance layer (NoSQL injection guards, MQL syntax checks, PII masking, tamper-evident audit logging) enforcing safe-query policy before any DB execution.</li>
+              <li><strong>Enabled horizontal scaling of PnL microservices</strong> — externalized in-process state to Redis to enable stateless replicas, with Kafka exactly-once consumer semantics ensuring concurrency safety under high-volume trade load. Contributed a DMN rules engine for swap position and payment-leg roll-ups and idempotent file ingestion for end-of-day archival flows.</li>
+              <li><strong>Optimized MongoDB query latency by 30–40%</strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
+              <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by ~90% and reducing I/O contention across the service mesh.</li>
+              <li>Authored a 150+ financial-scenario automation framework (parallel execution, 60% regression-cycle cut, Splunk telemetry); led OpenShift modernization of 10+ core services with resilient CI/CD; owned PnL pricing services and ABF data ingestion with zero production data-quality incidents across the ownership window.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="timeline__item reveal">
+          <div class="timeline__date">May 2021 – Jul 2021</div>
+          <div class="timeline__content">
+            <h3>Technology Intern</h3>
+            <p class="timeline__org">Wells Fargo · Bengaluru</p>
+            <p>Built a time-series forecasting engine for ATM cash optimization, benchmarking SARIMA, LSTM, and Prophet on transaction data from 111 ATMs, incorporating exogenous factors (holidays, weather) and automated retraining. Achieved ~91% weekly prediction accuracy via aggregated-window forecasting.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="awards">
+      <h2 class="section__heading">Publications &amp; Awards</h2>
+      <div class="awards-grid">
+        <div class="award award--featured reveal">
+          <div class="award__kind">Publication</div>
+          <h3 class="award__title">SaBMOGWO-S: A novel algorithm for feature selection across 21 benchmark datasets</h3>
+          <p class="award__meta">The Journal of Supercomputing · Vol. 79 · pp. 12869–12901 · 2023 · Co-authored</p>
+          <p class="award__desc">A self-adaptive binary multi-objective Grey Wolf Optimizer for feature selection, evaluated against 21 standard benchmarks. Grew out of the personal <a href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GreyWolfOptimizer</a> repo.</p>
+        </div>
+        <div class="award reveal">
+          <div class="award__kind">Award</div>
+          <h3 class="award__title">Top Achievers Award · Wells Fargo 2025</h3>
+          <p class="award__desc">Wells Fargo's highest individual honor.</p>
+        </div>
+        <div class="award reveal">
+          <div class="award__kind">Award</div>
+          <h3 class="award__title">Innovation Pitch Day 2024 · Grand Finalist</h3>
+          <p class="award__desc">Top 4 of 600+ firm-wide submissions.</p>
+        </div>
+        <div class="award reveal">
+          <div class="award__kind">Award</div>
+          <h3 class="award__title">Manager Spotlight Awards · ×2</h3>
+          <p class="award__desc">Recognized for impact on the team across two separate cycles.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="section__heading">Skills</h2>
+      <div class="skills__groups">
+        <div class="skill-group reveal">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span class="tag">Python <em>(primary)</em></span><span class="tag">Java</span>
+            <span class="tag">C / C++</span><span class="tag">JavaScript</span>
+            <span class="tag">Verilog HDL</span><span class="tag">Rust</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>AI / ML &amp; Agentic</h3>
+          <div class="tags">
+            <span class="tag">LLMs</span><span class="tag">RAG</span>
+            <span class="tag">LangGraph</span><span class="tag">LangChain</span>
+            <span class="tag">Orchestrator + Validator</span><span class="tag">MCP</span>
+            <span class="tag">Tool Calling</span><span class="tag">FAISS</span>
+            <span class="tag">Two-Tower Retrieval</span><span class="tag">MMR</span>
+            <span class="tag">InfoNCE Contrastive</span><span class="tag">PyTorch</span>
+            <span class="tag">ONNX-Runtime</span>
+            <span class="tag">Recall@K · MRR · nDCG</span>
+            <span class="tag">PII Masking</span><span class="tag">Tamper-Evident Audit</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Backend &amp; Distributed Systems</h3>
+          <div class="tags">
+            <span class="tag">System Design</span><span class="tag">Microservices</span>
+            <span class="tag">Event-Driven Architecture</span><span class="tag">Apache Kafka</span>
+            <span class="tag">REST</span><span class="tag">gRPC</span>
+            <span class="tag">MongoDB</span><span class="tag">Redis</span>
+            <span class="tag">SQL</span><span class="tag">Spring Boot</span>
+            <span class="tag">Apache Camel</span><span class="tag">Horizontal Scaling</span>
+            <span class="tag">Idempotency</span><span class="tag">Server-Sent Events</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Financial Domain</h3>
+          <div class="tags">
+            <span class="tag">Fixed-Income Trading</span><span class="tag">PnL Microservices</span>
+            <span class="tag">Trade Reconciliation</span><span class="tag">Swap Position Roll-ups</span>
+            <span class="tag">DMN Rules Engine</span><span class="tag">ABF Ingestion</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Infra, Observability &amp; CI/CD</h3>
+          <div class="tags">
+            <span class="tag">Kubernetes</span><span class="tag">Docker</span>
+            <span class="tag">Helm</span><span class="tag">OpenShift</span>
+            <span class="tag">GitHub Actions</span><span class="tag">Jenkins</span>
+            <span class="tag">Prometheus</span><span class="tag">Grafana</span>
+            <span class="tag">Splunk</span><span class="tag">Sonar</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2 class="section__heading">Personal Projects</h2>
+      <p class="section__sub">A slice of side projects across AI, systems, and the web — open-source on GitHub. <a href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">See the rest →</a></p>
+
+      <div class="projects-grid">
+        <article class="card card--featured reveal">
+          <div class="card__tag">Flagship · Open Source</div>
+          <h3 class="card__title">VoiceToText-with-UI</h3>
+          <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
+          <div class="card__tech">
+            <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/VoiceToText-with-UI" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <h3 class="card__title">Lumen.AI · NL → SQL</h3>
+          <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
+          <div class="card__tech">
+            <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Hackathon</div>
+          <h3 class="card__title">GAIDP — Gen AI Data Profiler</h3>
+          <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
+          <div class="card__tech">
+            <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Led to Publication</div>
+          <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
+          <p class="card__desc">Implementations of GWO and three variants — Binary GWO, Multi-Objective GWO, and Binary MOGWO — wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
+          <div class="card__tech">
+            <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <h3 class="card__title">Pneumonia Detection · Chest X-rays</h3>
+          <p class="card__desc">CNN binary classifier (NORMAL vs PNEUMONIA) trained on the Kaggle Chest X-Ray Images dataset. Sequential Conv/Pool architecture in Keras, ~96.9% training accuracy on the held-out split.</p>
+          <div class="card__tech">
+            <span>TensorFlow</span><span>Keras</span><span>CNN</span><span>Colab</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/Chest_X-ray_pneumonia_detection" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <h3 class="card__title">Power-Efficient Multi-Functional Elevator</h3>
+          <p class="card__desc">Group project in Verilog HDL — a dual-elevator controller for a 7-floor building comparing sweep vs. nearest-request schedulers. Power-saving motor model, temperature-sensor-driven fan, seven-segment floor display, and live LM35 stimulus piped in from an Arduino.</p>
+          <div class="card__tech">
+            <span>Verilog</span><span>FPGA</span><span>Arduino</span><span>FSM</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/Elevator---verilog-HDL" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <h3 class="card__title">Minnal Blockchain</h3>
+          <p class="card__desc">A from-scratch Python blockchain with Proof-of-Work mining, transactions, mining rewards, multi-node registration, and longest-chain consensus over a Flask HTTP API.</p>
+          <div class="card__tech">
+            <span>Python</span><span>Flask</span><span>PoW</span><span>Distributed</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/Minnal-Blockchain" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <h3 class="card__title">DevX · Linux Character Driver</h3>
+          <p class="card__desc">Linux kernel module exposing <code>/dev/devX</code> (major 240). Writes go through a substitution map; reads block on a wait queue until IRQ 1 (legacy keyboard) fires. Bundled with userspace test programs.</p>
+          <div class="card__tech">
+            <span>Linux Kernel</span><span>C</span><span>IRQ</span><span>Wait Queues</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/DevX_Driver" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <h2 class="section__heading">Education</h2>
+      <div class="education-list">
+        <div class="education-item reveal">
+          <h3>B.Tech in Computer Science and Engineering</h3>
+          <p class="education-item__org">National Institute of Technology Calicut · 2022</p>
+          <p class="education-item__detail">CGPA 8.55</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--contact" id="contact">
+      <h2 class="section__heading">Get in touch</h2>
+      <p class="contact__lead">Open to interesting conversations — collaboration, advising, or just trading notes on agentic systems and high-throughput backends.</p>
+      <div class="contact__methods">
+        <a class="contact__method" href="mailto:bindujayachandranarjun@gmail.com">
+          <span class="contact__icon" aria-hidden="true">✉</span>
+          <span>bindujayachandranarjun@gmail.com</span>
+        </a>
+        <a class="contact__method" href="https://linkedin.com/in/arjun-bindu-jayachandran" target="_blank" rel="noopener">
+          <span class="contact__icon" aria-hidden="true">in</span>
+          <span>LinkedIn</span>
+        </a>
+        <a class="contact__method" href="https://github.com/Arjun-B-J" target="_blank" rel="noopener">
+          <span class="contact__icon" aria-hidden="true">⌬</span>
+          <span>github.com/Arjun-B-J</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Arjun Bindu Jayachandran · Bengaluru · Built with care · No frameworks, just HTML &amp; CSS</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
