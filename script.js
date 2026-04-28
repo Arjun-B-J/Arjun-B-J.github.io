@@ -35,9 +35,9 @@ const nav = document.querySelector('.nav');
 if (nav) {
   const updateNav = () => {
     if (window.scrollY > 50) {
-      nav.style.background = 'rgba(10, 14, 26, 0.85)';
+      nav.style.background = 'rgba(6, 24, 18, 0.85)';
     } else {
-      nav.style.background = 'rgba(10, 14, 26, 0.6)';
+      nav.style.background = 'rgba(6, 24, 18, 0.6)';
     }
   };
   window.addEventListener('scroll', updateNav, { passive: true });
