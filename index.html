@@ -82,7 +82,7 @@
       <h2 class="section__heading">About</h2>
       <div class="about__grid">
         <div class="about__bio reveal">
-          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of GenAI and high-throughput backend systems for fixed-income trading. My work spans <strong>agentic LLM pipelines</strong> (LangGraph orchestrator + validator with MCP tool-use and governance), <strong>neural retrieval</strong> (two-tower dual-encoders with InfoNCE contrastive training, FAISS ANN, ONNX-runtime serving), and <strong>distributed PnL microservices</strong> hardened for replay-safety, exactly-once Kafka semantics, and idempotent ingestion.</p>
+          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of GenAI and high-throughput backend systems for fixed-income trading. My work spans <strong>agentic LLM pipelines</strong> (LangGraph orchestrator + validator with MCP tool-use and governance), <strong>neural retrieval</strong>, and <strong>distributed PnL microservices</strong> hardened for replay-safety, exactly-once Kafka semantics, and idempotent ingestion.</p>
           <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up a Top Achievers Award, an Innovation Pitch Day finalist spot, and an IEEE-published paper on metaheuristic feature selection.</p>
           <p>Outside of work I tinker — PyQt6 desktop AI, local LLM tooling, GAN experiments, and the occasional weekend hack. The portfolio below has a slice.</p>
         </div>
@@ -120,7 +120,8 @@
             <h3>Senior Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Initiated a bond recommendation system</strong> — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN similarity search, plus an LLM agent layer that converses with users and orchestrates similarity + free-form queries. Drove from PoC to a funded production build; now architecting the deployment with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from accept/dismiss signals.</li>
+              <li><strong>Initiated a bond recommendation system</strong> — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN similarity search, plus an LLM agent layer that converses with users and orchestrates similarity + free-form queries. Drove from PoC to a funded production build.</li>
+              <li><strong>Architected the production deployment</strong> with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from accept/dismiss signals.</li>
               <li><strong>Shipped a replay-safe historical rerun API on a PnL service</strong> — async Camel endpoint with context-propagation headers (recalc-flag, snapshot-date) flowing through trade / position / publish routes, with date-correct persistence and Kafka-publication suppression for backfills, so corrected snapshots never leak into live downstream consumers.</li>
               <li><strong>Drove reliability hardening across PnL reporting services</strong> — led root-cause analysis on data mismatches, decoupled fragile upstream dependencies, and added fail-fast integrity guards, shifting services from patch-driven fixes to a resilient-by-design posture.</li>
             </ul>
@@ -132,11 +133,12 @@
             <h3>Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Designed a LangGraph orchestrator + validator agentic pipeline</strong> for natural-language → database query translation — with a RAG retrieval layer (schema + user-context), an MCP-based tool layer exposing read-only primitives to the LLM, and a governance layer (syntax checks, PII masking, tamper-evident audit logging) enforcing safe-query policy before execution.</li>
+              <li><strong>Designed a LangGraph orchestrator + validator agentic pipeline</strong> for natural-language → database query translation, layering RAG retrieval, MCP-based tool exposure, and governance (syntax checks, PII masking, tamper-evident audit) to enforce safe-query policy before execution.</li>
               <li><strong>Enabled horizontal scaling of PnL microservices</strong> — externalized in-process state to Redis to enable stateless replicas, with Kafka exactly-once consumer semantics ensuring concurrency safety under high-volume trade load. Contributed a DMN rules engine for swap position and payment-leg roll-ups and idempotent file ingestion for end-of-day archival flows.</li>
               <li><strong>Optimized MongoDB query latency by <span class="metric">30–40%</span></strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
               <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by <span class="metric">~90%</span> and reducing I/O contention across the service mesh.</li>
-              <li>Authored a <span class="metric">150+</span> financial-scenario automation framework (parallel execution, <span class="metric">60%</span> regression-cycle cut, Splunk telemetry); led OpenShift modernization of <span class="metric">10+</span> core services with resilient CI/CD; owned PnL pricing services and ABF data ingestion with zero production data-quality incidents across the ownership window.</li>
+              <li>Authored a <span class="metric">150+</span> financial-scenario automation framework (parallel execution, <span class="metric">60%</span> regression-cycle cut, Splunk telemetry) and led OpenShift modernization of <span class="metric">10+</span> core services with resilient CI/CD.</li>
+              <li>Owned PnL pricing services and ABF data ingestion with <strong>zero production data-quality incidents</strong> across the ownership window.</li>
             </ul>
           </div>
         </li>
@@ -200,10 +202,8 @@
             <span class="skill-tier__sub">Use regularly</span>
           </div>
           <div class="skill-tier__rows">
-            <div class="skill-row"><span class="skill-row__label">ML / Retrieval</span><div class="tags"><span class="tag">PyTorch</span><span class="tag">ONNX-Runtime</span><span class="tag">FAISS</span><span class="tag">Two-Tower Retrieval</span><span class="tag">InfoNCE</span><span class="tag">MMR</span><span class="tag">scikit-learn</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">Eval</span><div class="tags"><span class="tag">Recall@K</span><span class="tag">MRR</span><span class="tag">nDCG</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">Security &amp; Governance</span><div class="tags"><span class="tag">PII Masking</span><span class="tag">NoSQL Injection Guards</span><span class="tag">Tamper-Evident Audit</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">Financial Domain</span><div class="tags"><span class="tag">Fixed-Income Trading</span><span class="tag">PnL Microservices</span><span class="tag">Trade Reconciliation</span><span class="tag">Swap Position Roll-ups</span><span class="tag">DMN Rules</span><span class="tag">ABF Ingestion</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">ML / Retrieval</span><div class="tags"><span class="tag">PyTorch</span><span class="tag">FAISS</span><span class="tag">scikit-learn</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Security</span><div class="tags"><span class="tag">PII Masking</span><span class="tag">Tamper-Evident Audit</span></div></div>
           </div>
         </div>
         <div class="skill-tier reveal">
