@@ -105,6 +105,7 @@ strong {
   backdrop-filter: blur(14px) saturate(150%);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .nav__logo {
@@ -460,7 +461,7 @@ strong {
 
 .skill-row {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 175px 1fr;
   align-items: start;
   gap: 1rem;
 }
@@ -1002,13 +1003,31 @@ strong {
 .hero .reveal:nth-child(3) { transition-delay: 0.32s; }
 .hero .reveal:nth-child(4) { transition-delay: 0.46s; }
 .hero .reveal:nth-child(5) { transition-delay: 0.62s; }
+.hero .reveal:nth-child(6) { transition-delay: 0.78s; }
+
+/* ===== Focus styles (keyboard a11y) ===== */
+:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.btn:focus-visible {
+  outline-offset: 4px;
+}
+
+.tag:focus-visible {
+  outline-offset: 2px;
+}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .hero__scroll-cue { display: none; }
   html { scroll-behavior: auto; }
 }
