@@ -718,6 +718,28 @@ strong {
   background: linear-gradient(145deg, var(--surface) 0%, rgba(34, 211, 238, 0.06) 100%);
 }
 
+/* CTA card — links the trimmed projects list to the full GitHub */
+.card--cta {
+  text-align: left;
+  cursor: pointer;
+  background: linear-gradient(145deg, var(--surface) 0%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  text-decoration: none;
+}
+
+.card--cta:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  background: linear-gradient(145deg, var(--surface) 0%, rgba(34, 211, 238, 0.1) 100%);
+}
+
+.card--cta .card__tag {
+  color: var(--accent-1);
+}
+
+@media (min-width: 900px) {
+  .card--cta { grid-column: 1 / -1; }
+}
+
 @media (min-width: 900px) {
   .card--featured { grid-column: 1 / -1; }
 }
