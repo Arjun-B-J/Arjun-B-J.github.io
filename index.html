@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <div class="bg-mesh" aria-hidden="true"></div>
 
   <nav class="nav">
@@ -35,7 +37,7 @@
     </ul>
   </nav>
 
-  <main>
+  <main id="main">
     <section class="hero" id="top">
       <div class="hero__content">
         <p class="hero__greeting reveal">— Hello, I'm</p>
@@ -119,9 +121,9 @@
             <ul class="bullet-list">
               <li><strong>Designed a LangGraph Orchestrator + Validator agentic pipeline</strong> for natural-language → MongoDB query translation — backed by an MMR-RAG retrieval layer (dual vector stores for schema + user-context injection), an MCP server exposing DB-read primitives to the LLM, and a governance layer (NoSQL injection guards, MQL syntax checks, PII masking, tamper-evident audit logging) enforcing safe-query policy before any DB execution.</li>
               <li><strong>Enabled horizontal scaling of PnL microservices</strong> — externalized in-process state to Redis to enable stateless replicas, with Kafka exactly-once consumer semantics ensuring concurrency safety under high-volume trade load. Contributed a DMN rules engine for swap position and payment-leg roll-ups and idempotent file ingestion for end-of-day archival flows.</li>
-              <li><strong>Optimized MongoDB query latency by 30–40%</strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
-              <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by ~90% and reducing I/O contention across the service mesh.</li>
-              <li>Authored a 150+ financial-scenario automation framework (parallel execution, 60% regression-cycle cut, Splunk telemetry); led OpenShift modernization of 10+ core services with resilient CI/CD; owned PnL pricing services and ABF data ingestion with zero production data-quality incidents across the ownership window.</li>
+              <li><strong>Optimized MongoDB query latency by <span class="metric">30–40%</span></strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
+              <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by <span class="metric">~90%</span> and reducing I/O contention across the service mesh.</li>
+              <li>Authored a <span class="metric">150+</span> financial-scenario automation framework (parallel execution, <span class="metric">60%</span> regression-cycle cut, Splunk telemetry); led OpenShift modernization of <span class="metric">10+</span> core services with resilient CI/CD; owned PnL pricing services and ABF data ingestion with zero production data-quality incidents across the ownership window.</li>
             </ul>
           </div>
         </li>
@@ -130,7 +132,7 @@
           <div class="timeline__content">
             <h3>Technology Intern</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
-            <p>Built a time-series forecasting engine for ATM cash optimization, benchmarking SARIMA, LSTM, and Prophet on transaction data from 111 ATMs, incorporating exogenous factors (holidays, weather) and automated retraining. Achieved ~91% weekly prediction accuracy via aggregated-window forecasting.</p>
+            <p>Built a time-series forecasting engine for ATM cash optimization, benchmarking SARIMA, LSTM, and Prophet on transaction data from <span class="metric">111 ATMs</span>, incorporating exogenous factors (holidays, weather) and automated retraining. Achieved <span class="metric">~91%</span> weekly prediction accuracy via aggregated-window forecasting.</p>
           </div>
         </li>
       </ol>
@@ -153,7 +155,7 @@
         <div class="award reveal">
           <div class="award__kind">Award</div>
           <h3 class="award__title">Innovation Pitch Day 2024 · Grand Finalist</h3>
-          <p class="award__desc">Top 4 of 600+ firm-wide submissions.</p>
+          <p class="award__desc"><span class="metric">Top 4 of 600+</span> firm-wide submissions.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>

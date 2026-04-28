@@ -1,3 +1,39 @@
+/* ===== Skip-to-content link (a11y) ===== */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.6rem 1.1rem;
+  background: var(--accent-1);
+  color: #0a0e1a;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+/* ===== Scroll progress bar ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--grad);
+  z-index: 200;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+  pointer-events: none;
+}
+
 /* ===== Reset & base ===== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -171,6 +207,8 @@ strong {
 
 /* ===== Hero ===== */
 .hero {
+  --cx: 50%;
+  --cy: 50%;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -178,6 +216,21 @@ strong {
   padding: 7rem 1.5rem 5rem;
   position: relative;
 }
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 350px at var(--cx) var(--cy), rgba(6, 182, 212, 0.08), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.hero:hover::before { opacity: 1; }
+
+.hero__content { position: relative; z-index: 1; }
 
 .hero__content {
   max-width: 900px;
@@ -890,6 +943,14 @@ strong {
   font-weight: 600;
 }
 
+/* Metric highlight — accent-color, bold, tabular-nums for clean alignment */
+.metric {
+  color: var(--accent-1);
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ===== Awards grid ===== */
 .awards-grid {
   display: grid;
@@ -1018,6 +1079,40 @@ strong {
 
 .tag:focus-visible {
   outline-offset: 2px;
+}
+
+/* ===== Print stylesheet ===== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .nav, .scroll-progress, .skip-link, .hero__scroll-cue, .bg-mesh, .footer { display: none !important; }
+  main { margin-top: 0; }
+  .hero { min-height: 0; padding: 0 0 1cm 0; }
+  .hero::before { display: none; }
+  .hero__name, .grad, .accent, .metric, .award__kind, .timeline__org, .card__tag, .card__link, .skill-tier__sub, .nav__logo {
+    background: none !important;
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .section { padding: 0.5cm 0; max-width: none; page-break-inside: avoid; }
+  .card, .skill-tier, .award, .education-item, .achievements li, .fact, .timeline__item, .contact__method {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    transform: none !important;
+    page-break-inside: avoid;
+  }
+  .tag, .card__tech span { background: white !important; border: 1px solid #999 !important; color: black !important; }
+  .badge { background: white !important; border: 1px solid #999 !important; color: black !important; }
+  .badge__dot { background: black !important; box-shadow: none !important; }
+  a { color: black !important; text-decoration: underline; }
+  .timeline::before, .timeline__item::before { display: none !important; }
+  .timeline { padding-left: 0; }
+  .section__heading::after { display: none; }
+  h1, h2, h3 { page-break-after: avoid; }
 }
 
 /* Reduced motion */

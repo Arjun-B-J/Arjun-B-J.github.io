@@ -44,7 +44,7 @@ if (nav) {
   updateNav();
 }
 
-// Scroll-spy: highlight active section in nav
+// Scroll-spy: highlight active section in nav (with aria-current for a11y)
 const navLinks = [...document.querySelectorAll('.nav__links a')];
 const sections = [...document.querySelectorAll('main section[id]')];
 if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
@@ -58,11 +58,42 @@ if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
       entries.forEach((entry) => {
         const link = linkMap.get(entry.target.id);
         if (!link || !entry.isIntersecting) return;
-        navLinks.forEach((l) => l.classList.remove('is-active'));
+        navLinks.forEach((l) => {
+          l.classList.remove('is-active');
+          l.removeAttribute('aria-current');
+        });
         link.classList.add('is-active');
+        link.setAttribute('aria-current', 'true');
       });
     },
     { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
   );
   sections.forEach((s) => spy.observe(s));
+}
+
+// Scroll progress bar
+const progressEl = document.querySelector('.scroll-progress');
+if (progressEl) {
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressEl.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+}
+
+// Hero cursor-follow spotlight (skipped on touch + reduced-motion)
+const heroEl = document.querySelector('.hero');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouch = window.matchMedia('(hover: none)').matches;
+if (heroEl && !reducedMotion && !isTouch) {
+  heroEl.addEventListener('mousemove', (e) => {
+    const r = heroEl.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    heroEl.style.setProperty('--cx', x + '%');
+    heroEl.style.setProperty('--cy', y + '%');
+  }, { passive: true });
 }
