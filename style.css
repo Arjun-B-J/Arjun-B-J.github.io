@@ -151,6 +151,14 @@ strong {
 
 .nav__links a:hover::after { width: 100%; }
 
+.nav__links a.is-active {
+  color: var(--text);
+}
+
+.nav__links a.is-active::after {
+  width: 100%;
+}
+
 @media (max-width: 640px) {
   .nav__links { gap: 1.1rem; }
   .nav__links a { font-size: 0.825rem; }
@@ -392,34 +400,86 @@ strong {
   font-size: 0.95rem;
 }
 
-/* ===== Skills ===== */
-.skills__groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* ===== Skills (tiered) ===== */
+.skills__tiers {
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
   margin-top: 2.5rem;
 }
 
-.skill-group {
+.skill-tier {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.4rem 1.6rem;
   transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
-.skill-group:hover {
+.skill-tier:hover {
   border-color: rgba(6, 182, 212, 0.3);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-.skill-group h3 {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 600;
+.skill-tier--primary {
+  border-left: 3px solid var(--accent-1);
+}
+
+.skill-tier__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.85rem;
   margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-tier__head h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   color: var(--text);
-  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.skill-tier__sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skill-tier__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: start;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .skill-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+.skill-row__label {
+  font-size: 0.74rem;
+  color: var(--text-2);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 0.4rem;
 }
 
 .tags {

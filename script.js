@@ -43,3 +43,26 @@ if (nav) {
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 }
+
+// Scroll-spy: highlight active section in nav
+const navLinks = [...document.querySelectorAll('.nav__links a')];
+const sections = [...document.querySelectorAll('main section[id]')];
+if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
+  const linkMap = new Map();
+  navLinks.forEach((link) => {
+    const id = link.getAttribute('href')?.replace('#', '');
+    if (id) linkMap.set(id, link);
+  });
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const link = linkMap.get(entry.target.id);
+        if (!link || !entry.isIntersecting) return;
+        navLinks.forEach((l) => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+  );
+  sections.forEach((s) => spy.observe(s));
+}
