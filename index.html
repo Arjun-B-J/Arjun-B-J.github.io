@@ -116,8 +116,8 @@
             <h3>Senior Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Initiated a Bond Recommendation Engine</strong> for fixed-income sales-analyst augmentation — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN bond-similarity search, plus an LLM agent layer that converses with traders and orchestrates similarity search and free-form queries. Drove from PoC to a funded production build; now architecting the deployment with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from trader accept/dismiss signals.</li>
-              <li><strong>Shipped a replay-safe historical rerun API for the PnL Service</strong> — async Camel endpoint with context-propagation headers (recalc-flag, snapshot-date) flowing through trade / position / publish routes, with date-correct MongoDB persistence and Kafka-publication suppression for backfills, so corrected snapshots never leak into live downstream consumers.</li>
+              <li><strong>Initiated a bond recommendation system</strong> for fixed-income sales-analyst augmentation — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN similarity search, plus an LLM agent layer that converses with users and orchestrates similarity + free-form queries. Drove from PoC to a funded production build; now architecting the deployment with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from accept/dismiss signals.</li>
+              <li><strong>Shipped a replay-safe historical rerun API on a PnL service</strong> — async Camel endpoint with context-propagation headers (recalc-flag, snapshot-date) flowing through trade / position / publish routes, with date-correct persistence and Kafka-publication suppression for backfills, so corrected snapshots never leak into live downstream consumers.</li>
               <li><strong>Drove reliability hardening across PnL reporting services</strong> — led root-cause analysis on data mismatches, decoupled fragile upstream dependencies, and added fail-fast integrity guards, shifting services from patch-driven fixes to a resilient-by-design posture.</li>
             </ul>
           </div>
@@ -128,7 +128,7 @@
             <h3>Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Designed a LangGraph Orchestrator + Validator agentic pipeline</strong> for natural-language → MongoDB query translation — backed by an MMR-RAG retrieval layer (dual vector stores for schema + user-context injection), an MCP server exposing DB-read primitives to the LLM, and a governance layer (NoSQL injection guards, MQL syntax checks, PII masking, tamper-evident audit logging) enforcing safe-query policy before any DB execution.</li>
+              <li><strong>Designed a LangGraph orchestrator + validator agentic pipeline</strong> for natural-language → database query translation — with a RAG retrieval layer (schema + user-context), an MCP-based tool layer exposing read-only primitives to the LLM, and a governance layer (syntax checks, PII masking, tamper-evident audit logging) enforcing safe-query policy before execution.</li>
               <li><strong>Enabled horizontal scaling of PnL microservices</strong> — externalized in-process state to Redis to enable stateless replicas, with Kafka exactly-once consumer semantics ensuring concurrency safety under high-volume trade load. Contributed a DMN rules engine for swap position and payment-leg roll-ups and idempotent file ingestion for end-of-day archival flows.</li>
               <li><strong>Optimized MongoDB query latency by <span class="metric">30–40%</span></strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
               <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by <span class="metric">~90%</span> and reducing I/O contention across the service mesh.</li>
@@ -164,7 +164,7 @@
         <div class="award reveal">
           <div class="award__kind">Award</div>
           <h3 class="award__title">Innovation Pitch Day 2024 · Grand Finalist</h3>
-          <p class="award__desc"><span class="metric">Top 4 of 600+</span> firm-wide submissions.</p>
+          <p class="award__desc"><span class="metric">Top 4</span> across firm-wide submissions.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
