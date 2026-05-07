@@ -227,11 +227,11 @@
 
       <div class="projects-grid">
         <article class="card card--featured reveal">
-          <div class="card__tag">Flagship · 2026 · Open Source</div>
-          <h3 class="card__title">kharcha-ai · LangGraph + Gemma 4</h3>
-          <p class="card__desc">A local-first <strong>agentic personal finance tracker</strong> for India. LangGraph orchestrates an LLM-first pipeline with seven services: deterministic PDF/CSV parsers (HDFC savings + credit card formats), per-transaction Gemma 4 tagging, a friend auto-discoverer, a validator agent that re-checks low-confidence tags, EMI detection, recurring-subscription fingerprinting, cross-source reconciliation, and a 2σ anomaly hunter. Outputs include a streaming chat panel grounded in your transactions, multimodal receipt scan via Gemma vision, and an <strong>editorial multi-page PDF spend analysis</strong> generated locally — no data leaves the machine. Backend: FastAPI + SQLAlchemy + <span class="metric">27 pytest</span> green. Frontend: Next.js 15 + Tailwind + Framer Motion + Playwright E2E.</p>
+          <div class="card__tag">Flagship · v0.4 · Open Source</div>
+          <h3 class="card__title">kharcha-ai · drop your bank PDFs in, get a forensic spend analysis out</h3>
+          <p class="card__desc">A multi-agent LangGraph system that ingests Indian bank statements and credit-card PDFs, runs every transaction through local Gemma 4, and renders an <strong>editorial 10-page Spend Analysis PDF</strong> — entirely offline. Deterministic parsers feed an LLM-first tagger; a friend auto-detector finds money loops from bidirectional UPI flow; a validator agent re-checks low-confidence rows; a narrative agent writes per-source analytical prose, gated by a deterministic quality check that catches degenerate LLM output before it reaches the PDF. Layered detectors handle EMI installments, recurring subscriptions, 2σ category anomalies, and cross-source reconciliation against the savings account. <strong>Five-layer privacy gitignore</strong> — zero bank data has ever been committed across any branch. Idempotent re-ingestion via deterministic hashes; <span class="metric">37</span> tests green.</p>
           <div class="card__tech">
-            <span>LangGraph</span><span>Multi-agent</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
+            <span>Multi-agent</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
           </div>
           <a class="card__link" href="https://github.com/Arjun-B-J/kharcha-ai" target="_blank" rel="noopener">View on GitHub →</a>
         </article>
