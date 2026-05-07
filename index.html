@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arjun Bindu Jayachandran — Senior Software Engineer at Wells Fargo. Building PnL microservices at scale and GenAI systems for regulated fintech." />
+  <meta name="description" content="Arjun Bindu Jayachandran — Senior Software Engineer at Wells Fargo. Multi-agent LangGraph systems on local Gemma 4, replay-safe PnL microservices, and a forensic spend-analysis agent (kharcha-ai)." />
   <meta name="theme-color" content="#061812" />
 
   <meta property="og:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta property="og:description" content="Building PnL microservices at scale and GenAI systems for regulated fintech — LangGraph orchestration, agentic retrieval, high-throughput backends." />
+  <meta property="og:description" content="Multi-agent LangGraph systems on local Gemma 4, replay-safe PnL microservices for fixed-income trading, and a forensic spend-analysis agent — kharcha-ai." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjun-b-j.github.io" />
   <meta property="og:image" content="https://arjun-b-j.github.io/og-image.png" />
@@ -17,7 +17,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta name="twitter:description" content="PnL microservices at scale · GenAI systems · LangGraph orchestration." />
+  <meta name="twitter:description" content="Multi-agent LangGraph systems · local Gemma 4 · replay-safe PnL microservices · kharcha-ai." />
   <meta name="twitter:image" content="https://arjun-b-j.github.io/og-image.png" />
 
   <title>Arjun Bindu Jayachandran · Senior Software Engineer</title>
@@ -84,7 +84,7 @@
         <div class="about__bio reveal">
           <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of GenAI and high-throughput backend systems for fixed-income trading. My work spans <strong>agentic LLM pipelines</strong>, <strong>neural retrieval</strong>, and <strong>distributed PnL microservices</strong> hardened for replay-safety, exactly-once Kafka semantics, and idempotent ingestion.</p>
           <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up a Top Achievers Award, an Innovation Pitch Day finalist spot, and an IEEE-published paper on metaheuristic feature selection.</p>
-          <p>Outside of work I tinker — PyQt6 desktop AI, local LLM tooling, GAN experiments, and the occasional weekend hack. The portfolio below has a slice.</p>
+          <p>Outside of work I'm building <a href="#projects"><strong>kharcha-ai</strong></a> — a multi-agent LangGraph + Gemma 4 spend-analysis system that runs entirely on a laptop — plus PyQt6 desktop AI, a focus-timer side project, local LLM experiments, and the occasional weekend hack. Scroll down for both work and personal builds.</p>
         </div>
         <aside class="about__facts reveal">
           <div class="fact">
@@ -155,6 +155,80 @@
       </ol>
     </section>
 
+    <section class="section" id="projects">
+      <h2 class="section__heading">Selected work</h2>
+      <p class="section__sub">Personal builds along the same lines as my Wells Fargo work — agentic LLM pipelines, retrieval, and applied ML — plus tooling I needed for myself. Plenty more side experiments on <a href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">GitHub</a>.</p>
+
+      <div class="projects-grid">
+        <article class="card card--featured reveal">
+          <div class="card__tag">Flagship · v0.4 · Open Source</div>
+          <h3 class="card__title">kharcha-ai · drop your bank PDFs in, get a forensic spend analysis out</h3>
+          <p class="card__desc">A multi-agent LangGraph system that ingests Indian bank statements and credit-card PDFs, runs every transaction through local Gemma 4, and renders an <strong>editorial 10-page Spend Analysis PDF</strong> — entirely offline. Deterministic parsers feed an LLM-first tagger; a friend auto-detector finds money loops from bidirectional UPI flow; a validator agent re-checks low-confidence rows; a narrative agent writes per-source analytical prose, gated by a deterministic quality check that catches degenerate LLM output before it reaches the PDF. Layered detectors handle EMI installments, recurring subscriptions, 2σ category anomalies, and cross-source reconciliation against the savings account. <strong>Five-layer privacy gitignore</strong> — zero bank data has ever been committed across any branch. Idempotent re-ingestion via deterministic hashes; <span class="metric">37</span> tests green.</p>
+          <div class="card__tech">
+            <span>Multi-agent</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/kharcha-ai" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Open Source</div>
+          <h3 class="card__title">VoiceToText-with-UI</h3>
+          <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
+          <div class="card__tech">
+            <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/VoiceToText-with-UI" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Recent · Open Source</div>
+          <h3 class="card__title">lockin · Focus Timer</h3>
+          <p class="card__desc">A green-themed standalone Windows focus timer I built for my own interview prep. Wall-clock based (survives laptop sleep), Picture-in-Picture mini mode for always-on-top, procedurally-generated brown / pink / white / rain ambient noise via Web Audio, and File System Access API auto-export so every session streams to disk as <code>jsonl</code> for pandas analytics. SVG-rendered calendar heatmap, hour-of-day grid, and personal-bests dashboard. No build, no deps, ~1500 lines.</p>
+          <div class="card__tech">
+            <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/lockin" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Open Source</div>
+          <h3 class="card__title">Lumen.AI · NL → SQL</h3>
+          <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
+          <div class="card__tech">
+            <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Hackathon</div>
+          <h3 class="card__title">GAIDP — Gen AI Data Profiler</h3>
+          <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
+          <div class="card__tech">
+            <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__tag">Led to Publication</div>
+          <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
+          <p class="card__desc">Implementations of GWO and three variants — Binary GWO, Multi-Objective GWO, and Binary MOGWO — wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
+          <div class="card__tech">
+            <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
+          </div>
+          <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
+        </article>
+
+        <a class="card card--cta reveal" href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">
+          <div class="card__tag">Plus more</div>
+          <h3 class="card__title">See all on GitHub →</h3>
+          <p class="card__desc">Older side experiments across blockchain, Linux kernel modules, Verilog FPGA, GANs, computer vision, and full-stack web — kept around as artifacts of past learning, separate from current focus.</p>
+          <span class="card__link">github.com/Arjun-B-J →</span>
+        </a>
+      </div>
+    </section>
+
     <section class="section" id="awards">
       <h2 class="section__heading">Publications &amp; Awards</h2>
       <div class="awards-grid">
@@ -214,83 +288,11 @@
             <span class="skill-tier__sub">Used in personal builds</span>
           </div>
           <div class="skill-tier__rows">
-            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">TensorFlow / Keras</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">UI</span><div class="tags"><span class="tag">PyQt6</span><span class="tag">Streamlit</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">Gemma 4</span><span class="tag">TensorFlow / Keras</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Web / API</span><div class="tags"><span class="tag">FastAPI</span><span class="tag">Next.js 15</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span><span class="tag">ReportLab</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">UI</span><div class="tags"><span class="tag">PyQt6</span><span class="tag">Streamlit</span><span class="tag">Web Audio</span><span class="tag">Document PiP</span></div></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <h2 class="section__heading">Personal Projects</h2>
-      <p class="section__sub">Recent personal explorations along the same lines as my work — agentic LLM tooling, retrieval, and applied ML. Plenty more side experiments on <a href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">GitHub</a>.</p>
-
-      <div class="projects-grid">
-        <article class="card card--featured reveal">
-          <div class="card__tag">Flagship · v0.4 · Open Source</div>
-          <h3 class="card__title">kharcha-ai · drop your bank PDFs in, get a forensic spend analysis out</h3>
-          <p class="card__desc">A multi-agent LangGraph system that ingests Indian bank statements and credit-card PDFs, runs every transaction through local Gemma 4, and renders an <strong>editorial 10-page Spend Analysis PDF</strong> — entirely offline. Deterministic parsers feed an LLM-first tagger; a friend auto-detector finds money loops from bidirectional UPI flow; a validator agent re-checks low-confidence rows; a narrative agent writes per-source analytical prose, gated by a deterministic quality check that catches degenerate LLM output before it reaches the PDF. Layered detectors handle EMI installments, recurring subscriptions, 2σ category anomalies, and cross-source reconciliation against the savings account. <strong>Five-layer privacy gitignore</strong> — zero bank data has ever been committed across any branch. Idempotent re-ingestion via deterministic hashes; <span class="metric">37</span> tests green.</p>
-          <div class="card__tech">
-            <span>Multi-agent</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/kharcha-ai" target="_blank" rel="noopener">View on GitHub →</a>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__tag">Open Source</div>
-          <h3 class="card__title">VoiceToText-with-UI</h3>
-          <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
-          <div class="card__tech">
-            <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/VoiceToText-with-UI" target="_blank" rel="noopener">View on GitHub →</a>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__tag">Recent · Open Source</div>
-          <h3 class="card__title">lockin · Focus Timer</h3>
-          <p class="card__desc">A green-themed standalone Windows focus timer I built for my own interview prep. Wall-clock based (survives laptop sleep), Picture-in-Picture mini mode for always-on-top, procedurally-generated brown / pink / white / rain ambient noise via Web Audio, and File System Access API auto-export so every session streams to disk as <code>jsonl</code> for pandas analytics. SVG-rendered calendar heatmap, hour-of-day grid, and personal-bests dashboard. No build, no deps, ~1500 lines.</p>
-          <div class="card__tech">
-            <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/lockin" target="_blank" rel="noopener">GitHub →</a>
-        </article>
-
-        <article class="card reveal">
-          <h3 class="card__title">Lumen.AI · NL → SQL</h3>
-          <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
-          <div class="card__tech">
-            <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__tag">Hackathon</div>
-          <h3 class="card__title">GAIDP — Gen AI Data Profiler</h3>
-          <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
-          <div class="card__tech">
-            <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__tag">Led to Publication</div>
-          <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
-          <p class="card__desc">Implementations of GWO and three variants — Binary GWO, Multi-Objective GWO, and Binary MOGWO — wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
-          <div class="card__tech">
-            <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
-        </article>
-
-        <a class="card card--cta reveal" href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">
-          <div class="card__tag">Plus more</div>
-          <h3 class="card__title">See all on GitHub →</h3>
-          <p class="card__desc">Older side experiments across blockchain, Linux kernel modules, Verilog FPGA, GANs, computer vision, and full-stack web — kept around as artifacts of past learning, separate from current focus.</p>
-          <span class="card__link">github.com/Arjun-B-J →</span>
-        </a>
       </div>
     </section>
 
