@@ -104,28 +104,32 @@ if (heroEl && !reducedMotion && !isTouch) {
 const heroNet = document.getElementById('hero-net');
 if (heroNet && heroEl) {
   const nctx = heroNet.getContext('2d');
-  const FOV = 380;
-  const Z_MIN = -140, Z_MAX = 320, Z_MID = (Z_MIN + Z_MAX) / 2;
   const dpr = Math.min(window.devicePixelRatio || 1, isTouch ? 1.5 : 2);
   const COUNT = isTouch ? 60 : 130;
-  let W = 0, H = 0, cx = 0, cy = 0;
+  // Particles live in a roughly cubic world of half-extent R. The camera sits
+  // at distance CAM > R*sqrt(2), so the projected depth (CAM + rz) is ALWAYS
+  // positive — no divide-by-zero, no negative scale, no negative arc radius.
+  const R = 230;
+  const CAM = 560;
+  const LINK = 150, LINK2 = LINK * LINK;
+  let W = 0, H = 0, cx = 0, cy = 0, spreadX = 1, spreadY = 1;
   let particles = [];
   let angle = 0;
   let mouseX = -9999, mouseY = -9999;
   let rafId = null;
   let heroVisible = true;
+  const proj = [];
 
   const spawn = () => {
     particles = [];
-    const hw = W * 0.68, hh = H * 0.62;
     for (let i = 0; i < COUNT; i++) {
       particles.push({
-        x: (Math.random() * 2 - 1) * hw,
-        y: (Math.random() * 2 - 1) * hh,
-        z: Z_MIN + Math.random() * (Z_MAX - Z_MIN),
-        vx: (Math.random() - 0.5) * 0.24,
-        vy: (Math.random() - 0.5) * 0.24,
-        vz: (Math.random() - 0.5) * 0.2,
+        x: (Math.random() * 2 - 1) * R,
+        y: (Math.random() * 2 - 1) * R,
+        z: (Math.random() * 2 - 1) * R,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        vz: (Math.random() - 0.5) * 0.5,
         hub: Math.random() < 0.1,
       });
     }
@@ -133,46 +137,45 @@ if (heroNet && heroEl) {
 
   const resize = () => {
     const prevW = W;
-    W = heroEl.clientWidth;
-    H = heroEl.clientHeight;
+    W = heroEl.clientWidth || window.innerWidth;
+    H = heroEl.clientHeight || window.innerHeight;
     cx = W / 2;
     cy = H / 2;
+    // Scale the projected cloud to comfortably overfill the hero
+    spreadX = (W * 0.58) / R;
+    spreadY = (H * 0.58) / R;
     heroNet.width = W * dpr;
     heroNet.height = H * dpr;
     nctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (Math.abs(W - prevW) > 80 || !particles.length) spawn();
   };
 
-  const LINK_D2 = 130 * 130;
-  const proj = new Array(COUNT);
-
   const draw = (staticFrame) => {
     nctx.clearRect(0, 0, W, H);
     const parallax = staticFrame ? 0 : window.scrollY * 0.28;
     const sinA = Math.sin(angle), cosA = Math.cos(angle);
-    const hw = W * 0.68, hh = H * 0.62;
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       p.x += p.vx; p.y += p.vy; p.z += p.vz;
-      if (p.x < -hw) p.x = hw; else if (p.x > hw) p.x = -hw;
-      if (p.y < -hh) p.y = hh; else if (p.y > hh) p.y = -hh;
-      if (p.z < Z_MIN) p.z = Z_MAX; else if (p.z > Z_MAX) p.z = Z_MIN;
+      if (p.x < -R) p.x = R; else if (p.x > R) p.x = -R;
+      if (p.y < -R) p.y = R; else if (p.y > R) p.y = -R;
+      if (p.z < -R) p.z = R; else if (p.z > R) p.z = -R;
 
-      const zr = p.z - Z_MID;
-      const rx = p.x * cosA + zr * sinA;
-      const rz = -p.x * sinA + zr * cosA + Z_MID;
-      const s = FOV / (FOV + rz);
-      const px = cx + rx * s;
-      const py = cy + p.y * s - parallax;
-      proj[i] = { px, py, s };
+      const rx = p.x * cosA + p.z * sinA;
+      const rz = -p.x * sinA + p.z * cosA;
+      const s = CAM / (CAM + rz); // CAM > R*sqrt(2) => denominator always > 0
+      proj[i] = {
+        px: cx + rx * s * spreadX,
+        py: cy + p.y * s * spreadY - parallax,
+        s: s,
+      };
 
       // Gentle pull toward the cursor (screen-space, mapped back to world)
-      const dmx = mouseX - px, dmy = mouseY - py;
-      const dm2 = dmx * dmx + dmy * dmy;
-      if (dm2 < 22500) {
-        p.x += (dmx / s) * 0.004 * cosA;
-        p.y += (dmy / s) * 0.004;
+      const dmx = mouseX - proj[i].px, dmy = mouseY - proj[i].py;
+      if (dmx * dmx + dmy * dmy < 22500) {
+        p.x += (dmx / (s * spreadX)) * 0.02;
+        p.y += (dmy / (s * spreadY)) * 0.02;
       }
     }
 
@@ -183,10 +186,10 @@ if (heroNet && heroEl) {
         const b = particles[j];
         const dx = a.x - b.x, dy = a.y - b.y, dz = a.z - b.z;
         const d2 = dx * dx + dy * dy + dz * dz;
-        if (d2 < LINK_D2) {
+        if (d2 < LINK2) {
           const pb = proj[j];
-          const alpha = (1 - Math.sqrt(d2) / 130) * 0.36 * Math.min(pa.s, pb.s);
-          nctx.strokeStyle = 'rgba(52, 211, 153, ' + alpha.toFixed(3) + ')';
+          const alpha = (1 - Math.sqrt(d2) / LINK) * 0.32 * Math.min(pa.s, pb.s);
+          nctx.strokeStyle = 'rgba(52, 211, 153, ' + Math.max(0, alpha).toFixed(3) + ')';
           nctx.beginPath();
           nctx.moveTo(pa.px, pa.py);
           nctx.lineTo(pb.px, pb.py);
@@ -200,31 +203,36 @@ if (heroNet && heroEl) {
       const dmx = mouseX - pr.px, dmy = mouseY - pr.py;
       const dm2 = dmx * dmx + dmy * dmy;
       if (dm2 < 19600) {
-        const alpha = (1 - Math.sqrt(dm2) / 140) * 0.55;
-        nctx.strokeStyle = 'rgba(34, 211, 238, ' + alpha.toFixed(3) + ')';
+        const alpha = (1 - Math.sqrt(dm2) / 140) * 0.5;
+        nctx.strokeStyle = 'rgba(34, 211, 238, ' + Math.max(0, alpha).toFixed(3) + ')';
         nctx.beginPath();
         nctx.moveTo(pr.px, pr.py);
         nctx.lineTo(mouseX, mouseY);
         nctx.stroke();
       }
-      const depth = Math.max(0.15, Math.min(1, pr.s - 0.25));
+      const depth = Math.max(0.15, Math.min(1, pr.s - 0.2));
       nctx.fillStyle = p.hub
         ? 'rgba(34, 211, 238, ' + (0.9 * depth).toFixed(3) + ')'
         : 'rgba(52, 211, 153, ' + (0.85 * depth).toFixed(3) + ')';
+      const radius = Math.max(0.4, (p.hub ? 2.6 : 1.5) * pr.s);
       nctx.beginPath();
-      nctx.arc(pr.px, pr.py, (p.hub ? 2.6 : 1.5) * pr.s, 0, 6.2832);
+      nctx.arc(pr.px, pr.py, radius, 0, 6.2832);
       nctx.fill();
     }
   };
 
   const tick = () => {
-    angle += 0.0011;
-    draw();
-    heroNet.style.opacity = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.9));
+    // Schedule the next frame FIRST so a single bad frame can never kill the loop
     rafId = requestAnimationFrame(tick);
+    angle += 0.0011;
+    if (angle > 6.283185) angle -= 6.283185;
+    try {
+      draw(false);
+      heroNet.style.opacity = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.9));
+    } catch (e) { /* never let one frame stop the animation */ }
   };
 
-  const start = () => { if (rafId === null && heroVisible && !document.hidden) rafId = requestAnimationFrame(tick); };
+  const start = () => { if (rafId === null && heroVisible && !document.hidden) tick(); };
   const stop = () => { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } };
 
   resize();
