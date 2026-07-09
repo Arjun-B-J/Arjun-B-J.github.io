@@ -146,10 +146,9 @@ if (heroNet && heroEl) {
   const LINK_D2 = 130 * 130;
   const proj = new Array(COUNT);
 
-  const draw = () => {
+  const draw = (staticFrame) => {
     nctx.clearRect(0, 0, W, H);
-    const scrollY = window.scrollY;
-    const parallax = scrollY * 0.28;
+    const parallax = staticFrame ? 0 : window.scrollY * 0.28;
     const sinA = Math.sin(angle), cosA = Math.cos(angle);
     const hw = W * 0.68, hh = H * 0.62;
 
@@ -232,7 +231,7 @@ if (heroNet && heroEl) {
   window.addEventListener('resize', resize, { passive: true });
 
   if (reducedMotion) {
-    draw(); // one static frame — texture without motion
+    draw(true); // one static frame — texture without motion, no scroll offset
   } else {
     if (!isTouch) {
       heroEl.addEventListener('mousemove', (e) => {
@@ -260,11 +259,24 @@ if (scrambleEls.length && !reducedMotion) {
   scrambleEls.forEach((el) => {
     const original = el.textContent;
     const total = Math.max(20, original.length * 3);
+    // Pin the span's width so random glyph widths can't reflow the heading
+    const w = el.offsetWidth;
+    if (w) {
+      el.style.display = 'inline-block';
+      el.style.width = w + 'px';
+      el.style.whiteSpace = 'nowrap';
+    }
     let frame = 0;
     const tick = () => {
       frame++;
       const settled = Math.floor((frame / total) * original.length);
-      if (settled >= original.length) { el.textContent = original; return; }
+      if (settled >= original.length) {
+        el.textContent = original;
+        el.style.display = '';
+        el.style.width = '';
+        el.style.whiteSpace = '';
+        return;
+      }
       let out = '';
       for (let i = 0; i < original.length; i++) {
         const ch = original[i];
