@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arjun Bindu Jayachandran — Senior Software Engineer at Wells Fargo. Multi-agent LangGraph systems on local Gemma 4, replay-safe PnL microservices, and a forensic spend-analysis agent (kharcha-ai)." />
+  <meta name="description" content="Arjun Bindu Jayachandran, Senior Software Engineer at Wells Fargo. Applied-AI and distributed backend systems for a fixed-income trading desk: a learning-to-rank bond recommendation engine with an LLM assistant, and replay-safe PnL microservices. Builds kharcha-ai, a local multi-agent spend-analysis system, on the side." />
   <meta name="theme-color" content="#061812" />
 
   <meta property="og:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta property="og:description" content="Multi-agent LangGraph systems on local Gemma 4, replay-safe PnL microservices for fixed-income trading, and a forensic spend-analysis agent — kharcha-ai." />
+  <meta property="og:description" content="Applied-AI and distributed backend systems for fixed-income trading: a learning-to-rank bond recommendation engine, replay-safe PnL microservices, and kharcha-ai, a local multi-agent spend-analysis system." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjun-b-j.github.io" />
   <meta property="og:image" content="https://arjun-b-j.github.io/og-image.png" />
@@ -17,7 +17,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta name="twitter:description" content="Multi-agent LangGraph systems · local Gemma 4 · replay-safe PnL microservices · kharcha-ai." />
+  <meta name="twitter:description" content="Applied-AI systems · distributed backends · fixed-income trading · kharcha-ai on the side." />
   <meta name="twitter:image" content="https://arjun-b-j.github.io/og-image.png" />
 
   <title>Arjun Bindu Jayachandran · Senior Software Engineer</title>
@@ -39,11 +39,13 @@
     <div class="aurora aurora--2"></div>
     <div class="aurora aurora--3"></div>
   </div>
+  <div class="grain" aria-hidden="true"></div>
 
   <nav class="nav">
     <a href="#top" class="nav__logo" aria-label="Home">ABJ</a>
     <ul class="nav__links">
       <li><a href="#about">About</a></li>
+      <li><a href="#ask">Ask</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -52,12 +54,13 @@
 
   <main id="main">
     <section class="hero" id="top">
+      <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
       <div class="hero__content">
         <p class="hero__greeting reveal">— Hello, I'm</p>
-        <h1 class="hero__name reveal">Arjun Bindu <span class="grad">Jayachandran</span></h1>
+        <h1 class="hero__name reveal"><span data-scramble>Arjun Bindu</span> <span class="grad" data-scramble>Jayachandran</span></h1>
         <p class="hero__title reveal">Senior Software Engineer · <span class="hero__org">Wells Fargo</span> · Bengaluru</p>
         <p class="hero__tagline reveal">
-          Building <span class="accent">PnL microservices at scale</span> and <span class="accent">GenAI systems</span> for regulated fintech.
+          Building <span class="accent">applied-AI systems</span> and <span class="accent">distributed backends</span> for a fixed-income trading desk.
         </p>
         <div class="hero__cta reveal">
           <a href="Arjun_Bindu_Jayachandran_Resume.pdf" download class="btn btn--primary">
@@ -82,8 +85,8 @@
       <h2 class="section__heading">About</h2>
       <div class="about__grid">
         <div class="about__bio reveal">
-          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of GenAI and high-throughput backend systems for fixed-income trading. My work spans <strong>agentic LLM pipelines</strong>, <strong>neural retrieval</strong>, and <strong>distributed PnL microservices</strong> hardened for replay-safety, exactly-once Kafka semantics, and idempotent ingestion.</p>
-          <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up a Top Achievers Award, an Innovation Pitch Day finalist spot, and an IEEE-published paper on metaheuristic feature selection.</p>
+          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of applied AI and high-throughput backend systems for fixed-income trading. My work spans <strong>learning-to-rank recommendations</strong>, <strong>LLM agent pipelines</strong>, and <strong>distributed PnL microservices</strong> built for replay-safe reruns and idempotent ingestion.</p>
+          <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up the Top Achievers Award (roughly the top 1% of employees), a Top Innovator finish at Innovation Pitch Day (top 4 of 600+), and a paper in Springer's Journal of Supercomputing on metaheuristic feature selection.</p>
           <p>Outside of work I'm building <a href="#projects"><strong>kharcha-ai</strong></a> — a multi-agent LangGraph + Gemma 4 spend-analysis system that runs entirely on a laptop — plus PyQt6 desktop AI, a focus-timer side project, local LLM experiments, and the occasional weekend hack. Scroll down for both work and personal builds.</p>
         </div>
         <aside class="about__facts reveal">
@@ -111,6 +114,61 @@
       </div>
     </section>
 
+    <section class="section" id="ask">
+      <h2 class="section__heading">Ask my portfolio</h2>
+      <p class="section__sub">A miniature of the agent architecture I build at work: an orchestrator routes your question, a retriever pulls grounded context, and a validator checks the answer before it renders. Scripted demo — answers are precomputed, no live LLM, nothing leaves your browser.</p>
+
+      <div class="ask reveal">
+        <div class="ask__chips" role="group" aria-label="Sample questions">
+          <button class="chip" type="button" data-q="wf">What does he do at Wells Fargo?</button>
+          <button class="chip" type="button" data-q="kharcha">How does kharcha-ai work?</button>
+          <button class="chip" type="button" data-q="genai">What's his GenAI experience?</button>
+          <button class="chip" type="button" data-q="perf">Biggest performance win?</button>
+          <button class="chip" type="button" data-q="pitch">Why interview him?</button>
+        </div>
+
+        <div class="pipe" aria-hidden="true">
+          <div class="pipe__node" data-stage="query">
+            <span class="pipe__icon">?</span>
+            <span class="pipe__name">Query</span>
+            <span class="pipe__status">pick a question</span>
+          </div>
+          <div class="pipe__edge"><i></i></div>
+          <div class="pipe__node" data-stage="orchestrator">
+            <span class="pipe__icon">◈</span>
+            <span class="pipe__name">Orchestrator</span>
+            <span class="pipe__status">idle</span>
+          </div>
+          <div class="pipe__edge"><i></i></div>
+          <div class="pipe__node" data-stage="retriever">
+            <span class="pipe__icon">⌕</span>
+            <span class="pipe__name">Retriever</span>
+            <span class="pipe__status">idle</span>
+          </div>
+          <div class="pipe__edge"><i></i></div>
+          <div class="pipe__node" data-stage="validator">
+            <span class="pipe__icon">✓</span>
+            <span class="pipe__name">Validator</span>
+            <span class="pipe__status">idle</span>
+          </div>
+          <div class="pipe__edge"><i></i></div>
+          <div class="pipe__node" data-stage="answer">
+            <span class="pipe__icon">✦</span>
+            <span class="pipe__name">Answer</span>
+            <span class="pipe__status">idle</span>
+          </div>
+        </div>
+
+        <div class="ask__chunks" aria-hidden="true"></div>
+
+        <div class="ask__answer">
+          <div class="ask__answer-head"><span class="ask__answer-dot"></span><span>answer · grounded in this page</span></div>
+          <p class="ask__answer-text" id="ask-text" aria-live="polite">Pick a question above and watch the pipeline run.</p>
+        </div>
+        <p class="ask__note">This mirrors how I ship LLM features in production — retrieval for grounding, a validator between the model and the user. Here it's fully scripted client-side; in the real systems, the model sits in the answer node.</p>
+      </div>
+    </section>
+
     <section class="section" id="experience">
       <h2 class="section__heading">Experience</h2>
       <ol class="timeline">
@@ -120,10 +178,10 @@
             <h3>Senior Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Initiated a bond recommendation system</strong> — built a two-tower dual-encoder PoC with symmetric InfoNCE contrastive learning and ANN similarity search, plus an LLM agent layer that converses with users and orchestrates similarity + free-form queries. Drove from PoC to a funded production build.</li>
-              <li><strong>Architected the production deployment</strong> with decoupled training + serving (ONNX-runtime inference, FAISS vector indices, temporal train/val/test split) and feedback-driven scheduled retraining from accept/dismiss signals.</li>
-              <li><strong>Shipped a replay-safe historical rerun API on a PnL service</strong> — async Camel endpoint with context-propagation headers (recalc-flag, snapshot-date) flowing through trade / position / publish routes, with date-correct persistence and Kafka-publication suppression for backfills, so corrected snapshots never leak into live downstream consumers.</li>
-              <li><strong>Drove reliability hardening across PnL reporting services</strong> — led root-cause analysis on data mismatches, decoupled fragile upstream dependencies, and added fail-fast integrity guards, shifting services from patch-driven fixes to a resilient-by-design posture.</li>
+              <li><strong>Building a machine-learning bond recommendation engine</strong> that surfaces the most relevant bonds for each institutional client from a daily sheet of <span class="metric">500–800</span> offerings. Own the learning-to-rank models (XGBoost), the feature pipeline, and an LLM assistant traders use to explore similar bonds and give feedback that improves future recommendations. Rankings are validated in offline backtesting on historical trades.</li>
+              <li><strong>Led a performance investigation into slow PnL calculations</strong>, benchmarking each service route to isolate the bottleneck. Reworked request throttling and load distribution in the calculation path, cutting end-to-end p95 latency by <span class="metric">66%</span>.</li>
+              <li><strong>Shipped historical rerun support for the PnL service</strong> using async Camel routes over MongoDB and Kafka. Corrections to past positions recompute and persist under the correct historical date without republishing into the live trade stream.</li>
+              <li><strong>Championed GitHub Copilot adoption</strong> across the line of business, presenting to <span class="metric">200+</span> engineers on practical usage and agentic development workflows.</li>
             </ul>
           </div>
         </li>
@@ -133,12 +191,13 @@
             <h3>Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Designed a LangGraph orchestrator + validator agentic pipeline</strong> for natural-language → database query translation, layering RAG retrieval, MCP-based tool exposure, and governance (syntax checks, PII masking, tamper-evident audit) to enforce safe-query policy before execution.</li>
-              <li><strong>Enabled horizontal scaling of PnL microservices</strong> — externalized in-process state to Redis to enable stateless replicas, with Kafka exactly-once consumer semantics ensuring concurrency safety under high-volume trade load. Contributed a DMN rules engine for swap position and payment-leg roll-ups and idempotent file ingestion for end-of-day archival flows.</li>
-              <li><strong>Optimized MongoDB query latency by <span class="metric">30–40%</span></strong> on PnL reporting stores — replaced legacy Views with aggregation pipelines and compound indexing, materially reducing infra load across the reporting cluster.</li>
-              <li><strong>Redesigned a PnL data-collection backup microservice from single-call to batched processing</strong> — consolidated per-record upstream calls into bulk payloads, improving end-of-day throughput by <span class="metric">~90%</span> and reducing I/O contention across the service mesh.</li>
-              <li>Authored a <span class="metric">150+</span> financial-scenario automation framework (parallel execution, <span class="metric">60%</span> regression-cycle cut, Splunk telemetry) and led OpenShift modernization of <span class="metric">10+</span> core services with resilient CI/CD.</li>
-              <li>Owned PnL services and ABF data ingestion, driving steady reliability improvements through targeted refactors and observability upgrades.</li>
+              <li><strong>Designed and prototyped a natural-language interface to MongoDB</strong> that turns plain questions into safe queries. Orchestrator and validator LLM agents (LangGraph, tool access via MCP) run retrieval-augmented generation over schema and user-context vector stores, behind guardrails that mask PII and block unsafe queries.</li>
+              <li><strong>Rebuilt the real-time PnL read path on MongoDB</strong>, replacing view-based reads with aggregation pipelines and compound indexes. P95 read latency dropped from around <span class="metric">710ms</span> to <span class="metric">230ms</span> with no loss of accuracy.</li>
+              <li><strong>Extended the Java Spring Boot PnL microservices to a new asset class</strong>: expected cash-flow models, EUR FX conversion, swap-position roll-ups, and risk-factor attribution. Released with production Kafka topics and regression sign-off.</li>
+              <li><strong>Created a reusable activity-tracking layer</strong> adopted by two trading-desk teams across six service flows and eight repositories. It emits run status with correlation IDs, and its non-blocking design keeps monitoring off the critical path.</li>
+              <li><strong>Converted a PnL backup service from per-record calls to batched writes</strong>, raising end-of-day throughput by roughly <span class="metric">90%</span> and easing load on shared infrastructure.</li>
+              <li>Automated regression testing across <span class="metric">150+</span> financial scenarios with parallel execution and Splunk telemetry, reducing run time by <span class="metric">60%</span>, and drove the migration of <span class="metric">10+</span> services onto OpenShift with rebuilt CI/CD pipelines.</li>
+              <li>Delivered an asset-backed-finance reporting feature end to end on an investment-banking platform: an ingestion engine for Excel deal and pricing sheets, plus the schema migrations and reference-data reconciliation behind it.</li>
             </ul>
           </div>
         </li>
@@ -148,7 +207,7 @@
             <h3>Technology Intern</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li>Built a time-series forecasting engine for ATM cash optimization, benchmarking <strong>SARIMA, LSTM, and Prophet</strong> on transaction data from <span class="metric">111 ATMs</span>, with exogenous factors (holidays, weather) and automated retraining. Achieved <span class="metric">~91%</span> weekly prediction accuracy via aggregated-window forecasting.</li>
+              <li>Prototyped a time-series forecasting engine for ATM cash-replenishment optimization, benchmarking <strong>SARIMA, LSTM, and Prophet</strong> across <span class="metric">111 ATMs</span> with holiday and weather signals. Reached about <span class="metric">91%</span> accuracy on weekly forecasts.</li>
             </ul>
           </div>
         </li>
@@ -164,6 +223,19 @@
           <div class="card__tag">Flagship · v0.4 · Open Source</div>
           <h3 class="card__title">kharcha-ai · drop your bank PDFs in, get a forensic spend analysis out</h3>
           <p class="card__desc">A multi-agent LangGraph system that ingests Indian bank statements and credit-card PDFs, runs every transaction through local Gemma 4, and renders an <strong>editorial 10-page Spend Analysis PDF</strong> — entirely offline. Deterministic parsers feed an LLM-first tagger; a friend auto-detector finds money loops from bidirectional UPI flow; a validator agent re-checks low-confidence rows; a narrative agent writes per-source analytical prose, gated by a deterministic quality check that catches degenerate LLM output before it reaches the PDF. Layered detectors handle EMI installments, recurring subscriptions, 2σ category anomalies, and cross-source reconciliation against the savings account. <strong>Five-layer privacy gitignore</strong> — zero bank data has ever been committed across any branch. Idempotent re-ingestion via deterministic hashes; <span class="metric">37</span> tests green.</p>
+          <div class="mini-pipe" aria-hidden="true">
+            <span class="mini-pipe__node">bank PDFs</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node">parse</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node">LLM tag</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node">validate</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node">narrate</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node mini-pipe__node--out">10-page report</span>
+          </div>
           <div class="card__tech">
             <span>Multi-agent</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
           </div>
@@ -192,7 +264,7 @@
 
         <article class="card reveal">
           <div class="card__tag">Open Source</div>
-          <h3 class="card__title">Lumen.AI · NL → SQL</h3>
+          <h3 class="card__title">NL → SQL · local sqlcoder pipeline</h3>
           <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
           <div class="card__tech">
             <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
@@ -235,23 +307,23 @@
         <div class="award award--featured reveal">
           <div class="award__kind">Publication</div>
           <h3 class="award__title">SaBMOGWO-S: A novel algorithm for feature selection across 21 benchmark datasets</h3>
-          <p class="award__meta">The Journal of Supercomputing · Vol. 79 · pp. 12869–12901 · 2023 · Co-authored</p>
+          <p class="award__meta">The Journal of Supercomputing (Springer) · Vol. 79 · pp. 12869–12901 · 2023 · Co-authored · <a href="https://doi.org/10.1007/s11227-023-05145-y" target="_blank" rel="noopener">DOI: 10.1007/s11227-023-05145-y</a></p>
           <p class="award__desc">A self-adaptive binary multi-objective Grey Wolf Optimizer for feature selection, evaluated against 21 standard benchmarks. Grew out of the personal <a href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GreyWolfOptimizer</a> repo.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
           <h3 class="award__title">Top Achievers Award · Wells Fargo 2025</h3>
-          <p class="award__desc">Wells Fargo's highest individual honor.</p>
+          <p class="award__desc">Wells Fargo's highest individual recognition, awarded to roughly the top <span class="metric">1%</span> of employees.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
-          <h3 class="award__title">Innovation Pitch Day 2024 · Grand Finalist</h3>
-          <p class="award__desc"><span class="metric">Top 4</span> across firm-wide submissions.</p>
+          <h3 class="award__title">Top Innovator · Innovation Pitch Day 2024</h3>
+          <p class="award__desc"><span class="metric">Top 4</span> of 600+ firm-wide entries, for a natural-language database assistant.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
-          <h3 class="award__title">Manager Spotlight Awards · ×2</h3>
-          <p class="award__desc">Recognized for impact on the team across two separate cycles.</p>
+          <h3 class="award__title">Manager Spotlight Awards · ×3</h3>
+          <p class="award__desc">Awarded in three consecutive years for consistent ownership and delivery.</p>
         </div>
       </div>
     </section>
@@ -265,9 +337,9 @@
             <span class="skill-tier__sub">Daily, in production</span>
           </div>
           <div class="skill-tier__rows">
-            <div class="skill-row"><span class="skill-row__label">Languages</span><div class="tags"><span class="tag">Python</span><span class="tag">Java</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">Backend</span><div class="tags"><span class="tag">Apache Kafka</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">Spring Boot</span><span class="tag">Apache Camel</span><span class="tag">REST</span><span class="tag">gRPC</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">AI / Agentic</span><div class="tags"><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">RAG</span><span class="tag">MCP</span><span class="tag">Tool Calling</span><span class="tag">Orchestrator + Validator</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Languages</span><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Backend</span><div class="tags"><span class="tag">Apache Kafka</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">Spring Boot</span><span class="tag">Apache Camel</span><span class="tag">REST</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">AI / Agentic</span><div class="tags"><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">RAG</span><span class="tag">MCP</span><span class="tag">XGBoost · Learning-to-rank</span><span class="tag">Tool Calling</span><span class="tag">Orchestrator + Validator</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Infra &amp; CI/CD</span><div class="tags"><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Helm</span><span class="tag">OpenShift</span><span class="tag">GitHub Actions</span><span class="tag">Jenkins</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Observability</span><div class="tags"><span class="tag">Splunk</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Sonar</span></div></div>
           </div>
