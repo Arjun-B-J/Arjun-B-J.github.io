@@ -399,7 +399,7 @@ if (askSection) {
     },
     pitch: {
       intent: 'the pitch',
-      chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › shipped-side-builds'],
+      chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › finished-side-builds'],
       answer: 'He ships production GenAI inside a regulated bank — agents, RAG, and guardrails that had to pass real risk review, not just demos — on top of years of high-throughput backend work in fixed-income trading. Wells Fargo put him in roughly the top 1% of employees (Top Achievers, 2025), he’s published in Springer’s Journal of Supercomputing, and he finishes what he starts on the side too. Also: the pipeline you just ran is how he thinks by default.',
     },
   };
