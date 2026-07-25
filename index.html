@@ -232,7 +232,7 @@
             <span class="mini-pipe__edge"></span>
             <span class="mini-pipe__node">categorise</span>
             <span class="mini-pipe__edge"></span>
-            <span class="mini-pipe__node">find people</span>
+            <span class="mini-pipe__node">people</span>
             <span class="mini-pipe__edge"></span>
             <span class="mini-pipe__node">validate</span>
             <span class="mini-pipe__edge"></span>
@@ -240,11 +240,14 @@
           </div>
 
           <figure class="shots">
-            <a class="shots__item shots__item--wide" href="assets/wimmg/architecture.svg" target="_blank" rel="noopener">
-              <img src="assets/wimmg/architecture.svg" alt="Architecture: statements and synthetic data are parsed deterministically into one record type, stored in SQLite, then categorised by a local model and refined by two agents." loading="lazy" decoding="async" />
+            <a class="shots__item shots__item--wide shots__item--diagram" href="assets/wimmg/architecture.svg" target="_blank" rel="noopener">
+              <!-- The intrinsic size must be declared: a lazy image with no
+                   dimensions reserves no space, and this one is an SVG that the
+                   layout would otherwise collapse to zero height. -->
+              <img src="assets/wimmg/architecture.svg" alt="Architecture: statements and synthetic data are parsed deterministically into one record type, stored in SQLite, then categorised by a local model and refined by two agents." loading="lazy" decoding="async" width="1180" height="700" />
               <figcaption>The architecture. The model sits in exactly one place; extraction never touches it.</figcaption>
             </a>
-            <a class="shots__item" href="assets/wimmg/dashboard.webp" target="_blank" rel="noopener">
+            <a class="shots__item shots__item--wide shots__item--hero" href="assets/wimmg/dashboard.webp" target="_blank" rel="noopener">
               <img src="assets/wimmg/dashboard.webp" alt="Dashboard showing spend, money in, net surplus, monthly cash flow, category breakdown and model-written insight cards." loading="lazy" decoding="async" width="1600" height="1883" />
               <figcaption>Dashboard, and the numbers reconcile. Card-bill payments are excluded from spend, because counting them double-counts every card purchase they settle.</figcaption>
             </a>

@@ -752,10 +752,12 @@ strong {
     align-items: center;
     align-content: center;
     justify-content: center;
-    gap: 0.55rem;
+    gap: 0.4rem;
   }
   .card--featured .mini-pipe__node { font-size: 0.74rem; padding: 0.3rem 0.65rem; }
-  .card--featured .mini-pipe__edge { width: 30px; }
+  /* Six nodes have to fit on one line at this card width, otherwise the last one
+     wraps alone and reads like a separate thing rather than the end of a flow. */
+  .card--featured .mini-pipe__edge { width: 22px; }
 }
 
 .card__tag {
@@ -1572,6 +1574,8 @@ strong {
 @media (prefers-reduced-motion: reduce) {
   .mini-pipe__edge::after, .pipe__edge i { display: none; }
   .grain { opacity: 0.03; }
+}
+
 /* ---------------------------------------------------------------------------
    Project screenshots
    Used by the flagship card. The images are light-themed against this dark
@@ -1583,15 +1587,15 @@ strong {
   margin: 0.25rem 0 0.5rem;
   display: grid;
   gap: 0.9rem;
-  grid-template-columns: 1fr;
+  /* Sized off the container, not the viewport. A viewport breakpoint gets this
+     wrong at tablet width, where the projects grid has already gone multi-column
+     and this card is narrow: 768px of viewport bought two 136px thumbnails.
+     auto-fit only splits into two columns once each one can hold 240px. */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-@media (min-width: 720px) {
-  /* Two up, with the architecture diagram spanning both columns — it is wide and
-     unreadable at half width. */
-  .shots { grid-template-columns: 1fr 1fr; }
-  .shots__item--wide { grid-column: 1 / -1; }
-}
+/* The diagram and the hero shot always run the full width of the gallery. */
+.shots__item--wide { grid-column: 1 / -1; }
 
 .shots__item {
   display: block;
@@ -1614,7 +1618,23 @@ strong {
   display: block;
   width: 100%;
   height: auto;
+  /* The app screenshots are full-page captures and one is nearly 1:1.2, so at
+     card width they would each be over a thousand pixels tall. Cap the height
+     and crop from the top: the interesting part of every one of these is the
+     header and the first fold, and clicking opens the full image anyway. */
+  max-height: 260px;
+  object-fit: cover;
+  object-position: top center;
 }
+
+/* The architecture diagram is the one image that has to be shown whole. */
+.shots__item--diagram img {
+  max-height: none;
+  object-fit: contain;
+  background: #fdfaf4;
+}
+
+.shots__item--hero img { max-height: 420px; }
 
 .shots__item figcaption {
   padding: 0.6rem 0.8rem 0.7rem;
