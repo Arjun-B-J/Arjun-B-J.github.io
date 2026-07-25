@@ -62,6 +62,7 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
@@ -677,9 +678,17 @@ strong {
 /* ===== Projects ===== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.75rem;
   margin-top: 1.75rem;
+}
+
+/* The cards beside the flagship, as one continuous stack. */
+.projects-side {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.75rem;
+  align-content: start;
 }
 
 .card {
@@ -736,28 +745,33 @@ strong {
   color: var(--accent-1);
 }
 
-/* Bento layout: featured spans 2×2, small cards fill around it */
-@media (min-width: 900px) {
+/* The flagship beside a single stacked column of the rest.
+   This replaced a 2x2 bento. The bento could not work once the flagship grew a
+   screenshot gallery: `grid-row: span 2` makes it share row heights with the
+   small cards, so a card several times taller than them stretched those rows and
+   left most of the third column empty. Two independent columns have no shared
+   rows, so neither side can stretch the other. */
+@media (min-width: 1060px) {
   .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: dense;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    align-items: start;
   }
-  .card--featured { grid-column: span 2; grid-row: span 2; }
-  .card--cta { grid-column: 1 / -1; }
-  /* In the tall 2×2 cell, the desc stops growing and the animated
-     pipeline centers itself in the breathing room instead */
+  /* One card per row here: the column is too narrow to split again, and auto-fit
+     would otherwise pair them up at the widest viewports. */
+  .projects-side { grid-template-columns: minmax(0, 1fr); }
   .card--featured .card__desc { flex-grow: 0; font-size: 1rem; }
   .card--featured .mini-pipe {
-    flex-grow: 1;
     align-items: center;
     align-content: center;
     justify-content: center;
     gap: 0.4rem;
   }
-  .card--featured .mini-pipe__node { font-size: 0.74rem; padding: 0.3rem 0.65rem; }
-  /* Six nodes have to fit on one line at this card width, otherwise the last one
-     wraps alone and reads like a separate thing rather than the end of a flow. */
-  .card--featured .mini-pipe__edge { width: 22px; }
+  /* Six nodes have to fit on one line in this column, otherwise the last one
+     wraps alone and reads like a separate thing rather than the end of a flow.
+     The column is ~548px of usable width, so the node chrome is what gives. */
+  .card--featured .mini-pipe { gap: 0.3rem; }
+  .card--featured .mini-pipe__node { font-size: 0.68rem; padding: 0.26rem 0.5rem; }
+  .card--featured .mini-pipe__edge { width: 14px; }
 }
 
 .card__tag {

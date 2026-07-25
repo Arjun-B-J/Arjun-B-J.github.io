@@ -269,62 +269,69 @@
           <a class="card__link" href="https://github.com/Arjun-B-J/where-is-my-money-going" target="_blank" rel="noopener">View on GitHub →</a>
         </article>
 
-        <article class="card reveal">
-          <div class="card__tag">Open Source</div>
-          <h3 class="card__title">VoiceToText-with-UI</h3>
-          <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
-          <div class="card__tech">
-            <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/VoiceToText-with-UI" target="_blank" rel="noopener">View on GitHub →</a>
-        </article>
+        <!-- The remaining cards stack in one column beside the flagship.
+             They used to be grid cells sharing row heights with it, which is
+             what left the dead space: the flagship is several times taller
+             than any of them. -->
+        <div class="projects-side">
 
-        <article class="card reveal">
-          <div class="card__tag">Recent · Open Source</div>
-          <h3 class="card__title">lockin · Focus Timer</h3>
-          <p class="card__desc">A green-themed standalone Windows focus timer I built for my own interview prep. Wall-clock based (survives laptop sleep), Picture-in-Picture mini mode for always-on-top, procedurally-generated brown / pink / white / rain ambient noise via Web Audio, and File System Access API auto-export so every session streams to disk as <code>jsonl</code> for pandas analytics. SVG-rendered calendar heatmap, hour-of-day grid, and personal-bests dashboard. No build, no deps, ~1500 lines.</p>
-          <div class="card__tech">
-            <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/lockin" target="_blank" rel="noopener">GitHub →</a>
-        </article>
+    <article class="card reveal">
+      <div class="card__tag">Open Source</div>
+      <h3 class="card__title">VoiceToText-with-UI</h3>
+      <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
+      <div class="card__tech">
+        <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/VoiceToText-with-UI" target="_blank" rel="noopener">View on GitHub →</a>
+    </article>
 
-        <article class="card reveal">
-          <div class="card__tag">Open Source</div>
-          <h3 class="card__title">NL → SQL · local sqlcoder pipeline</h3>
-          <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
-          <div class="card__tech">
-            <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
-        </article>
+    <article class="card reveal">
+      <div class="card__tag">Recent · Open Source</div>
+      <h3 class="card__title">lockin · Focus Timer</h3>
+      <p class="card__desc">A green-themed standalone Windows focus timer I built for my own interview prep. Wall-clock based (survives laptop sleep), Picture-in-Picture mini mode for always-on-top, procedurally-generated brown / pink / white / rain ambient noise via Web Audio, and File System Access API auto-export so every session streams to disk as <code>jsonl</code> for pandas analytics. SVG-rendered calendar heatmap, hour-of-day grid, and personal-bests dashboard. No build, no deps, ~1500 lines.</p>
+      <div class="card__tech">
+        <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/lockin" target="_blank" rel="noopener">GitHub →</a>
+    </article>
 
-        <article class="card reveal">
-          <div class="card__tag">Hackathon</div>
-          <h3 class="card__title">GAIDP — Gen AI Data Profiler</h3>
-          <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
-          <div class="card__tech">
-            <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
-        </article>
+    <article class="card reveal">
+      <div class="card__tag">Open Source</div>
+      <h3 class="card__title">NL → SQL · local sqlcoder pipeline</h3>
+      <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
+      <div class="card__tech">
+        <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
+    </article>
 
-        <article class="card reveal">
-          <div class="card__tag">Led to Publication</div>
-          <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
-          <p class="card__desc">Implementations of GWO and three variants — Binary GWO, Multi-Objective GWO, and Binary MOGWO — wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
-          <div class="card__tech">
-            <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
-          </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
-        </article>
+    <article class="card reveal">
+      <div class="card__tag">Hackathon</div>
+      <h3 class="card__title">GAIDP — Gen AI Data Profiler</h3>
+      <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
+      <div class="card__tech">
+        <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
+    </article>
 
-        <a class="card card--cta reveal" href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">
-          <div class="card__tag">Plus more</div>
-          <h3 class="card__title">See all on GitHub →</h3>
-          <p class="card__desc">Older side experiments across blockchain, Linux kernel modules, Verilog FPGA, GANs, computer vision, and full-stack web — kept around as artifacts of past learning, separate from current focus.</p>
-          <span class="card__link">github.com/Arjun-B-J →</span>
-        </a>
+    <article class="card reveal">
+      <div class="card__tag">Led to Publication</div>
+      <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
+      <p class="card__desc">Implementations of GWO and three variants — Binary GWO, Multi-Objective GWO, and Binary MOGWO — wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
+      <div class="card__tech">
+        <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
+    </article>
+
+    <a class="card card--cta reveal" href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">
+      <div class="card__tag">Plus more</div>
+      <h3 class="card__title">See all on GitHub →</h3>
+      <p class="card__desc">Older side experiments across blockchain, Linux kernel modules, Verilog FPGA, GANs, computer vision, and full-stack web — kept around as artifacts of past learning, separate from current focus.</p>
+      <span class="card__link">github.com/Arjun-B-J →</span>
+    </a>
+        </div>
       </div>
     </section>
 
