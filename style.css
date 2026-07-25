@@ -1258,7 +1258,7 @@ strong {
 
 .timeline.is-drawn::before { transform: scaleY(1); }
 
-/* ===== Mini pipeline (kharcha-ai featured card) ===== */
+/* ===== Mini pipeline (featured project card) ===== */
 .mini-pipe {
   display: flex;
   align-items: center;
@@ -1572,4 +1572,67 @@ strong {
 @media (prefers-reduced-motion: reduce) {
   .mini-pipe__edge::after, .pipe__edge i { display: none; }
   .grain { opacity: 0.03; }
+/* ---------------------------------------------------------------------------
+   Project screenshots
+   Used by the flagship card. The images are light-themed against this dark
+   surface, so each one gets a hairline border and slight inset rather than
+   floating as a bright rectangle.
+   --------------------------------------------------------------------------- */
+
+.shots {
+  margin: 0.25rem 0 0.5rem;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  /* Two up, with the architecture diagram spanning both columns — it is wide and
+     unreadable at half width. */
+  .shots { grid-template-columns: 1fr 1fr; }
+  .shots__item--wide { grid-column: 1 / -1; }
+}
+
+.shots__item {
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.shots__item:hover,
+.shots__item:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.45);
+}
+
+.shots__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shots__item figcaption {
+  padding: 0.6rem 0.8rem 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.shots__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+@media print {
+  /* One column, no hover chrome, and keep a shot with its caption. */
+  .shots { grid-template-columns: 1fr; }
+  .shots__item { break-inside: avoid; border: 1px solid #999 !important; }
 }

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arjun Bindu Jayachandran, Senior Software Engineer at Wells Fargo. Applied-AI and distributed backend systems for a fixed-income trading desk: a learning-to-rank bond recommendation engine with an LLM assistant, and replay-safe PnL microservices. Builds kharcha-ai, a local multi-agent spend-analysis system, on the side." />
+  <meta name="description" content="Arjun Bindu Jayachandran, Senior Software Engineer at Wells Fargo. Applied-AI and distributed backend systems for a fixed-income trading desk: a learning-to-rank bond recommendation engine with an LLM assistant, and replay-safe PnL microservices. Builds Where Is My Money Going?, a local spend-analysis system, on the side." />
   <meta name="theme-color" content="#061812" />
 
   <meta property="og:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta property="og:description" content="Applied-AI and distributed backend systems for fixed-income trading: a learning-to-rank bond recommendation engine, replay-safe PnL microservices, and kharcha-ai, a local multi-agent spend-analysis system." />
+  <meta property="og:description" content="Applied-AI and distributed backend systems for fixed-income trading: a learning-to-rank bond recommendation engine, replay-safe PnL microservices, and Where Is My Money Going?, a local spend-analysis system." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://arjun-b-j.github.io" />
   <meta property="og:image" content="https://arjun-b-j.github.io/og-image.png" />
@@ -17,7 +17,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
-  <meta name="twitter:description" content="Applied-AI systems · distributed backends · fixed-income trading · kharcha-ai on the side." />
+  <meta name="twitter:description" content="Applied-AI systems · distributed backends · fixed-income trading · local-first spend analysis on the side." />
   <meta name="twitter:image" content="https://arjun-b-j.github.io/og-image.png" />
 
   <title>Arjun Bindu Jayachandran · Senior Software Engineer</title>
@@ -87,7 +87,7 @@
         <div class="about__bio reveal">
           <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working at the intersection of applied AI and high-throughput backend systems for fixed-income trading. My work spans <strong>learning-to-rank recommendations</strong>, <strong>LLM agent pipelines</strong>, and <strong>distributed PnL microservices</strong> built for replay-safe reruns and idempotent ingestion.</p>
           <p>I joined Wells Fargo as an intern in 2021, came back full-time in 2022 right after graduating from <strong>NIT Calicut</strong>, and was promoted to Senior in 2026. Along the way I picked up the Top Achievers Award (roughly the top 1% of employees), a Top Innovator finish at Innovation Pitch Day (top 4 of 600+), and a paper in Springer's Journal of Supercomputing on metaheuristic feature selection.</p>
-          <p>Outside of work I'm building <a href="#projects"><strong>kharcha-ai</strong></a> — a multi-agent LangGraph + Gemma 4 spend-analysis system that runs entirely on a laptop — plus PyQt6 desktop AI, a focus-timer side project, local LLM experiments, and the occasional weekend hack. Scroll down for both work and personal builds.</p>
+          <p>Outside of work I'm building <a href="#projects"><strong>Where Is My Money Going?</strong></a> — a LangGraph + Gemma 4 spend-analysis system that runs entirely on a laptop — plus PyQt6 desktop AI, a focus-timer side project, local LLM experiments, and the occasional weekend hack. Scroll down for both work and personal builds.</p>
         </div>
         <aside class="about__facts reveal">
           <div class="fact">
@@ -121,7 +121,7 @@
       <div class="ask reveal">
         <div class="ask__chips" role="group" aria-label="Sample questions">
           <button class="chip" type="button" data-q="wf">What does he do at Wells Fargo?</button>
-          <button class="chip" type="button" data-q="kharcha">How does kharcha-ai work?</button>
+          <button class="chip" type="button" data-q="wimmg">How does &ldquo;Where Is My Money Going?&rdquo; work?</button>
           <button class="chip" type="button" data-q="genai">What's his GenAI experience?</button>
           <button class="chip" type="button" data-q="perf">Biggest performance win?</button>
           <button class="chip" type="button" data-q="pitch">Why interview him?</button>
@@ -220,26 +220,50 @@
 
       <div class="projects-grid">
         <article class="card card--featured reveal">
-          <div class="card__tag">Flagship · v0.4 · Open Source</div>
-          <h3 class="card__title">kharcha-ai · drop your bank PDFs in, get a forensic spend analysis out</h3>
-          <p class="card__desc">A multi-agent LangGraph system that ingests Indian bank statements and credit-card PDFs, runs every transaction through local Gemma 4, and renders an <strong>editorial 10-page Spend Analysis PDF</strong> — entirely offline. Deterministic parsers feed an LLM-first tagger; a friend auto-detector finds money loops from bidirectional UPI flow; a validator agent re-checks low-confidence rows; a narrative agent writes per-source analytical prose, gated by a deterministic quality check that catches degenerate LLM output before it reaches the PDF. Layered detectors handle EMI installments, recurring subscriptions, 2σ category anomalies, and cross-source reconciliation against the savings account. <strong>Five-layer privacy gitignore</strong> — zero bank data has ever been committed across any branch. Idempotent re-ingestion via deterministic hashes; <span class="metric">37</span> tests green.</p>
+          <div class="card__tag">Flagship · v0.5 · Open Source</div>
+          <h3 class="card__title">Where Is My Money Going? · statements in, a categorised answer out, on your own machine</h3>
+          <p class="card__desc">I couldn't answer that question from my own bank statement. A year of UPI transfers to names that meant nothing to me weeks later, and every app that promised to sort it out wanted my full financial history uploaded to a server first. So the constraint came before the design: <strong>nothing leaves the machine</strong>. Everything else follows from that. Deterministic Python parses the statements, and a local model (Gemma 4 via Ollama) only ever labels rows that have already been extracted, so a hallucination can never turn into a rupee figure. Two agents then refine the result. One finds the people in the ledger from two-way UPI flow, the other re-checks every tag the first pass was unsure about.</p>
+          <p class="card__desc">The part I'd actually talk about in an interview is a bug I shipped. A failed model call was returning a plausible-looking <code>{"category": "uncategorized", "confidence": 0.0}</code>, and the pipeline stored it as genuine output. So <span class="metric">285</span> transactions the model had never seen sat in the database labelled as its work, and the dashboard reported "80% uncategorized". The model itself was fine. It's a reasoning model, and asking it for JSON the naive way made its output degenerate mid-string. Turning the thinking channel off and passing a real JSON Schema fixed it outright. The lesson stuck harder than the fix: <strong>a fallback that imitates success hides the bug that caused it</strong>. Failures now return nothing at all, and the row stays visibly untagged. Once I knew what to look for I found two more of the same species, including a prose quality gate that was rejecting 100% of valid output while a canned fallback shipped in its place.</p>
+
           <div class="mini-pipe" aria-hidden="true">
-            <span class="mini-pipe__node">bank PDFs</span>
+            <span class="mini-pipe__node">statements</span>
             <span class="mini-pipe__edge"></span>
             <span class="mini-pipe__node">parse</span>
             <span class="mini-pipe__edge"></span>
-            <span class="mini-pipe__node">LLM tag</span>
+            <span class="mini-pipe__node">categorise</span>
+            <span class="mini-pipe__edge"></span>
+            <span class="mini-pipe__node">find people</span>
             <span class="mini-pipe__edge"></span>
             <span class="mini-pipe__node">validate</span>
             <span class="mini-pipe__edge"></span>
-            <span class="mini-pipe__node">narrate</span>
-            <span class="mini-pipe__edge"></span>
-            <span class="mini-pipe__node mini-pipe__node--out">10-page report</span>
+            <span class="mini-pipe__node mini-pipe__node--out">report</span>
           </div>
+
+          <figure class="shots">
+            <a class="shots__item shots__item--wide" href="assets/wimmg/architecture.svg" target="_blank" rel="noopener">
+              <img src="assets/wimmg/architecture.svg" alt="Architecture: statements and synthetic data are parsed deterministically into one record type, stored in SQLite, then categorised by a local model and refined by two agents." loading="lazy" decoding="async" />
+              <figcaption>The architecture. The model sits in exactly one place; extraction never touches it.</figcaption>
+            </a>
+            <a class="shots__item" href="assets/wimmg/dashboard.webp" target="_blank" rel="noopener">
+              <img src="assets/wimmg/dashboard.webp" alt="Dashboard showing spend, money in, net surplus, monthly cash flow, category breakdown and model-written insight cards." loading="lazy" decoding="async" width="1600" height="1883" />
+              <figcaption>Dashboard, and the numbers reconcile. Card-bill payments are excluded from spend, because counting them double-counts every card purchase they settle.</figcaption>
+            </a>
+            <a class="shots__item" href="assets/wimmg/transactions.webp" target="_blank" rel="noopener">
+              <img src="assets/wimmg/transactions.webp" alt="Transaction ledger with a category, tag provenance and confidence score on every row." loading="lazy" decoding="async" width="1600" height="1000" />
+              <figcaption>Every row carries provenance and a confidence score. Below the threshold it goes to a review queue rather than being trusted.</figcaption>
+            </a>
+            <a class="shots__item" href="assets/wimmg/people.webp" target="_blank" rel="noopener">
+              <img src="assets/wimmg/people.webp" alt="People view showing running balances per person, inferred from two-way UPI flow." loading="lazy" decoding="async" width="1600" height="1000" />
+              <figcaption>People are found structurally, by two-way flow, a person-shaped name and a personal UPI handle. The model then reads the direction off the time series.</figcaption>
+            </a>
+            <figcaption class="shots__note">All screenshots are from the synthetic demo dataset. The payees are footballers on purpose: nobody should be able to mistake a demo screenshot for a real ledger.</figcaption>
+          </figure>
+
+          <p class="card__desc">Also in there: instalment-plan detection off the counters printed on card statements, cadence-based recurring-charge detection, duplicate-charge and unmatched-refund checks, cross-statement reconciliation of card bills from both sides, and a typeset Spend Analysis PDF. Statement parsers are selected by sniffing document content, not filenames. Re-ingesting the same file is a no-op via a content hash. <span class="metric">158</span> backend and <span class="metric">10</span> frontend tests, with ruff, mypy, ESLint and tsc clean in CI, plus a job that fails the build if a phone number, a real UPI handle or an employer identifier ever reappears in source.</p>
           <div class="card__tech">
-            <span>Multi-agent</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>FastAPI</span><span>Next.js 15</span><span>ReportLab</span>
+            <span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>Structured output</span><span>FastAPI</span><span>SQLAlchemy</span><span>Next.js 15</span><span>ReportLab</span>
           </div>
-          <a class="card__link" href="https://github.com/Arjun-B-J/kharcha-ai" target="_blank" rel="noopener">View on GitHub →</a>
+          <a class="card__link" href="https://github.com/Arjun-B-J/where-is-my-money-going" target="_blank" rel="noopener">View on GitHub →</a>
         </article>
 
         <article class="card reveal">

@@ -382,15 +382,15 @@ if (askSection) {
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
       answer: 'Arjun works on a fixed-income trading desk at Wells Fargo. He owns the learning-to-rank models and feature pipeline for a bond recommendation engine that ranks 500–800 daily offerings per institutional client, plus an LLM assistant traders use to explore similar bonds. He also builds the desk’s PnL microservices — replay-safe historical reruns over Kafka and MongoDB, and a performance rework that cut end-to-end p95 latency by 66%.',
     },
-    kharcha: {
+    wimmg: {
       intent: 'project deep-dive',
-      chunks: ['github › kharcha-ai › README', 'kharcha › agents › validator', 'kharcha › privacy › gitignore'],
-      answer: 'kharcha-ai is a multi-agent LangGraph system that runs entirely on a laptop. Deterministic parsers ingest Indian bank and credit-card PDFs, every transaction is tagged by a local Gemma 4 model, a validator agent re-checks low-confidence rows, and a narrative agent writes the analysis — gated by a deterministic quality check before anything reaches the final 10-page PDF. A five-layer privacy gitignore means zero bank data has ever been committed; 37 tests green.',
+      chunks: ['github › where-is-my-money-going › README', 'wimmg › pipeline › validator', 'wimmg › docs › DECISIONS'],
+      answer: '"Where Is My Money Going?" is a LangGraph pipeline that runs entirely on a laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn Indian bank and credit-card statements into one record type — the model never produces a number. A local Gemma 4 model then categorises each row under a JSON Schema, one agent finds the people in the ledger from two-way UPI flow, and a validator agent re-checks every tag the first pass was unsure about. Failed model calls return nothing rather than a plausible-looking default, which is the bug he talks about in the write-up. 158 backend and 10 frontend tests, ruff, mypy, ESLint and tsc green in CI.',
     },
     genai: {
       intent: 'skills · genai',
       chunks: ['experience › nl-mongo-agents', 'skills › ai-agentic', 'projects › local-llm'],
-      answer: 'At work: production LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries — RAG over schema and user-context vector stores, tool access via MCP, and guardrails that mask PII and block unsafe queries. That design took Top Innovator at Wells Fargo’s Innovation Pitch Day (top 4 of 600+). On the side: kharcha-ai, a local NL→SQL pipeline, and a GPU dictation assistant.',
+      answer: 'At work: production LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries — RAG over schema and user-context vector stores, tool access via MCP, and guardrails that mask PII and block unsafe queries. That design took Top Innovator at Wells Fargo’s Innovation Pitch Day (top 4 of 600+). On the side: "Where Is My Money Going?", a fully local agentic pipeline with schema-constrained structured output, and a GPU dictation assistant.',
     },
     perf: {
       intent: 'impact · latency',
