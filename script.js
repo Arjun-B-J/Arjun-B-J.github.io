@@ -521,12 +521,12 @@ if (askSection) {
     wf: {
       intent: 'experience',
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices — a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
+      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices: a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
     },
     wimmg: {
       intent: 'project deep-dive',
       chunks: ['github › where-is-my-money-going › README', 'wimmg › pipeline › validator', 'wimmg › docs › DECISIONS'],
-      answer: 'It is a LangGraph pipeline that runs entirely on my laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn statements into one record type, so the model never produces a number — a local Gemma 4 model only labels rows that code already extracted. One agent finds the people in the ledger from two-way UPI flow, a validator re-checks every uncertain tag, and failed model calls now return nothing instead of a plausible-looking default. That last one was my own bug, and it is the story I would tell in an interview.',
+      answer: 'It is a LangGraph pipeline that runs entirely on my laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn statements into one record type, so the model never produces a number. A local Gemma 4 model only labels rows that code already extracted. One agent finds the people in the ledger from two-way UPI flow, a validator re-checks every uncertain tag, and failed model calls now return nothing instead of a plausible-looking default. That last one was my own bug, and it is the story I would tell in an interview.',
     },
     genai: {
       intent: 'skills · genai',
