@@ -521,7 +521,7 @@ if (askSection) {
     wf: {
       intent: 'experience',
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It beat the single-model baseline by 58% on Recall@3 offline and is piloting with the desk. I also own the desk’s P&L microservices — a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
+      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices — a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
     },
     wimmg: {
       intent: 'project deep-dive',
@@ -541,7 +541,7 @@ if (askSection) {
     pitch: {
       intent: 'the pitch',
       chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › finished-side-builds'],
-      answer: 'I ship GenAI inside a regulated bank: agents, hybrid RAG and guardrails that had to pass real risk review, not just a demo. My recommendation engine scores about 4 million pairs daily and beat its baseline by 58% on Recall@3, on top of years of high-throughput backend work on a trading desk. Wells Fargo put me in roughly the top 1% of employees in 2025, I am published in Springer’s Journal of Supercomputing, and I finish what I start on the side too. Also: the pipeline you just watched is how I think by default.',
+      answer: 'I ship GenAI inside a regulated bank: agents, hybrid RAG and guardrails that had to pass real risk review, not just a demo. My recommendation engine scores about 4 million pairs daily, on top of years of high-throughput backend work on a trading desk. Wells Fargo put me in roughly the top 1% of employees in 2025, I am published in Springer’s Journal of Supercomputing, and I finish what I start on the side too. Also: the pipeline you just watched is how I think by default.',
     },
   };
 
