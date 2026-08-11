@@ -41,15 +41,33 @@
   </div>
   <div class="grain" aria-hidden="true"></div>
 
-  <nav class="nav">
-    <a href="#top" class="nav__logo" aria-label="Home">ABJ</a>
-    <ul class="nav__links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#ask">Ask</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- The bar hides on scroll-down and comes back on scroll-up, so it costs no
+       screen space while reading but is never more than a flick away. Below
+       900px the links move into a full-screen drawer: seven of them cannot
+       share a phone-width bar, and the old fix was to delete one. -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo" aria-label="Back to top">ABJ</a>
+
+    <button class="nav__toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+      <span class="nav__toggle-box" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="nav__toggle-label">Menu</span>
+    </button>
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__links">
+        <li><a href="#about" data-spy="about">About</a></li>
+        <li><a href="#ask" class="nav__ask" data-spy="ask"><span class="nav__ask-dot" aria-hidden="true"></span>Ask</a></li>
+        <li><a href="#experience" data-spy="experience">Experience</a></li>
+        <li><a href="#projects" data-spy="projects">Projects</a></li>
+        <li><a href="#awards" data-spy="awards">Awards</a></li>
+        <li><a href="#skills" data-spy="skills education">Skills</a></li>
+        <li><a href="#contact" data-spy="contact">Contact</a></li>
+      </ul>
+      <a class="nav__resume" href="Arjun_Bindu_Jayachandran_Resume.pdf" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
+    </div>
   </nav>
 
   <main id="main">
@@ -122,11 +140,11 @@
 
       <div class="ask reveal">
         <div class="ask__chips" role="group" aria-label="Sample questions">
-          <button class="chip" type="button" data-q="wf">What does he do at Wells Fargo?</button>
+          <button class="chip" type="button" data-q="wf">What do you do at Wells Fargo?</button>
           <button class="chip" type="button" data-q="wimmg">How does &ldquo;Where Is My Money Going?&rdquo; work?</button>
-          <button class="chip" type="button" data-q="genai">What's his GenAI experience?</button>
+          <button class="chip" type="button" data-q="genai">What's your GenAI experience?</button>
           <button class="chip" type="button" data-q="perf">Biggest performance win?</button>
-          <button class="chip" type="button" data-q="pitch">Why interview him?</button>
+          <button class="chip" type="button" data-q="pitch">Why should I interview you?</button>
         </div>
 
         <div class="pipe" aria-hidden="true">
@@ -445,6 +463,10 @@
       </div>
     </section>
   </main>
+
+  <a class="to-top" href="#top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </a>
 
   <footer class="footer">
     <p>© <span id="year"></span> Arjun Bindu Jayachandran · Bengaluru</p>

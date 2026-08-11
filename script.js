@@ -30,28 +30,141 @@ window.addEventListener('DOMContentLoaded', () => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Subtle nav background intensification on scroll
+// ===== Navigation =====
+// Sticky bar, mobile drawer, scroll-spy, progress bar and back-to-top. All the
+// scroll-driven parts share one rAF-throttled handler; they used to be three
+// separate scroll listeners each reading layout on every event.
 const nav = document.querySelector('.nav');
-if (nav) {
-  const updateNav = () => {
-    if (window.scrollY > 50) {
-      nav.style.background = 'rgba(6, 24, 18, 0.85)';
-    } else {
-      nav.style.background = 'rgba(6, 24, 18, 0.6)';
-    }
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const progressEl = document.querySelector('.scroll-progress');
+const toTopEl = document.querySelector('.to-top');
+let navIsOpen = false;
+// Hiding is a response to the *user* scrolling down, not to the page scrolling
+// itself. Without the distinction, following a nav link slides the bar away the
+// instant it was used, because the smooth scroll it triggers looks identical to
+// a downward flick. The hold ends the moment a real input arrives — timing it
+// instead was fragile, since any jank longer than the window broke the hold.
+let navHold = false;
+let navHoldTimer = null;
+const holdNav = () => {
+  navHold = true;
+  clearTimeout(navHoldTimer);
+  navHoldTimer = setTimeout(() => { navHold = false; }, 3000);
+};
+const releaseNavHold = () => {
+  navHold = false;
+  clearTimeout(navHoldTimer);
+};
+// touchstart on the link itself lands before its click, so the hold still wins.
+['wheel', 'touchstart', 'keydown'].forEach((type) => {
+  window.addEventListener(type, releaseNavHold, { passive: true });
+});
+
+// Publish the bar's real height: the drawer hangs off the bottom of it and
+// anchor jumps have to clear it, and both go wrong if the contents ever wrap.
+const syncNavHeight = () => {
+  if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+};
+syncNavHeight();
+window.addEventListener('resize', syncNavHeight, { passive: true });
+
+if (nav && navToggle && navMenu) {
+  const mainEl = document.getElementById('main');
+
+  const setNav = (open) => {
+    navIsOpen = open;
+    nav.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // The drawer covers the page but does not trap focus on its own; inert
+    // keeps Tab inside it instead of walking the page hidden behind it.
+    if (mainEl) mainEl.inert = open;
+    if (open) nav.classList.remove('is-hidden');
   };
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav();
+
+  navToggle.addEventListener('click', () => setNav(!navIsOpen));
+  // Following a link is the whole point of the drawer, so it closes behind you.
+  navMenu.addEventListener('click', (e) => {
+    if (!e.target.closest('a')) return;
+    setNav(false);
+    holdNav();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navIsOpen) {
+      setNav(false);
+      navToggle.focus();
+    }
+  });
+  // Past the breakpoint the links are visible anyway — drop the scroll lock.
+  window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => {
+    if (e.matches && navIsOpen) setNav(false);
+  });
+  // Tabbing into a bar that has scrolled itself away has to bring it back — and
+  // it has to stay back. Focusing something inside an off-screen fixed element
+  // makes the browser scroll the document to reveal it and then scroll back,
+  // and that return leg is downward, which without the hold re-hides the bar
+  // the moment a keyboard user reached it.
+  nav.addEventListener('focusin', () => {
+    nav.classList.remove('is-hidden');
+    holdNav();
+  });
 }
+
+let lastScrollY = window.scrollY;
+let scrollQueued = false;
+const NAV_HIDE_AFTER = 420;
+
+const onScrollFrame = () => {
+  scrollQueued = false;
+  const y = window.scrollY;
+
+  if (nav) {
+    nav.classList.toggle('is-scrolled', y > 24);
+    const delta = y - lastScrollY;
+    // A deadzone: without it, trackpad jitter and rubber-banding flip the bar
+    // in and out. lastScrollY only moves once the reading passes the deadzone,
+    // so slow scrolling accumulates instead of being discarded frame by frame.
+    if (Math.abs(delta) > 6) {
+      if (!navIsOpen && !navHold && delta > 0 && y > NAV_HIDE_AFTER) nav.classList.add('is-hidden');
+      else if (delta < 0 || navHold) nav.classList.remove('is-hidden');
+      lastScrollY = y;
+    }
+    if (y <= NAV_HIDE_AFTER) {
+      nav.classList.remove('is-hidden');
+      lastScrollY = y;
+    }
+  }
+
+  if (progressEl) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressEl.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+  }
+
+  if (toTopEl) toTopEl.classList.toggle('is-visible', y > window.innerHeight * 1.2);
+};
+
+const queueScroll = () => {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(onScrollFrame);
+};
+
+window.addEventListener('scroll', queueScroll, { passive: true });
+window.addEventListener('resize', queueScroll, { passive: true });
+onScrollFrame();
 
 // Scroll-spy: highlight active section in nav (with aria-current for a11y)
 const navLinks = [...document.querySelectorAll('.nav__links a')];
 const sections = [...document.querySelectorAll('main section[id]')];
 if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
+  // One link can stand for several sections. Education has no bar of its own,
+  // so it lights up Skills rather than leaving the previous link stale — which
+  // is what the whole unlisted third of the page used to do.
   const linkMap = new Map();
   navLinks.forEach((link) => {
-    const id = link.getAttribute('href')?.replace('#', '');
-    if (id) linkMap.set(id, link);
+    const ids = (link.dataset.spy || link.getAttribute('href').replace('#', '')).trim().split(/\s+/);
+    ids.forEach((id) => { if (id) linkMap.set(id, link); });
   });
   const spy = new IntersectionObserver(
     (entries) => {
@@ -69,19 +182,6 @@ if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
     { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
   );
   sections.forEach((s) => spy.observe(s));
-}
-
-// Scroll progress bar
-const progressEl = document.querySelector('.scroll-progress');
-if (progressEl) {
-  const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    progressEl.style.width = pct + '%';
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress, { passive: true });
-  updateProgress();
 }
 
 // Hero cursor-follow spotlight (skipped on touch + reduced-motion)
@@ -297,6 +397,47 @@ if (scrambleEls.length && !reducedMotion) {
   });
 }
 
+// ===== Progressive disclosure on long experience lists =====
+// Seven bullets under one role is a wall nobody reads. The strongest three stay
+// up, the rest are one tap away. Purely additive: with JS off, everything shows.
+// This runs before the metric count-up so collapsed numbers are not observed
+// while visible and then hidden mid-animation.
+const VISIBLE_BULLETS = 3;
+document.querySelectorAll('.timeline__content .bullet-list').forEach((list, i) => {
+  const items = [...list.children];
+  // Only worth a control if it hides more than a single line.
+  if (items.length <= VISIBLE_BULLETS + 1) return;
+
+  const rest = items.slice(VISIBLE_BULLETS);
+  rest.forEach((li) => { li.hidden = true; });
+
+  if (!list.id) list.id = 'bullets-' + (i + 1);
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'more-toggle';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', list.id);
+
+  const label = document.createElement('span');
+  label.textContent = 'Show ' + rest.length + ' more';
+  const icon = document.createElement('span');
+  icon.className = 'more-toggle__icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.textContent = '⌄';
+  btn.append(label, icon);
+  list.after(btn);
+
+  btn.addEventListener('click', () => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    rest.forEach((li) => { li.hidden = isOpen; });
+    btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    label.textContent = isOpen ? 'Show ' + rest.length + ' more' : 'Show less';
+    // Collapsing can leave the button above the viewport; follow it back.
+    if (isOpen) btn.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
+});
+
 // ===== Metric count-up on scroll into view =====
 const metricEls = document.querySelectorAll('.metric');
 if (metricEls.length && !reducedMotion && 'IntersectionObserver' in window) {
@@ -380,29 +521,36 @@ if (askSection) {
     wf: {
       intent: 'experience',
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'Arjun works on a fixed-income trading desk at Wells Fargo. He built a bond recommendation engine from the ground up: XGBoost learning-to-rank scoring about 4 million client-offering pairs daily, a KNN similar-bond search, and SHAP explainability surfaced through an LLM agent. It beat the single-model baseline by 58% on Recall@3 in offline evaluation and is piloting with the desk, projected to save millions in sales commissions. He also builds the desk’s P&L microservices: a replay-safe historical rerun REST API over Kafka and MongoDB, and a performance rework that cut end-to-end p95 latency by 66%.',
+      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It beat the single-model baseline by 58% on Recall@3 offline and is piloting with the desk. I also own the desk’s P&L microservices — a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
     },
     wimmg: {
       intent: 'project deep-dive',
       chunks: ['github › where-is-my-money-going › README', 'wimmg › pipeline › validator', 'wimmg › docs › DECISIONS'],
-      answer: '"Where Is My Money Going?" is a LangGraph pipeline that runs entirely on a laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn Indian bank and credit-card statements into one record type, so the model never produces a number. A local Gemma 4 model then categorises each row under a JSON Schema, one agent finds the people in the ledger from two-way UPI flow, and a validator agent re-checks every tag the first pass was unsure about. Failed model calls return nothing rather than a plausible-looking default, which is the bug he talks about in the write-up. 158 backend and 10 frontend tests, ruff, mypy, ESLint and tsc green in CI.',
+      answer: 'It is a LangGraph pipeline that runs entirely on my laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn statements into one record type, so the model never produces a number — a local Gemma 4 model only labels rows that code already extracted. One agent finds the people in the ledger from two-way UPI flow, a validator re-checks every uncertain tag, and failed model calls now return nothing instead of a plausible-looking default. That last one was my own bug, and it is the story I would tell in an interview.',
     },
     genai: {
       intent: 'skills · genai',
       chunks: ['experience › nl-mongo-agents', 'skills › ai-agentic', 'projects › local-llm'],
-      answer: 'At work: LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries, running hybrid BM25-plus-vector RAG over schema stores with tool access via MCP, behind guardrails that mask PII and block unsafe queries. That design took Top Innovator at Wells Fargo’s Innovation Pitch Day (top 4 of 600+) and became the basis of a live internal query assistant. He also owns the KNN-plus-SHAP LLM agent inside the bond engine now piloting with the desk. On the side: "Where Is My Money Going?", a fully local agentic pipeline with schema-constrained structured output, and a GPU dictation assistant.',
+      answer: 'At work: LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries, hybrid BM25-plus-vector RAG over schema stores, tool access via MCP, and guardrails that mask PII and block unsafe queries. It won Top Innovator at our Innovation Pitch Day (top 4 of 600+) and became a live internal assistant. I also own the KNN-plus-SHAP agent inside the bond engine. On the side: "Where Is My Money Going?", fully local, schema-constrained structured output throughout.',
     },
     perf: {
       intent: 'impact · latency',
       chunks: ['pnl › p95-investigation', 'mongo › read-path-710-230', 'backup › batched-writes'],
-      answer: 'Two he’d point at. He led a benchmarking investigation into slow P&L calculations and reworked request throttling and load distribution, cutting end-to-end p95 latency by 66%. Earlier, he rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes. P95 reads dropped from ~710ms to ~230ms with no loss of accuracy. Honorable mention: batched writes that raised end-of-day backup throughput by roughly 90%.',
+      answer: 'Two I would point at. I benchmarked every Spring Boot and Camel route behind slow P&L calculations, then reworked throttling and load distribution: end-to-end p95 latency down 66%. Earlier I rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes, taking p95 reads from about 710ms to 230ms with no loss of accuracy. Honorable mention: batching a backup service’s writes lifted end-of-day throughput by roughly 90%.',
     },
     pitch: {
       intent: 'the pitch',
       chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › finished-side-builds'],
-      answer: 'He builds GenAI inside a regulated bank: agents, hybrid RAG, and guardrails that had to pass real risk review, not just demos. His ground-up recommendation engine scores about 4 million client-offering pairs daily and beat its baseline by 58% on Recall@3, all on top of years of high-throughput backend work in fixed-income trading. Wells Fargo put him in roughly the top 1% of employees (Top Achievers, 2025), he’s published in Springer’s Journal of Supercomputing, and he finishes what he starts on the side too. Also: the pipeline you just ran is how he thinks by default.',
+      answer: 'I ship GenAI inside a regulated bank: agents, hybrid RAG and guardrails that had to pass real risk review, not just a demo. My recommendation engine scores about 4 million pairs daily and beat its baseline by 58% on Recall@3, on top of years of high-throughput backend work on a trading desk. Wells Fargo put me in roughly the top 1% of employees in 2025, I am published in Springer’s Journal of Supercomputing, and I finish what I start on the side too. Also: the pipeline you just watched is how I think by default.',
     },
   };
+
+  // Timings. This has to read as a pipeline without making anyone wait for it:
+  // a full run now lands in under three seconds, where it used to take nearly
+  // nine before the answer finished writing itself out.
+  const EDGE_MS = 190;
+  const THINK_MS = 300;
+  const CHUNK_MS = 120;
 
   const chips = [...askSection.querySelectorAll('.chip')];
   const stageNodes = {};
@@ -435,11 +583,11 @@ if (askSection) {
     const caret = document.createElement('span');
     caret.className = 'caret';
     answerEl.append(textSpan, caret);
-    const CHUNK = 2;
+    const CHUNK = 5;
     for (let i = 0; i < text.length; i += CHUNK) {
       if (token !== runToken) return;
       textSpan.textContent = text.slice(0, i + CHUNK);
-      await new Promise((r) => setTimeout(r, 16));
+      await new Promise((r) => setTimeout(r, 11));
     }
     if (token === runToken) { caret.remove(); answerEl.textContent = text; }
   };
@@ -460,17 +608,17 @@ if (askSection) {
     setStatus('query', 'received ✓');
 
     edges[0].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : 420, token)) return;
+    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
     edges[0].classList.remove('is-flowing'); edges[0].classList.add('is-done');
     stageNodes.orchestrator.classList.add('is-active');
     setStatus('orchestrator', 'routing intent…');
-    if (!await wait(reducedMotion ? 0 : 650, token)) return;
+    if (!await wait(reducedMotion ? 0 : THINK_MS, token)) return;
     stageNodes.orchestrator.classList.remove('is-active');
     stageNodes.orchestrator.classList.add('is-done');
     setStatus('orchestrator', 'intent: ' + data.intent);
 
     edges[1].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : 420, token)) return;
+    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
     edges[1].classList.remove('is-flowing'); edges[1].classList.add('is-done');
     stageNodes.retriever.classList.add('is-active');
     setStatus('retriever', 'searching vector stores…');
@@ -480,25 +628,25 @@ if (askSection) {
       chunk.textContent = data.chunks[i];
       chunksEl.appendChild(chunk);
       requestAnimationFrame(() => requestAnimationFrame(() => chunk.classList.add('is-in')));
-      if (!await wait(reducedMotion ? 0 : 260, token)) return;
+      if (!await wait(reducedMotion ? 0 : CHUNK_MS, token)) return;
     }
-    if (!await wait(reducedMotion ? 0 : 240, token)) return;
+    if (!await wait(reducedMotion ? 0 : 110, token)) return;
     stageNodes.retriever.classList.remove('is-active');
     stageNodes.retriever.classList.add('is-done');
     setStatus('retriever', 'top-' + data.chunks.length + ' chunks');
 
     edges[2].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : 420, token)) return;
+    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
     edges[2].classList.remove('is-flowing'); edges[2].classList.add('is-done');
     stageNodes.validator.classList.add('is-active');
     setStatus('validator', 'grounding check…');
-    if (!await wait(reducedMotion ? 0 : 700, token)) return;
+    if (!await wait(reducedMotion ? 0 : THINK_MS, token)) return;
     stageNodes.validator.classList.remove('is-active');
     stageNodes.validator.classList.add('is-done');
     setStatus('validator', 'grounded ✓');
 
     edges[3].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : 420, token)) return;
+    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
     edges[3].classList.remove('is-flowing'); edges[3].classList.add('is-done');
     stageNodes.answer.classList.add('is-active');
     setStatus('answer', 'writing…');
