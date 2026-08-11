@@ -380,27 +380,27 @@ if (askSection) {
     wf: {
       intent: 'experience',
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'Arjun works on a fixed-income trading desk at Wells Fargo. He owns the learning-to-rank models and feature pipeline for a bond recommendation engine that ranks 500–800 daily offerings per institutional client, plus an LLM assistant traders use to explore similar bonds. He also builds the desk’s PnL microservices — replay-safe historical reruns over Kafka and MongoDB, and a performance rework that cut end-to-end p95 latency by 66%.',
+      answer: 'Arjun works on a fixed-income trading desk at Wells Fargo. He built a bond recommendation engine from the ground up: XGBoost learning-to-rank scoring about 4 million client-offering pairs daily, a KNN similar-bond search, and SHAP explainability surfaced through an LLM agent. It beat the single-model baseline by 58% on Recall@3 in offline evaluation and is piloting with the desk, projected to save millions in sales commissions. He also builds the desk’s P&L microservices: a replay-safe historical rerun REST API over Kafka and MongoDB, and a performance rework that cut end-to-end p95 latency by 66%.',
     },
     wimmg: {
       intent: 'project deep-dive',
       chunks: ['github › where-is-my-money-going › README', 'wimmg › pipeline › validator', 'wimmg › docs › DECISIONS'],
-      answer: '"Where Is My Money Going?" is a LangGraph pipeline that runs entirely on a laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn Indian bank and credit-card statements into one record type — the model never produces a number. A local Gemma 4 model then categorises each row under a JSON Schema, one agent finds the people in the ledger from two-way UPI flow, and a validator agent re-checks every tag the first pass was unsure about. Failed model calls return nothing rather than a plausible-looking default, which is the bug he talks about in the write-up. 158 backend and 10 frontend tests, ruff, mypy, ESLint and tsc green in CI.',
+      answer: '"Where Is My Money Going?" is a LangGraph pipeline that runs entirely on a laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn Indian bank and credit-card statements into one record type, so the model never produces a number. A local Gemma 4 model then categorises each row under a JSON Schema, one agent finds the people in the ledger from two-way UPI flow, and a validator agent re-checks every tag the first pass was unsure about. Failed model calls return nothing rather than a plausible-looking default, which is the bug he talks about in the write-up. 158 backend and 10 frontend tests, ruff, mypy, ESLint and tsc green in CI.',
     },
     genai: {
       intent: 'skills · genai',
       chunks: ['experience › nl-mongo-agents', 'skills › ai-agentic', 'projects › local-llm'],
-      answer: 'At work: production LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries — RAG over schema and user-context vector stores, tool access via MCP, and guardrails that mask PII and block unsafe queries. That design took Top Innovator at Wells Fargo’s Innovation Pitch Day (top 4 of 600+). On the side: "Where Is My Money Going?", a fully local agentic pipeline with schema-constrained structured output, and a GPU dictation assistant.',
+      answer: 'At work: LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries, running hybrid BM25-plus-vector RAG over schema stores with tool access via MCP, behind guardrails that mask PII and block unsafe queries. That design took Top Innovator at Wells Fargo’s Innovation Pitch Day (top 4 of 600+) and became the basis of a live internal query assistant. He also owns the KNN-plus-SHAP LLM agent inside the bond engine now piloting with the desk. On the side: "Where Is My Money Going?", a fully local agentic pipeline with schema-constrained structured output, and a GPU dictation assistant.',
     },
     perf: {
       intent: 'impact · latency',
       chunks: ['pnl › p95-investigation', 'mongo › read-path-710-230', 'backup › batched-writes'],
-      answer: 'Two he’d point at. He led a benchmarking investigation into slow PnL calculations and reworked request throttling and load distribution, cutting end-to-end p95 latency by 66%. Earlier, he rebuilt the real-time PnL read path on MongoDB with aggregation pipelines and compound indexes — p95 reads dropped from ~710ms to ~230ms with no loss of accuracy. Honorable mention: batched writes that raised end-of-day backup throughput by roughly 90%.',
+      answer: 'Two he’d point at. He led a benchmarking investigation into slow P&L calculations and reworked request throttling and load distribution, cutting end-to-end p95 latency by 66%. Earlier, he rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes. P95 reads dropped from ~710ms to ~230ms with no loss of accuracy. Honorable mention: batched writes that raised end-of-day backup throughput by roughly 90%.',
     },
     pitch: {
       intent: 'the pitch',
       chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › finished-side-builds'],
-      answer: 'He ships production GenAI inside a regulated bank — agents, RAG, and guardrails that had to pass real risk review, not just demos — on top of years of high-throughput backend work in fixed-income trading. Wells Fargo put him in roughly the top 1% of employees (Top Achievers, 2025), he’s published in Springer’s Journal of Supercomputing, and he finishes what he starts on the side too. Also: the pipeline you just ran is how he thinks by default.',
+      answer: 'He builds GenAI inside a regulated bank: agents, hybrid RAG, and guardrails that had to pass real risk review, not just demos. His ground-up recommendation engine scores about 4 million client-offering pairs daily and beat its baseline by 58% on Recall@3, all on top of years of high-throughput backend work in fixed-income trading. Wells Fargo put him in roughly the top 1% of employees (Top Achievers, 2025), he’s published in Springer’s Journal of Supercomputing, and he finishes what he starts on the side too. Also: the pipeline you just ran is how he thinks by default.',
     },
   };
 
