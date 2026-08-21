@@ -29,7 +29,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=10" />
+  <noscript><style>.view{display:block !important}</style></noscript>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
@@ -46,7 +47,7 @@
        900px the links move into a full-screen drawer: seven of them cannot
        share a phone-width bar, and the old fix was to delete one. -->
   <nav class="nav" id="nav">
-    <a href="#top" class="nav__logo" aria-label="Back to top">ABJ</a>
+    <a href="#home" class="nav__logo" aria-label="Home">ABJ</a>
 
     <button class="nav__toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
       <span class="nav__toggle-box" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -55,13 +56,12 @@
 
     <div class="nav__menu" id="nav-menu">
       <ul class="nav__links">
-        <li><a href="#about" data-spy="about">About</a></li>
-        <li><a href="#ask" class="nav__ask" data-spy="ask"><span class="nav__ask-dot" aria-hidden="true"></span>Ask</a></li>
-        <li><a href="#experience" data-spy="experience">Experience</a></li>
-        <li><a href="#projects" data-spy="projects">Projects</a></li>
-        <li><a href="#awards" data-spy="awards">Awards</a></li>
-        <li><a href="#skills" data-spy="skills education">Skills</a></li>
-        <li><a href="#contact" data-spy="contact">Contact</a></li>
+        <li><a href="#home" data-view-link="home">Home</a></li>
+        <li><a href="#about" data-view-link="about">About</a></li>
+        <li><a href="#experience" data-view-link="experience">Experience</a></li>
+        <li><a href="#projects" data-view-link="projects">Projects</a></li>
+        <li><a href="#skills" data-view-link="skills">Skills &amp; Awards</a></li>
+        <li><a href="#contact" data-view-link="contact">Contact</a></li>
       </ul>
       <a class="nav__resume" href="Arjun_Bindu_Jayachandran_Resume.pdf" download>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -71,6 +71,7 @@
   </nav>
 
   <main id="main">
+    <div class="view is-active" id="home" data-view="home">
     <section class="hero" id="top">
       <canvas class="hero__net" id="hero-net" aria-hidden="true"></canvas>
       <div class="hero__content">
@@ -78,7 +79,7 @@
         <h1 class="hero__name reveal"><span data-scramble>Arjun Bindu</span> <span class="grad" data-scramble>Jayachandran</span></h1>
         <p class="hero__title reveal">Senior Software Engineer · <span class="hero__org">Wells Fargo</span> · Bengaluru</p>
         <p class="hero__tagline reveal">
-          I build <span class="accent">applied-AI, generative-AI, and machine-learning systems</span> for fixed-income trading and real-time profit-and-loss workflows, and the <span class="accent">distributed Java backends</span> that keep them honest: real money, tight latency, regulatory audit.
+          I build <span class="accent">applied-AI systems</span> for fixed-income trading and the <span class="accent">distributed Java backends</span> that keep them honest: real money, tight latency, regulatory audit.
         </p>
         <div class="hero__cta reveal">
           <a href="Arjun_Bindu_Jayachandran_Resume.pdf" download class="btn btn--primary">
@@ -96,16 +97,18 @@
           <span class="badge"><span class="badge__dot"></span>Published · Journal of Supercomputing 2023</span>
         </div>
       </div>
-      <div class="hero__scroll-cue" aria-hidden="true"><span></span></div>
     </section>
 
-    <section class="section" id="about">
+    </div><!-- /view home -->
+
+    <div class="view" id="about" data-view="about">
+    <section class="section" id="about-main">
       <h2 class="section__heading">About</h2>
       <div class="about__grid">
         <div class="about__bio reveal">
-          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working in Fixed Income Technology. I specialize in <strong>applied AI, generative AI, and machine learning</strong> on top of enterprise-grade backend engineering with <strong>Java and Spring Boot</strong>: event-driven microservices over Kafka, MongoDB, and Redis on OpenShift, with Python for everything ML. On the desk's real-time P&amp;L platform that has meant cutting end-to-end p95 latency by <strong>66%</strong> and rebuilding a read path from 710ms to 230ms.</p>
-          <p>Right now I'm building an ML-driven bond recommendation engine from the ground up in Python, owning it from data pipeline to desk pilot: an in-house MLOps stack, <strong>XGBoost learning-to-rank</strong> scoring about <strong>4 million client-offering pairs</strong> each morning, a KNN similar-bond search, and SHAP explainability surfaced through an LLM agent. It's piloting with the desk now.</p>
-          <p>Before that came the GenAI side of the same platform: orchestrator and validator LLM agents on <strong>LangGraph and MCP</strong>, running hybrid BM25-plus-vector RAG behind PII masking and injection guards. It won Top Innovator at the firm-wide Innovation Pitch Day (top 4 of 600+) and became the basis of a live internal assistant. I joined Wells Fargo as an intern in 2021, returned full-time after graduating from <strong>NIT Calicut</strong> in 2022, and was promoted to Senior in 2026; the Top Achievers Award 2025 put me in roughly the top 1% of employees firm-wide. I've also co-authored a paper in Springer's Journal of Supercomputing.</p>
+          <p>I'm a Senior Software Engineer at <strong>Wells Fargo</strong>, working in Fixed Income Technology. My job is the software behind a bond trading desk: the systems that work out, in real time, what the desk is making or losing, and more recently the AI on top of them. Most of that is <strong>Java</strong> for the trading systems and <strong>Python</strong> for the machine learning. In practice it has meant making the slowest calculations <strong>66%</strong> faster and taking one screen's load time from 710ms down to 230ms.</p>
+          <p>Right now I'm building the system that works out which bonds to offer which clients, and I own the whole of it, from the data going in to the traders using it. Every morning it ranks about <strong>4 million</strong> client-and-bond combinations, finds comparable bonds, and has an AI assistant explain in plain language why each one came up. It's piloting with the desk now.</p>
+          <p>Before that I built a tool that lets colleagues ask our databases questions in plain English rather than writing code, with one AI agent answering and a second checking the answer is safe before anything runs. It won Top Innovator at the firm-wide pitch day (<strong>top 4 of 600+</strong>) and became the basis of an assistant people use internally today. I joined Wells Fargo as an intern in 2021, returned full-time after graduating from <strong>NIT Calicut</strong> in 2022, and was promoted to Senior in 2026; the Top Achievers Award 2025 put me in roughly the top 1% of employees firm-wide. I've also co-authored a paper in Springer's Journal of Supercomputing.</p>
           <p>Outside of work I keep building software for myself, most recently <a href="#projects"><strong>Where Is My Money Going?</strong></a>, a spend analyzer that runs a local LLM entirely on-device, because bank statements should not leave your laptop. The rest of the time it's gaming, both story-driven and competitive, badminton, and the gym.</p>
         </div>
         <aside class="about__facts reveal">
@@ -134,62 +137,11 @@
       </div>
     </section>
 
-    <section class="section" id="ask">
-      <h2 class="section__heading">Ask my portfolio</h2>
-      <p class="section__sub">A miniature of the agent architecture I build at work: an orchestrator routes your question, a retriever pulls grounded context, and a validator checks the answer before it renders. Scripted demo: answers are precomputed, no live LLM, nothing leaves your browser.</p>
 
-      <div class="ask reveal">
-        <div class="ask__chips" role="group" aria-label="Sample questions">
-          <button class="chip" type="button" data-q="wf">What do you do at Wells Fargo?</button>
-          <button class="chip" type="button" data-q="wimmg">How does &ldquo;Where Is My Money Going?&rdquo; work?</button>
-          <button class="chip" type="button" data-q="genai">What's your GenAI experience?</button>
-          <button class="chip" type="button" data-q="perf">Biggest performance win?</button>
-          <button class="chip" type="button" data-q="pitch">Why should I interview you?</button>
-        </div>
+    </div><!-- /view about -->
 
-        <div class="pipe" aria-hidden="true">
-          <div class="pipe__node" data-stage="query">
-            <span class="pipe__icon">?</span>
-            <span class="pipe__name">Query</span>
-            <span class="pipe__status">pick a question</span>
-          </div>
-          <div class="pipe__edge"><i></i></div>
-          <div class="pipe__node" data-stage="orchestrator">
-            <span class="pipe__icon">◈</span>
-            <span class="pipe__name">Orchestrator</span>
-            <span class="pipe__status">idle</span>
-          </div>
-          <div class="pipe__edge"><i></i></div>
-          <div class="pipe__node" data-stage="retriever">
-            <span class="pipe__icon">⌕</span>
-            <span class="pipe__name">Retriever</span>
-            <span class="pipe__status">idle</span>
-          </div>
-          <div class="pipe__edge"><i></i></div>
-          <div class="pipe__node" data-stage="validator">
-            <span class="pipe__icon">✓</span>
-            <span class="pipe__name">Validator</span>
-            <span class="pipe__status">idle</span>
-          </div>
-          <div class="pipe__edge"><i></i></div>
-          <div class="pipe__node" data-stage="answer">
-            <span class="pipe__icon">✦</span>
-            <span class="pipe__name">Answer</span>
-            <span class="pipe__status">idle</span>
-          </div>
-        </div>
-
-        <div class="ask__chunks" aria-hidden="true"></div>
-
-        <div class="ask__answer">
-          <div class="ask__answer-head"><span class="ask__answer-dot"></span><span>answer · grounded in this page</span></div>
-          <p class="ask__answer-text" id="ask-text" aria-live="polite">Pick a question above and watch the pipeline run.</p>
-        </div>
-        <p class="ask__note">This mirrors how I build LLM features at work: retrieval for grounding, a validator between the model and the user. Here it's fully scripted client-side; in the real systems, the model sits in the answer node.</p>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
+    <div class="view" id="experience" data-view="experience">
+    <section class="section" id="experience-main">
       <h2 class="section__heading">Experience</h2>
       <ol class="timeline">
         <li class="timeline__item reveal">
@@ -232,29 +184,24 @@
             </ul>
           </div>
         </li>
-        <li class="timeline__item reveal">
-          <div class="timeline__date">May 2021 – Jul 2021</div>
-          <div class="timeline__content">
-            <h3>Technology Intern</h3>
-            <p class="timeline__org">Wells Fargo · Bengaluru</p>
-            <ul class="bullet-list">
-              <li>Prototyped a time-series forecasting engine for ATM cash-replenishment optimization, benchmarking <strong>SARIMA, LSTM, and Prophet</strong> across <span class="metric">111 ATMs</span> with holiday and weather signals. Reached about <span class="metric">91%</span> accuracy on weekly forecasts.</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
+              </ol>
     </section>
 
-    <section class="section" id="projects">
+    </div><!-- /view experience -->
+
+    <div class="view" id="projects" data-view="projects">
+    <section class="section" id="projects-main">
       <h2 class="section__heading">Selected work</h2>
-      <p class="section__sub">Personal builds along the same lines as my Wells Fargo work: agentic LLM pipelines, retrieval, and applied ML, plus tooling I needed for myself. Plenty more side experiments on <a href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p class="section__sub">Things I built for myself, mostly along the same lines as my day job, plus a few tools I just wanted to exist. More on <a href="https://github.com/Arjun-B-J?tab=repositories" target="_blank" rel="noopener">GitHub</a>.</p>
 
       <div class="projects-grid">
         <article class="card card--featured reveal">
           <div class="card__tag">Flagship · v0.5 · Open Source</div>
           <h3 class="card__title">Where Is My Money Going? · statements in, a categorised answer out, on your own machine</h3>
-          <p class="card__desc">I couldn't answer that question from my own bank statement. A year of UPI transfers to names that meant nothing to me weeks later, and every app that promised to sort it out wanted my full financial history uploaded to a server first. So the constraint came before the design: <strong>nothing leaves the machine</strong>. Everything else follows from that. Deterministic Python parses the statements, and a local model (Gemma 4 26B via Ollama, running on a laptop 5090) only ever labels rows that code has already extracted, so no figure on a statement can come from a hallucination. Two agents then refine the result. One finds the people in the ledger from two-way UPI flow, the other re-checks every tag the first pass was unsure about.</p>
-          <p class="card__desc">The part I'd actually talk about in an interview is a bug I wrote myself. A failed model call was returning a plausible-looking <code>{"category": "uncategorized", "confidence": 0.0}</code>, and the pipeline stored it as genuine output. So <span class="metric">285</span> transactions the model had never seen sat in the database labelled as its work, and the dashboard reported "80% uncategorized". The model itself was fine. It's a reasoning model, and asking it for JSON the naive way made its output degenerate mid-string. Turning the thinking channel off and passing a real JSON Schema fixed it outright. The lesson stuck harder than the fix: <strong>a fallback that imitates success hides the bug that caused it</strong>. Failures now return nothing at all, and the row stays visibly untagged. Once I knew what to look for I found two more of the same species, including a prose quality gate that was rejecting 100% of valid output while a canned fallback went out in its place.</p>
+          <p class="card__desc">I couldn't answer that question from my own bank statement. A year of UPI transfers to names that meant nothing to me weeks later, and every app that promised to sort it out wanted my full financial history uploaded to a server first. So the constraint came before the design: <strong>nothing leaves the machine</strong>. Everything else follows from that. Plain code reads the statements and pulls out the numbers; an AI model running on my own laptop only ever puts a label on rows the code has already read. That way no figure on your statement can be something the model made up. Two more passes tidy it up: one works out which payees are actual people you send money back and forth with, the other double-checks anything the first pass wasn't sure about.</p>
+                    <details class="deep-dive">
+            <summary>The bug I wrote, and how the architecture works</summary>
+<p class="card__desc">The part I'd actually talk about in an interview is a bug I wrote myself. A failed model call was returning a plausible-looking <code>{"category": "uncategorized", "confidence": 0.0}</code>, and the pipeline stored it as genuine output. So <span class="metric">285</span> transactions the model had never seen sat in the database labelled as its work, and the dashboard reported "80% uncategorized". The model itself was fine. It's a reasoning model, and asking it for JSON the naive way made its output degenerate mid-string. Turning the thinking channel off and passing a real JSON Schema fixed it outright. The lesson stuck harder than the fix: <strong>a fallback that imitates success hides the bug that caused it</strong>. Failures now return nothing at all, and the row stays visibly untagged. Once I knew what to look for I found two more of the same species, including a prose quality gate that was rejecting 100% of valid output while a canned fallback went out in its place.</p>
 
           <div class="mini-pipe" aria-hidden="true">
             <span class="mini-pipe__node">statements</span>
@@ -292,9 +239,9 @@
             </a>
             <figcaption class="shots__note">All screenshots are from the synthetic demo dataset. The payees are footballers on purpose: nobody should be able to mistake a demo screenshot for a real ledger.</figcaption>
           </figure>
+          </details>
 
-          <p class="card__desc">Also in there: instalment-plan detection off the counters printed on card statements, cadence-based recurring-charge detection, duplicate-charge and unmatched-refund checks, cross-statement reconciliation of card bills from both sides, and a typeset Spend Analysis PDF. Statement parsers are selected by sniffing document content, not filenames. Re-ingesting the same file is a no-op via a content hash. <span class="metric">158</span> backend and <span class="metric">10</span> frontend tests, with ruff, mypy, ESLint and tsc clean in CI, plus a job that fails the build if a phone number, a real UPI handle or an employer identifier ever reappears in source.</p>
-          <div class="card__tech">
+                    <div class="card__tech">
             <span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>Structured output</span><span>FastAPI</span><span>SQLAlchemy</span><span>Next.js 15</span><span>ReportLab</span>
           </div>
           <a class="card__link" href="https://github.com/Arjun-B-J/where-is-my-money-going" target="_blank" rel="noopener">View on GitHub →</a>
@@ -309,7 +256,7 @@
     <article class="card reveal">
       <div class="card__tag">Open Source</div>
       <h3 class="card__title">VoiceToText-with-UI</h3>
-      <p class="card__desc">An open-source PyQt6 AI dictation assistant. Real-time, on-device transcription via faster-whisper on NVIDIA GPUs. Hardware-level Bluetooth HFP toggling to prevent audio degradation, system-tray background execution, graceful VRAM cleanup, global hotkey, and clipboard auto-paste.</p>
+      <p class="card__desc">Hold a hotkey, talk, and your words appear wherever the cursor is. The speech recognition runs on your own graphics card, so nothing is sent anywhere. It also fixes a Bluetooth quirk that makes headset microphones sound terrible, and cleans up after itself so it can sit in the system tray all day.</p>
       <div class="card__tech">
         <span>PyQt6</span><span>faster-whisper</span><span>CUDA</span><span>Win32</span><span>Whisper</span>
       </div>
@@ -319,7 +266,7 @@
     <article class="card reveal">
       <div class="card__tag">Recent · Open Source</div>
       <h3 class="card__title">lockin · Focus Timer</h3>
-      <p class="card__desc">A green-themed standalone Windows focus timer I built for my own interview prep. Wall-clock based (survives laptop sleep), Picture-in-Picture mini mode for always-on-top, procedurally-generated brown / pink / white / rain ambient noise via Web Audio, and File System Access API auto-export so every session streams to disk as <code>jsonl</code> for pandas analytics. SVG-rendered calendar heatmap, hour-of-day grid, and personal-bests dashboard. No build, no deps, ~1500 lines.</p>
+      <p class="card__desc">A focus timer I built for my own interview prep. It keeps correct time even if the laptop sleeps, shrinks into a small always-on-top window, generates its own background noise, and writes every session to a file so I can chart what I actually did afterwards. One file, no installer, no dependencies, about 1500 lines.</p>
       <div class="card__tech">
         <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
       </div>
@@ -329,7 +276,7 @@
     <article class="card reveal">
       <div class="card__tag">Open Source</div>
       <h3 class="card__title">NL → SQL · local sqlcoder pipeline</h3>
-      <p class="card__desc">A natural-language-to-SQL pipeline using a local Ollama <code>sqlcoder</code> model with a llama3 cleanup pass, MySQL execution, and a Streamlit UI. Lets non-engineers query a database in plain English with no data leaving the machine.</p>
+      <p class="card__desc">Lets someone who doesn't write code ask a database questions in plain English and get an answer back. The model that translates the question runs on your own machine, so the data never leaves it.</p>
       <div class="card__tech">
         <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
       </div>
@@ -339,7 +286,7 @@
     <article class="card reveal">
       <div class="card__tag">Hackathon</div>
       <h3 class="card__title">GAIDP · Gen AI Data Profiler</h3>
-      <p class="card__desc">Anomaly detection over Federal Reserve FR Y-14Q-style corporate-loan data using Isolation Forest on numerical fields and DBSCAN on categorical, with a token-budget-aware router that escalates flagged rows to an LLM for narrative explanation.</p>
+      <p class="card__desc">Scans corporate-loan records of the kind banks report to the Federal Reserve and flags the ones that look wrong. Two different techniques catch two different kinds of oddity, and only the flagged rows are passed to an AI to explain in writing, which keeps the cost down.</p>
       <div class="card__tech">
         <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
       </div>
@@ -349,7 +296,7 @@
     <article class="card reveal">
       <div class="card__tag">Led to Publication</div>
       <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
-      <p class="card__desc">Implementations of GWO and three variants (Binary GWO, Multi-Objective GWO, and Binary MOGWO) wrapping a Keras ANN evaluator to perform metaheuristic feature selection on UCI ML datasets. Precursor work for the SaBMOGWO-S paper above.</p>
+      <p class="card__desc">An algorithm inspired by how grey wolves hunt, used here to work out which columns in a dataset actually matter and which can be thrown away. Four versions of it, each scored against a neural network. This is the work the published paper above grew out of.</p>
       <div class="card__tech">
         <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
       </div>
@@ -366,7 +313,10 @@
       </div>
     </section>
 
-    <section class="section" id="awards">
+    </div><!-- /view projects -->
+
+    <div class="view" id="skills" data-view="skills">
+    <section class="section" id="awards-main">
       <h2 class="section__heading">Publications &amp; Awards</h2>
       <div class="awards-grid">
         <div class="award award--featured reveal">
@@ -393,7 +343,7 @@
       </div>
     </section>
 
-    <section class="section" id="skills">
+    <section class="section" id="skills-main">
       <h2 class="section__heading">Skills</h2>
       <div class="skills__tiers">
         <div class="skill-tier skill-tier--primary reveal">
@@ -433,7 +383,7 @@
       </div>
     </section>
 
-    <section class="section" id="education">
+    <section class="section" id="education-main">
       <h2 class="section__heading">Education</h2>
       <div class="education-list">
         <div class="education-item reveal">
@@ -444,7 +394,10 @@
       </div>
     </section>
 
-    <section class="section section--contact" id="contact">
+    </div><!-- /view skills -->
+
+    <div class="view" id="contact" data-view="contact">
+    <section class="section section--contact" id="contact-main">
       <h2 class="section__heading">Get in touch</h2>
       <p class="contact__lead">Open to interesting conversations: collaboration, advising, or just trading notes on agentic systems and high-throughput backends.</p>
       <div class="contact__methods">
@@ -462,6 +415,7 @@
         </a>
       </div>
     </section>
+    </div><!-- /view contact -->
   </main>
 
   <a class="to-top" href="#top" aria-label="Back to top">
@@ -472,6 +426,6 @@
     <p>© <span id="year"></span> Arjun Bindu Jayachandran · Bengaluru</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

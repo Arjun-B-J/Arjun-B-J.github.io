@@ -514,162 +514,54 @@ if (timelineEl) {
   }
 }
 
-// ===== Ask my portfolio (scripted agent pipeline) =====
-const askSection = document.getElementById('ask');
-if (askSection) {
-  const ASK_DATA = {
-    wf: {
-      intent: 'experience',
-      chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up in Python: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices: a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
-    },
-    wimmg: {
-      intent: 'project deep-dive',
-      chunks: ['github › where-is-my-money-going › README', 'wimmg › pipeline › validator', 'wimmg › docs › DECISIONS'],
-      answer: 'It is a LangGraph pipeline that runs entirely on my laptop, because the constraint came first: no financial data leaves the machine. Deterministic Python parsers turn statements into one record type, so the model never produces a number. A local Gemma 4 model only labels rows that code already extracted. One agent finds the people in the ledger from two-way UPI flow, a validator re-checks every uncertain tag, and failed model calls now return nothing instead of a plausible-looking default. That last one was my own bug, and it is the story I would tell in an interview.',
-    },
-    genai: {
-      intent: 'skills · genai',
-      chunks: ['experience › nl-mongo-agents', 'skills › ai-agentic', 'projects › local-llm'],
-      answer: 'At work: LangGraph orchestrator and validator agents that turn plain questions into safe MongoDB queries, hybrid BM25-plus-vector RAG over schema stores, tool access via MCP, and guardrails that mask PII and block unsafe queries. It won Top Innovator at our Innovation Pitch Day (top 4 of 600+) and became a live internal assistant. I also own the KNN-plus-SHAP agent inside the bond engine. On the side: "Where Is My Money Going?", fully local, schema-constrained structured output throughout.',
-    },
-    perf: {
-      intent: 'impact · latency',
-      chunks: ['pnl › p95-investigation', 'mongo › read-path-710-230', 'backup › batched-writes'],
-      answer: 'Two I would point at. I benchmarked every Java service route behind slow P&L calculations, then reworked throttling and load distribution: end-to-end p95 latency down 66%. Earlier I rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes, taking p95 reads from about 710ms to 230ms with no loss of accuracy. Honorable mention: batching a backup service’s writes lifted end-of-day throughput by roughly 90%.',
-    },
-    pitch: {
-      intent: 'the pitch',
-      chunks: ['awards › top-achievers-2025', 'publication › supercomputing-2023', 'projects › finished-side-builds'],
-      answer: 'I ship GenAI inside a regulated bank: agents, hybrid RAG and guardrails that had to pass real risk review, not just a demo. My recommendation engine scores about 4 million pairs daily, on top of years of high-throughput backend work on a trading desk. Wells Fargo put me in roughly the top 1% of employees in 2025, I am published in Springer’s Journal of Supercomputing, and I finish what I start on the side too. Also: the pipeline you just watched is how I think by default.',
-    },
-  };
+// ===== View router =====
+// The page used to be one 23-screen scroll, which nobody reads to the end of.
+// Each destination is now its own view and the nav switches between them.
+// Everything stays in the DOM and only visibility toggles, so crawlers still
+// see the whole site and Ctrl+F still finds all of it -- this is a router, not
+// a content cut. The hash is the source of truth, which keeps deep links,
+// bookmarks and the browser's own back button working for free.
+const views = [...document.querySelectorAll('.view')];
+if (views.length) {
+  const viewLinks = [...document.querySelectorAll('[data-view-link]')];
+  const DEFAULT_VIEW = 'home';
+  const known = new Set(views.map((v) => v.dataset.view));
 
-  // Timings. This has to read as a pipeline without making anyone wait for it:
-  // a full run now lands in under three seconds, where it used to take nearly
-  // nine before the answer finished writing itself out.
-  const EDGE_MS = 190;
-  const THINK_MS = 300;
-  const CHUNK_MS = 120;
-
-  const chips = [...askSection.querySelectorAll('.chip')];
-  const stageNodes = {};
-  askSection.querySelectorAll('.pipe__node').forEach((n) => { stageNodes[n.dataset.stage] = n; });
-  const edges = [...askSection.querySelectorAll('.pipe__edge')];
-  const chunksEl = askSection.querySelector('.ask__chunks');
-  const answerEl = document.getElementById('ask-text');
-  let runToken = 0;
-  let hasRun = false;
-
-  const setStatus = (stage, text) => {
-    const el = stageNodes[stage] && stageNodes[stage].querySelector('.pipe__status');
-    if (el) el.textContent = text;
-  };
-  const wait = (ms, token) => new Promise((resolve) => setTimeout(() => resolve(token === runToken), ms));
-
-  const resetPipeline = () => {
-    edges.forEach((e) => e.classList.remove('is-flowing', 'is-done'));
-    Object.keys(stageNodes).forEach((k) => {
-      stageNodes[k].classList.remove('is-active', 'is-done');
-      setStatus(k, k === 'query' ? 'pick a question' : 'idle');
+  const showView = (name, { scroll = true } = {}) => {
+    if (!known.has(name)) name = DEFAULT_VIEW;
+    views.forEach((v) => v.classList.toggle('is-active', v.dataset.view === name));
+    viewLinks.forEach((a) => {
+      const on = a.dataset.viewLink === name;
+      a.classList.toggle('is-active', on);
+      // aria-current is what actually tells a screen reader which of the six
+      // destinations you are on; the colour change alone says nothing.
+      if (on) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
     });
-    chunksEl.innerHTML = '';
+    document.title = name === DEFAULT_VIEW
+      ? 'Arjun Bindu Jayachandran · Senior Software Engineer'
+      : name.charAt(0).toUpperCase() + name.slice(1).replace('skills', 'Skills & Awards')
+        + ' · Arjun Bindu Jayachandran';
+    // A switched view is a new page as far as the reader is concerned, so it
+    // starts at the top. Re-running the reveal pass matters because those
+    // elements were display:none when their observer first fired, so every one
+    // of them measured as out-of-view and would otherwise stay invisible.
+    if (scroll) window.scrollTo({ top: 0, behavior: 'auto' });
+    document.querySelectorAll('.view.is-active .reveal').forEach((el) => el.classList.add('in-view'));
   };
 
-  const typeAnswer = async (text, token) => {
-    if (reducedMotion) { answerEl.textContent = text; return; }
-    answerEl.textContent = '';
-    const textSpan = document.createElement('span');
-    const caret = document.createElement('span');
-    caret.className = 'caret';
-    answerEl.append(textSpan, caret);
-    const CHUNK = 5;
-    for (let i = 0; i < text.length; i += CHUNK) {
-      if (token !== runToken) return;
-      textSpan.textContent = text.slice(0, i + CHUNK);
-      await new Promise((r) => setTimeout(r, 11));
-    }
-    if (token === runToken) { caret.remove(); answerEl.textContent = text; }
-  };
+  const fromHash = () => (location.hash || '').replace(/^#/, '') || DEFAULT_VIEW;
+  showView(fromHash(), { scroll: false });
+  window.addEventListener('hashchange', () => showView(fromHash()));
 
-  const runPipeline = async (key) => {
-    const data = ASK_DATA[key];
-    if (!data) return;
-    hasRun = true;
-    const token = ++runToken;
-    resetPipeline();
-    chips.forEach((c) => {
-      c.classList.toggle('is-selected', c.dataset.q === key);
-      c.setAttribute('aria-pressed', c.dataset.q === key ? 'true' : 'false');
-    });
-    answerEl.textContent = '…';
-
-    stageNodes.query.classList.add('is-done');
-    setStatus('query', 'received ✓');
-
-    edges[0].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
-    edges[0].classList.remove('is-flowing'); edges[0].classList.add('is-done');
-    stageNodes.orchestrator.classList.add('is-active');
-    setStatus('orchestrator', 'routing intent…');
-    if (!await wait(reducedMotion ? 0 : THINK_MS, token)) return;
-    stageNodes.orchestrator.classList.remove('is-active');
-    stageNodes.orchestrator.classList.add('is-done');
-    setStatus('orchestrator', 'intent: ' + data.intent);
-
-    edges[1].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
-    edges[1].classList.remove('is-flowing'); edges[1].classList.add('is-done');
-    stageNodes.retriever.classList.add('is-active');
-    setStatus('retriever', 'searching vector stores…');
-    for (let i = 0; i < data.chunks.length; i++) {
-      const chunk = document.createElement('span');
-      chunk.className = 'ask__chunk';
-      chunk.textContent = data.chunks[i];
-      chunksEl.appendChild(chunk);
-      requestAnimationFrame(() => requestAnimationFrame(() => chunk.classList.add('is-in')));
-      if (!await wait(reducedMotion ? 0 : CHUNK_MS, token)) return;
-    }
-    if (!await wait(reducedMotion ? 0 : 110, token)) return;
-    stageNodes.retriever.classList.remove('is-active');
-    stageNodes.retriever.classList.add('is-done');
-    setStatus('retriever', 'top-' + data.chunks.length + ' chunks');
-
-    edges[2].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
-    edges[2].classList.remove('is-flowing'); edges[2].classList.add('is-done');
-    stageNodes.validator.classList.add('is-active');
-    setStatus('validator', 'grounding check…');
-    if (!await wait(reducedMotion ? 0 : THINK_MS, token)) return;
-    stageNodes.validator.classList.remove('is-active');
-    stageNodes.validator.classList.add('is-done');
-    setStatus('validator', 'grounded ✓');
-
-    edges[3].classList.add('is-flowing');
-    if (!await wait(reducedMotion ? 0 : EDGE_MS, token)) return;
-    edges[3].classList.remove('is-flowing'); edges[3].classList.add('is-done');
-    stageNodes.answer.classList.add('is-active');
-    setStatus('answer', 'writing…');
-    await typeAnswer(data.answer, token);
-    if (token !== runToken) return;
-    stageNodes.answer.classList.remove('is-active');
-    stageNodes.answer.classList.add('is-done');
-    setStatus('answer', 'complete ✓');
-  };
-
-  chips.forEach((chip) => {
-    chip.setAttribute('aria-pressed', 'false');
-    chip.addEventListener('click', () => runPipeline(chip.dataset.q));
+  // Any in-page link routes, including the hero's "See my work" button.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const target = a.getAttribute('href').slice(1);
+    if (!known.has(target)) return;
+    e.preventDefault();
+    if (fromHash() === target) showView(target);
+    else location.hash = target;
   });
-
-  // Auto-demo once when the section scrolls into view
-  if ('IntersectionObserver' in window && !reducedMotion) {
-    const aio = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        aio.disconnect();
-        if (!hasRun) runPipeline('wf');
-      }
-    }, { threshold: 0.55 });
-    aio.observe(askSection.querySelector('.pipe'));
-  }
 }
