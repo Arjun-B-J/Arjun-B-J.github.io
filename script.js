@@ -521,7 +521,7 @@ if (askSection) {
     wf: {
       intent: 'experience',
       chunks: ['resume › experience › senior-swe', 'bond-engine › ltr-models', 'pnl › replay-reruns'],
-      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices: a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
+      answer: 'I work on a fixed-income trading desk at Wells Fargo. I built its bond recommendation engine from the ground up in Python: XGBoost learning-to-rank over about 4 million client-offering pairs a day, a KNN similar-bond search, and SHAP explanations surfaced through an LLM agent. It is piloting with the desk. I also own the desk’s P&L microservices: a replay-safe historical rerun API over Kafka and MongoDB, and a rework that cut end-to-end p95 latency by 66%.',
     },
     wimmg: {
       intent: 'project deep-dive',
@@ -536,7 +536,7 @@ if (askSection) {
     perf: {
       intent: 'impact · latency',
       chunks: ['pnl › p95-investigation', 'mongo › read-path-710-230', 'backup › batched-writes'],
-      answer: 'Two I would point at. I benchmarked every Spring Boot and Camel route behind slow P&L calculations, then reworked throttling and load distribution: end-to-end p95 latency down 66%. Earlier I rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes, taking p95 reads from about 710ms to 230ms with no loss of accuracy. Honorable mention: batching a backup service’s writes lifted end-of-day throughput by roughly 90%.',
+      answer: 'Two I would point at. I benchmarked every Java service route behind slow P&L calculations, then reworked throttling and load distribution: end-to-end p95 latency down 66%. Earlier I rebuilt the real-time P&L read path on MongoDB with aggregation pipelines and compound indexes, taking p95 reads from about 710ms to 230ms with no loss of accuracy. Honorable mention: batching a backup service’s writes lifted end-of-day throughput by roughly 90%.',
     },
     pitch: {
       intent: 'the pitch',

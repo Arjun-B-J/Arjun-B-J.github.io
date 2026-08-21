@@ -82,7 +82,7 @@ role = "Senior Software Engineer  ·  Wells Fargo  ·  NIT Calicut '22"
 draw.text(((W - text_w(role, role_font)) // 2, name_y + 130), role, fill=SUB, font=role_font)
 
 # Tagline (centered)
-tag = "Applied-AI systems  ·  Distributed backends  ·  Fixed-income trading"
+tag = "Applied AI · GenAI · ML  ·  Java backends  ·  Fixed-income trading"
 draw.text(((W - text_w(tag, tagline_font)) // 2, name_y + 195), tag, fill=DIM, font=tagline_font)
 
 # URL bottom-left
