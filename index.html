@@ -164,7 +164,7 @@
             <h3>Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Designed and built a natural-language interface to MongoDB</strong> that turns plain questions into safe queries. Orchestrator and validator LLM agents in Python (LangGraph, tool access via MCP) run hybrid BM25-plus-vector RAG over schema stores, behind guardrails that mask PII and block unsafe queries. Won the firm-wide Top Innovator award (top 4 of 600+ entries), and became the basis of a live internal query assistant.</li>
+              <li><strong>Designed and built a natural-language interface to MongoDB</strong> that turns plain questions into safe queries. Orchestrator and validator LLM agents in Python (LangGraph, tool access via MCP) run hybrid keyword-plus-vector RAG over schema stores, behind guardrails that mask PII and block unsafe queries. Won the firm-wide Top Innovator award (top 4 of 600+ entries), and became the basis of a live internal query assistant.</li>
               <li><strong>Rebuilt the real-time P&amp;L read path on MongoDB</strong>, replacing view-based reads with aggregation pipelines and compound indexes. p95 read latency dropped from around <span class="metric">710ms</span> to <span class="metric">230ms</span> with no loss of accuracy.</li>
               <li><strong>Extended the Java Spring Boot P&amp;L microservices to a new asset class</strong>: expected cash-flow models, EUR FX conversion, swap-position roll-ups, and risk-factor attribution. Released with production Kafka topics and regression sign-off.</li>
               <li><strong>Cut multi-million-dollar reporting-penalty exposure</strong> with a clean P&amp;L activity-tracking layer, working cross-functionally in agile Scrum sprints with <span class="metric">2</span> trading-desk teams to roll out correlation-ID audit tracking across <span class="metric">6</span> service flows and <span class="metric">8</span> repositories; its non-blocking design keeps monitoring off the critical path.</li>
@@ -274,23 +274,12 @@
     </article>
 
     <article class="card reveal">
-      <div class="card__tag">Open Source</div>
-      <h3 class="card__title">NL → SQL · local sqlcoder pipeline</h3>
-      <p class="card__desc">Lets someone who doesn't write code ask a database questions in plain English and get an answer back. The model that translates the question runs on your own machine, so the data never leaves it.</p>
-      <div class="card__tech">
-        <span>Ollama</span><span>sqlcoder</span><span>LangChain</span><span>Streamlit</span><span>MySQL</span>
-      </div>
-      <a class="card__link" href="https://github.com/Arjun-B-J/LLM-Poc" target="_blank" rel="noopener">GitHub →</a>
-    </article>
-
-    <article class="card reveal">
       <div class="card__tag">Hackathon</div>
       <h3 class="card__title">GAIDP · Gen AI Data Profiler</h3>
       <p class="card__desc">Scans corporate-loan records of the kind banks report to the Federal Reserve and flags the ones that look wrong. Two different techniques catch two different kinds of oddity, and only the flagged rows are passed to an AI to explain in writing, which keeps the cost down.</p>
       <div class="card__tech">
         <span>scikit-learn</span><span>tiktoken</span><span>pandas</span><span>Jupyter</span>
       </div>
-      <a class="card__link" href="https://github.com/Arjun-B-J/gaidp-ranga-arjun" target="_blank" rel="noopener">GitHub →</a>
     </article>
 
     <article class="card reveal">
@@ -298,7 +287,7 @@
       <h3 class="card__title">Grey Wolf Optimizer · Feature Selection</h3>
       <p class="card__desc">An algorithm inspired by how grey wolves hunt, used here to work out which columns in a dataset actually matter and which can be thrown away. Four versions of it, each scored against a neural network. This is the work the published paper above grew out of.</p>
       <div class="card__tech">
-        <span>NumPy</span><span>scikit-learn</span><span>TensorFlow</span><span>Metaheuristics</span>
+        <span>NumPy</span><span>scikit-learn</span><span>Metaheuristics</span>
       </div>
       <a class="card__link" href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GitHub →</a>
     </article>
@@ -323,7 +312,7 @@
           <div class="award__kind">Publication</div>
           <h3 class="award__title">Statistically aided Binary Multi-Objective Grey Wolf Optimizer: a new feature selection approach for classification</h3>
           <p class="award__meta">The Journal of Supercomputing (Springer) · Vol. 79 · pp. 12869–12901 · 2023 · Co-authored · <a href="https://doi.org/10.1007/s11227-023-05145-y" target="_blank" rel="noopener">DOI: 10.1007/s11227-023-05145-y</a></p>
-          <p class="award__desc">SaBMOGWO-S, a binary multi-objective Grey Wolf Optimizer that feeds statistical information about a dataset's attributes into feature selection, with methods to cut the running time by skipping unnecessary evaluations. Grew out of the personal <a href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GreyWolfOptimizer</a> repo.</p>
+          <p class="award__desc">SaBMOGWO-S, a binary multi-objective Grey Wolf Optimizer that feeds statistical information about a dataset's attributes into feature selection, with methods to cut the running time by skipping unnecessary evaluations. Grew out of our <a href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GreyWolfOptimizer</a> repo.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
@@ -375,7 +364,7 @@
             <span class="skill-tier__sub">Used in personal builds</span>
           </div>
           <div class="skill-tier__rows">
-            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">Gemma 4</span><span class="tag">TensorFlow / Keras</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">Gemma 4</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Web / API</span><div class="tags"><span class="tag">FastAPI</span><span class="tag">Next.js 15</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span><span class="tag">ReportLab</span></div></div>
             <div class="skill-row"><span class="skill-row__label">UI</span><div class="tags"><span class="tag">PyQt6</span><span class="tag">Streamlit</span><span class="tag">Web Audio</span><span class="tag">Document PiP</span></div></div>
           </div>
