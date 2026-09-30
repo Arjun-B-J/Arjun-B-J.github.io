@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arjun Bindu Jayachandran, Senior Software Engineer at Wells Fargo. Applied AI, generative AI, machine learning, and Java backend systems for a fixed-income trading desk: a ground-up bond recommendation engine scoring about 4 million client-offering pairs daily, and replay-safe real-time profit and loss (P&amp;L) microservices. Top Achievers Award (top 1%). Builds Where Is My Money Going?, a local spend-analysis system, on the side." />
+  <meta name="description" content="Arjun Bindu Jayachandran, Senior Software Engineer at Wells Fargo. Applied AI, generative AI, machine learning, and Java backend systems for a fixed-income trading desk: a ground-up bond recommendation engine scoring about 4 million client-offering pairs daily, and replay-safe real-time profit and loss (P&amp;L) microservices. Top Achievers Award 2025. Builds Where Is My Money Going?, a local spend-analysis system, on the side." />
   <meta name="theme-color" content="#061812" />
 
   <meta property="og:title" content="Arjun Bindu Jayachandran · Senior Software Engineer" />
@@ -150,11 +150,10 @@
             <h3>Senior Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Built a bond recommendation engine from the ground up in Python</strong>: XGBoost learning-to-rank scoring about <span class="metric">4</span> million client-offering pairs daily from the desk's offering sheet. Piloting with the desk, projected to save millions in sales commissions.</li>
-              <li><strong>Built the KNN similar-bond search</strong> over bond features and the LLM agent that runs similarity lookups and explains ranked picks with SHAP. Trader feedback is captured for retraining.</li>
+              <li><strong>Built a bond recommendation engine from the ground up in Python</strong> for Fixed Income trading. Its XGBoost learning-to-rank models score about <span class="metric">4</span> million client-offering pairs daily from the desk's offering sheet.</li>
               <li><strong>Engineered the engine's feature pipeline and in-house MLOps stack</strong>, matching a <span class="metric">3.7</span>M-row external holdings dataset to internal counterparty IDs, so the model learns what each client already owns.</li>
-              <li><strong>Built a multi-agent AI framework on GitHub Copilot</strong> that automates Java and Spring Boot integration test authoring across <span class="metric">80+</span> microservices: orchestrated agents scan each repo, plan coverage, critique the plan, and generate compilable tests, so engineers stopped hand-writing them and defects surface before release.</li>
-              <li><strong>Cut end-to-end p95 latency by <span class="metric">66%</span> on slow P&amp;L calculations</strong> by benchmarking each Java service route, then reworking request throttling and load distribution, so traders see positions refresh sooner. Shipped a historical rerun REST API so corrected past positions persist to MongoDB without republishing into the live Kafka stream.</li>
+              <li><strong>Architected a multi-agent framework that writes Spring Boot integration tests</strong> across <span class="metric">80+</span> microservices. Designed its orchestrator and the agents that scan each repo, plan coverage, critique the plan, and generate the tests with GitHub Copilot.</li>
+              <li><strong>Cut end-to-end p95 latency by <span class="metric">66%</span> on slow P&amp;L calculations</strong> by benchmarking each Java service route to isolate the bottleneck, then reworking request throttling and load distribution. Also shipped a REST API that reruns historical P&amp;L on Camel routes without republishing into the live Kafka stream.</li>
             </ul>
           </div>
         </li>
@@ -164,13 +163,11 @@
             <h3>Software Engineer</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Designed and built a natural-language interface to MongoDB</strong> that turns plain questions into safe queries. Orchestrator and validator LLM agents in Python (LangGraph, tool access via MCP) run hybrid keyword-plus-vector RAG over schema stores, behind guardrails that mask PII and block unsafe queries. Won the firm-wide Top Innovator award (top 4 of 600+ entries), and became the basis of a live internal query assistant.</li>
-              <li><strong>Rebuilt the real-time P&amp;L read path on MongoDB</strong>, replacing view-based reads with aggregation pipelines and compound indexes. p95 read latency dropped from around <span class="metric">710ms</span> to <span class="metric">230ms</span> with no loss of accuracy.</li>
-              <li><strong>Extended the Java Spring Boot P&amp;L microservices to a new asset class</strong>: expected cash-flow models, EUR FX conversion, swap-position roll-ups, and risk-factor attribution. Released with production Kafka topics and regression sign-off.</li>
-              <li><strong>Cut multi-million-dollar reporting-penalty exposure</strong> with a clean P&amp;L activity-tracking layer, working cross-functionally in agile Scrum sprints with <span class="metric">2</span> trading-desk teams to roll out correlation-ID audit tracking across <span class="metric">6</span> service flows and <span class="metric">8</span> repositories; its non-blocking design keeps monitoring off the critical path.</li>
-              <li><strong>Converted a P&amp;L backup service from per-record calls to batched writes</strong>, raising end-of-day throughput by roughly <span class="metric">90%</span> and easing load on shared infrastructure.</li>
+              <li><strong>Designed and built a natural-language interface to MongoDB</strong> that turns plain questions into safe queries. Orchestrator and validator LLM agents in Python (LangGraph, tool access via MCP) run hybrid keyword-plus-vector RAG over schema stores, behind injection guards and PII masking, with audit logging. Won the firm-wide Top Innovator award (top 4 of 600+ entries).</li>
+              <li><strong>Rebuilt the real-time P&amp;L read path on MongoDB</strong>, replacing view-based reads with aggregation pipelines and compound indexes. p95 read latency dropped from around <span class="metric">710ms</span> to <span class="metric">230ms</span>.</li>
+              <li><strong>Created a reusable pattern for SLA activity tracking</strong>, adopted by <span class="metric">2</span> trading-desk teams across <span class="metric">8</span> repositories. It threads correlation IDs through each run, and its non-blocking design keeps monitoring off the critical path.</li>
               <li><strong>Led the end-to-end migration of <span class="metric">10+</span> Java services to Red Hat OpenShift</strong>, developing Helm charts and GitHub Actions CI/CD workflows to automate Kubernetes deployments, cutting each release from <span class="metric">4–5</span> engineer-hours to about <span class="metric">2</span>.</li>
-              <li><strong>Championed AI-assisted development</strong> across the line of business: agentic workflows presented to <span class="metric">200+</span> engineers, P&amp;L architecture documentation, knowledge-transfer sessions, and mentoring peers on workflows they use daily.</li>
+              <li><strong>Presented agentic AI workflows to <span class="metric">200+</span> engineers</strong> and wrote the P&amp;L architecture documentation.</li>
             </ul>
           </div>
         </li>
@@ -180,7 +177,8 @@
             <h3>Program Associate</h3>
             <p class="timeline__org">Wells Fargo · Bengaluru</p>
             <ul class="bullet-list">
-              <li><strong>Owned an asset-backed-finance reporting workflow end to end</strong> with traders, saving <span class="metric">2–3</span> person-hours daily: an Excel deal- and pricing-sheet ingestion engine with tranche extraction, duplicate-upload protection, schema migrations, and reference-data reconciliation. Started on the Market Risk UI team (AngularJS) before moving to backend on the investment-banking deal platform.</li>
+              <li><strong>Modeled complex asset-backed bond deals in Java</strong> and built the pipeline that loads them from source files into SQL, with tranche extraction and duplicate-upload protection.</li>
+              <li><strong>Owned an asset-backed-finance reporting workflow end to end</strong> with traders, saving <span class="metric">2–3</span> person-hours daily.</li>
             </ul>
           </div>
         </li>
@@ -196,12 +194,13 @@
 
       <div class="projects-grid">
         <article class="card card--featured reveal">
-          <div class="card__tag">Flagship · v0.5 · Open Source</div>
+          <div class="card__tag">Flagship · Open Source</div>
           <h3 class="card__title">Where Is My Money Going? · statements in, a categorised answer out, on your own machine</h3>
           <p class="card__desc">I couldn't answer that question from my own bank statement. A year of UPI transfers to names that meant nothing to me weeks later, and every app that promised to sort it out wanted my full financial history uploaded to a server first. So the constraint came before the design: <strong>nothing leaves the machine</strong>. Everything else follows from that. Plain code reads the statements and pulls out the numbers; an AI model running on my own laptop only ever puts a label on rows the code has already read. That way no figure on your statement can be something the model made up. Two more passes tidy it up: one works out which payees are actual people you send money back and forth with, the other double-checks anything the first pass wasn't sure about.</p>
+          <p class="card__desc">It also learns from corrections. Once I categorise a payee, the next payment to the same UPI handle takes my label, and a payee that only looks similar gets my earlier labels as examples, found by embedding similarity. Questions in the chat go to an agent that calls read-only query tools, so the model picks the filters and the database does the arithmetic. The same tools are also served over MCP. I added evals too: on 199 labelled transaction descriptions written to stress it, the local model categorises 91% correctly, against 52% for regex rules alone.</p>
                     <details class="deep-dive">
             <summary>The bug I wrote, and how the architecture works</summary>
-<p class="card__desc">The part I'd actually talk about in an interview is a bug I wrote myself. A failed model call was returning a plausible-looking <code>{"category": "uncategorized", "confidence": 0.0}</code>, and the pipeline stored it as genuine output. So <span class="metric">285</span> transactions the model had never seen sat in the database labelled as its work, and the dashboard reported "80% uncategorized". The model itself was fine. It's a reasoning model, and asking it for JSON the naive way made its output degenerate mid-string. Turning the thinking channel off and passing a real JSON Schema fixed it outright. The lesson stuck harder than the fix: <strong>a fallback that imitates success hides the bug that caused it</strong>. Failures now return nothing at all, and the row stays visibly untagged. Once I knew what to look for I found two more of the same species, including a prose quality gate that was rejecting 100% of valid output while a canned fallback went out in its place.</p>
+<p class="card__desc">The part I'd actually talk about in an interview is a bug I wrote myself. A failed model call was returning a plausible-looking <code>{"category": "uncategorized", "confidence": 0.0}</code>, and the pipeline stored it as genuine output. So <span class="metric">285</span> transactions the model had never seen sat in the database labelled as its work, and the dashboard reported "80% uncategorized". The model itself was fine. It's a reasoning model, and asking it for JSON the naive way made its output degenerate mid-string. Turning the thinking channel off and passing a real JSON Schema fixed it outright. The lesson stuck harder than the fix: <strong>a fallback that imitates success hides the bug that caused it</strong>. Failures now return nothing at all, and the row stays visibly untagged. Once I knew what to look for I found two more of the same species, including a prose quality gate that was rejecting all valid output while a canned fallback went out in its place.</p>
 
           <div class="mini-pipe" aria-hidden="true">
             <span class="mini-pipe__node">statements</span>
@@ -242,7 +241,7 @@
           </details>
 
                     <div class="card__tech">
-            <span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>Structured output</span><span>FastAPI</span><span>SQLAlchemy</span><span>Next.js 15</span><span>ReportLab</span>
+            <span>Python</span><span>LangGraph</span><span>Gemma 4</span><span>Ollama</span><span>Structured output</span><span>MCP</span><span>FastAPI</span><span>SQLAlchemy</span><span>Next.js 15</span><span>ReportLab</span>
           </div>
           <a class="card__link" href="https://github.com/Arjun-B-J/where-is-my-money-going" target="_blank" rel="noopener">View on GitHub →</a>
         </article>
@@ -252,6 +251,16 @@
              what left the dead space: the flagship is several times taller
              than any of them. -->
         <div class="projects-side">
+
+    <article class="card reveal">
+      <div class="card__tag">Open Source</div>
+      <h3 class="card__title">Payments Ledger</h3>
+      <p class="card__desc">A double-entry payments ledger. Every transfer writes a debit and a matching credit to an append-only journal, so money can move but never appear or vanish. Transfers are idempotent, so a retry never moves money twice, and they can run in two phases, holding the money before it posts. Balance rows are always locked in the same order, so two transfers cannot deadlock, and events leave through a transactional outbox. A reconciler re-proves the books from the journal and found zero drift in 18 runs. The hard case is one merchant receiving half of all payments. On a laptop benchmark with durable commits (fsync on), splitting its balance over 16 rows raised throughput 2.7x to 3.2x over plain row locking, to about 10.9k transfers per second.</p>
+      <div class="card__tech">
+        <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>Spring JDBC</span><span>Flyway</span><span>Prometheus</span>
+      </div>
+      <a class="card__link" href="https://github.com/Arjun-B-J/payments-ledger" target="_blank" rel="noopener">View on GitHub →</a>
+    </article>
 
     <article class="card reveal">
       <div class="card__tag">Open Source</div>
@@ -266,7 +275,7 @@
     <article class="card reveal">
       <div class="card__tag">Recent · Open Source</div>
       <h3 class="card__title">lockin · Focus Timer</h3>
-      <p class="card__desc">A focus timer I built for my own interview prep. It keeps correct time even if the laptop sleeps, shrinks into a small always-on-top window, generates its own background noise, and writes every session to a file so I can chart what I actually did afterwards. One file, no installer, no dependencies, about 1500 lines.</p>
+      <p class="card__desc">A focus timer I built for my own interview prep. It keeps correct time even if the laptop sleeps, shrinks into a small always-on-top window, generates its own background noise, and writes every session to a file so I can chart what I actually did afterwards. One file, no installer, no dependencies.</p>
       <div class="card__tech">
         <span>Vanilla JS</span><span>Web Audio</span><span>Document PiP</span><span>File System Access</span><span>SVG</span><span>IndexedDB</span>
       </div>
@@ -311,13 +320,13 @@
         <div class="award award--featured reveal">
           <div class="award__kind">Publication</div>
           <h3 class="award__title">Statistically aided Binary Multi-Objective Grey Wolf Optimizer: a new feature selection approach for classification</h3>
-          <p class="award__meta">The Journal of Supercomputing (Springer) · Vol. 79 · pp. 12869–12901 · 2023 · Co-authored · <a href="https://doi.org/10.1007/s11227-023-05145-y" target="_blank" rel="noopener">DOI: 10.1007/s11227-023-05145-y</a></p>
+          <p class="award__meta">The Journal of Supercomputing (Springer) · 2023 · Co-authored · <a href="https://doi.org/10.1007/s11227-023-05145-y" target="_blank" rel="noopener">DOI: 10.1007/s11227-023-05145-y</a></p>
           <p class="award__desc">SaBMOGWO-S, a binary multi-objective Grey Wolf Optimizer that feeds statistical information about a dataset's attributes into feature selection, with methods to cut the running time by skipping unnecessary evaluations. Grew out of our <a href="https://github.com/Arjun-B-J/GreyWolfOptimizer" target="_blank" rel="noopener">GreyWolfOptimizer</a> repo.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
           <h3 class="award__title">Top Achievers Award · Wells Fargo 2025</h3>
-          <p class="award__desc">Wells Fargo's highest individual recognition, awarded to roughly the top <span class="metric">1%</span> of employees.</p>
+          <p class="award__desc">Wells Fargo's highest individual recognition, for P&amp;L and generative AI delivery.</p>
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
@@ -326,7 +335,7 @@
         </div>
         <div class="award reveal">
           <div class="award__kind">Award</div>
-          <h3 class="award__title">Manager Spotlight Awards · ×2</h3>
+          <h3 class="award__title">Manager Spotlight Awards</h3>
           <p class="award__desc">Awarded for consistent ownership and delivery.</p>
         </div>
       </div>
@@ -342,8 +351,8 @@
           </div>
           <div class="skill-tier__rows">
             <div class="skill-row"><span class="skill-row__label">Languages</span><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">Backend</span><div class="tags"><span class="tag">Apache Kafka</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">Spring Boot</span><span class="tag">Apache Camel</span><span class="tag">REST</span></div></div>
-            <div class="skill-row"><span class="skill-row__label">AI / Agentic</span><div class="tags"><span class="tag">LangGraph</span><span class="tag">Hybrid RAG</span><span class="tag">MCP</span><span class="tag">XGBoost · Learning-to-rank</span><span class="tag">MLOps</span><span class="tag">SHAP</span><span class="tag">Claude Code</span><span class="tag">GitHub Copilot</span><span class="tag">Orchestrator + Validator</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Backend</span><div class="tags"><span class="tag">Apache Kafka</span><span class="tag">MongoDB</span><span class="tag">Redis</span><span class="tag">Spring Boot</span><span class="tag">Apache Camel</span><span class="tag">REST</span><span class="tag">Distributed Systems</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">AI / Agentic</span><div class="tags"><span class="tag">LangGraph</span><span class="tag">Hybrid RAG</span><span class="tag">MCP</span><span class="tag">Tool Use</span><span class="tag">XGBoost · Learning-to-rank</span><span class="tag">MLOps</span><span class="tag">SHAP</span><span class="tag">Claude Code</span><span class="tag">GitHub Copilot</span><span class="tag">Orchestrator + Validator</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Infra &amp; CI/CD</span><div class="tags"><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Helm</span><span class="tag">OpenShift</span><span class="tag">GitHub Actions</span><span class="tag">Gradle</span><span class="tag">Maven</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Observability</span><div class="tags"><span class="tag">Splunk</span><span class="tag">Elastic APM</span></div></div>
           </div>
@@ -364,7 +373,8 @@
             <span class="skill-tier__sub">Used in personal builds</span>
           </div>
           <div class="skill-tier__rows">
-            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">Gemma 4</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Local AI / ML</span><div class="tags"><span class="tag">faster-whisper</span><span class="tag">Ollama</span><span class="tag">Gemma 4</span><span class="tag">LLM Evaluation</span></div></div>
+            <div class="skill-row"><span class="skill-row__label">Backend</span><div class="tags"><span class="tag">PostgreSQL</span></div></div>
             <div class="skill-row"><span class="skill-row__label">Web / API</span><div class="tags"><span class="tag">FastAPI</span><span class="tag">Next.js 15</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span><span class="tag">ReportLab</span></div></div>
             <div class="skill-row"><span class="skill-row__label">UI</span><div class="tags"><span class="tag">PyQt6</span><span class="tag">Streamlit</span><span class="tag">Web Audio</span><span class="tag">Document PiP</span></div></div>
           </div>
