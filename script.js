@@ -154,49 +154,9 @@ window.addEventListener('scroll', queueScroll, { passive: true });
 window.addEventListener('resize', queueScroll, { passive: true });
 onScrollFrame();
 
-// Scroll-spy: highlight active section in nav (with aria-current for a11y)
-const navLinks = [...document.querySelectorAll('.nav__links a')];
-const sections = [...document.querySelectorAll('main section[id]')];
-if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
-  // One link can stand for several sections. Education has no bar of its own,
-  // so it lights up Skills rather than leaving the previous link stale — which
-  // is what the whole unlisted third of the page used to do.
-  const linkMap = new Map();
-  navLinks.forEach((link) => {
-    const ids = (link.dataset.spy || link.getAttribute('href').replace('#', '')).trim().split(/\s+/);
-    ids.forEach((id) => { if (id) linkMap.set(id, link); });
-  });
-  const spy = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const link = linkMap.get(entry.target.id);
-        if (!link || !entry.isIntersecting) return;
-        navLinks.forEach((l) => {
-          l.classList.remove('is-active');
-          l.removeAttribute('aria-current');
-        });
-        link.classList.add('is-active');
-        link.setAttribute('aria-current', 'true');
-      });
-    },
-    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-  );
-  sections.forEach((s) => spy.observe(s));
-}
-
-// Hero cursor-follow spotlight (skipped on touch + reduced-motion)
 const heroEl = document.querySelector('.hero');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isTouch = window.matchMedia('(hover: none)').matches;
-if (heroEl && !reducedMotion && !isTouch) {
-  heroEl.addEventListener('mousemove', (e) => {
-    const r = heroEl.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width) * 100;
-    const y = ((e.clientY - r.top) / r.height) * 100;
-    heroEl.style.setProperty('--cx', x + '%');
-    heroEl.style.setProperty('--cy', y + '%');
-  }, { passive: true });
-}
 
 // ===== 3D agent-graph hero =====
 // Hand-rolled perspective projection: particles drift in a 3D box, the cloud
@@ -360,131 +320,6 @@ if (heroNet && heroEl) {
   }
 }
 
-// ===== Hero name decode effect =====
-const scrambleEls = document.querySelectorAll('[data-scramble]');
-if (scrambleEls.length && !reducedMotion) {
-  const POOL = '!<>-_\\/[]{}=+*^?#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  scrambleEls.forEach((el) => {
-    const original = el.textContent;
-    const total = Math.max(20, original.length * 3);
-    // Pin the span's width so random glyph widths can't reflow the heading
-    const w = el.offsetWidth;
-    if (w) {
-      el.style.display = 'inline-block';
-      el.style.width = w + 'px';
-      el.style.whiteSpace = 'nowrap';
-    }
-    let frame = 0;
-    const tick = () => {
-      frame++;
-      const settled = Math.floor((frame / total) * original.length);
-      if (settled >= original.length) {
-        el.textContent = original;
-        el.style.display = '';
-        el.style.width = '';
-        el.style.whiteSpace = '';
-        return;
-      }
-      let out = '';
-      for (let i = 0; i < original.length; i++) {
-        const ch = original[i];
-        out += (ch === ' ' || i < settled) ? ch : POOL[(Math.random() * POOL.length) | 0];
-      }
-      el.textContent = out;
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  });
-}
-
-// ===== Progressive disclosure on long experience lists =====
-// Seven bullets under one role is a wall nobody reads. The strongest three stay
-// up, the rest are one tap away. Purely additive: with JS off, everything shows.
-// This runs before the metric count-up so collapsed numbers are not observed
-// while visible and then hidden mid-animation.
-const VISIBLE_BULLETS = 3;
-document.querySelectorAll('.timeline__content .bullet-list').forEach((list, i) => {
-  const items = [...list.children];
-  // Only worth a control if it hides more than a single line.
-  if (items.length <= VISIBLE_BULLETS + 1) return;
-
-  const rest = items.slice(VISIBLE_BULLETS);
-  rest.forEach((li) => { li.hidden = true; });
-
-  if (!list.id) list.id = 'bullets-' + (i + 1);
-
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'more-toggle';
-  btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-controls', list.id);
-
-  const label = document.createElement('span');
-  label.textContent = 'Show ' + rest.length + ' more';
-  const icon = document.createElement('span');
-  icon.className = 'more-toggle__icon';
-  icon.setAttribute('aria-hidden', 'true');
-  icon.textContent = '⌄';
-  btn.append(label, icon);
-  list.after(btn);
-
-  btn.addEventListener('click', () => {
-    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-    rest.forEach((li) => { li.hidden = isOpen; });
-    btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-    label.textContent = isOpen ? 'Show ' + rest.length + ' more' : 'Show less';
-    // Collapsing can leave the button above the viewport; follow it back.
-    if (isOpen) btn.scrollIntoView({ block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
-  });
-});
-
-// ===== Metric count-up on scroll into view =====
-const metricEls = document.querySelectorAll('.metric');
-if (metricEls.length && !reducedMotion && 'IntersectionObserver' in window) {
-  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-  const animateMetric = (el) => {
-    const original = el.textContent;
-    const parts = original.split(/(\d[\d,]*)/);
-    if (parts.length < 2) return;
-    const duration = 1100;
-    let startTs = null;
-    const step = (ts) => {
-      if (startTs === null) startTs = ts;
-      const p = Math.min(1, (ts - startTs) / duration);
-      const e = easeOut(p);
-      if (p >= 1) { el.textContent = original; return; }
-      el.textContent = parts.map((part) => {
-        if (/^\d/.test(part)) {
-          return String(Math.round(parseFloat(part.replace(/,/g, '')) * e));
-        }
-        return part;
-      }).join('');
-      requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  const mio = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateMetric(entry.target);
-        mio.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.6 });
-  metricEls.forEach((el) => mio.observe(el));
-}
-
-// ===== Cursor spotlight on cards =====
-if (!isTouch && !reducedMotion) {
-  document.querySelectorAll('.card, .award, .skill-tier, .fact').forEach((el) => {
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    }, { passive: true });
-  });
-}
-
 // ===== Magnetic hero buttons =====
 if (!isTouch && !reducedMotion) {
   document.querySelectorAll('.hero .btn').forEach((btn) => {
@@ -496,22 +331,6 @@ if (!isTouch && !reducedMotion) {
     }, { passive: true });
     btn.addEventListener('mouseleave', () => { btn.style.translate = '0px 0px'; }, { passive: true });
   });
-}
-
-// ===== Timeline line draw-in =====
-const timelineEl = document.querySelector('.timeline');
-if (timelineEl) {
-  if ('IntersectionObserver' in window) {
-    const tio = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        timelineEl.classList.add('is-drawn');
-        tio.disconnect();
-      }
-    }, { threshold: 0.05 });
-    tio.observe(timelineEl);
-  } else {
-    timelineEl.classList.add('is-drawn');
-  }
 }
 
 // ===== View router =====
@@ -565,3 +384,137 @@ if (views.length) {
     else location.hash = target;
   });
 }
+
+// ===== Projects carousel =====
+// One project at a time. The track is a native scroll-snap strip, so swiping on
+// a phone works for free; the buttons, dots and arrow keys only move it.
+(() => {
+  const deck = document.querySelector('.deck');
+  if (!deck) return;
+
+  const track = deck.querySelector('.deck__track');
+  const slides = [...deck.querySelectorAll('.slide')];
+  const prevBtn = deck.querySelector('[data-deck="prev"]');
+  const nextBtn = deck.querySelector('[data-deck="next"]');
+  const nextLabel = deck.querySelector('.deck__next-label');
+  const nextName = deck.querySelector('.deck__next-name');
+  const dotsEl = deck.querySelector('.deck__dots');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const titles = slides.map((s) => s.querySelector('.slide__title').textContent.trim());
+  let current = 0;
+
+  const dots = titles.map((title, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'deck__dot';
+    dot.setAttribute('aria-label', 'Project ' + (i + 1) + ': ' + title);
+    dot.addEventListener('click', () => go(i));
+    dotsEl.append(dot);
+    return dot;
+  });
+
+  // Where the track must sit for a slide to be centred. Transforms do not touch
+  // offsetLeft, so the shrunken neighbours cannot throw this off.
+  const leftOf = (slide) => slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2;
+
+  // The buttons answer at once rather than waiting for the scroll to land, so
+  // two quick clicks move two projects. While the track glides, sync stands down:
+  // it would otherwise read the slide being left as the nearest one.
+  let gliding = null;
+  const go = (i) => {
+    current = i;
+    paint();
+    clearTimeout(gliding);
+    gliding = setTimeout(landed, 1500);
+    track.scrollTo({ left: leftOf(slides[i]), behavior: reduced ? 'auto' : 'smooth' });
+  };
+
+  // scrollend is the real signal; the timer covers browsers without it and the
+  // case where the track was already in place, which fires nothing at all.
+  const landed = () => {
+    clearTimeout(gliding);
+    gliding = null;
+    sync();
+  };
+  track.addEventListener('scrollend', landed);
+
+  const paint = () => {
+    slides.forEach((slide, i) => {
+      const on = i === current;
+      slide.classList.toggle('is-current', on);
+      slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+      // The neighbours peek in, but only the centred card is a tab stop.
+      const link = slide.querySelector('.slide__title a');
+      if (link) link.tabIndex = on ? 0 : -1;
+    });
+    dots.forEach((dot, i) => {
+      if (i === current) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+    prevBtn.disabled = current === 0;
+    const last = current === slides.length - 1;
+    nextLabel.textContent = last ? 'Back to start' : 'Next';
+    nextName.textContent = last ? '' : ': ' + titles[current + 1];
+    nextBtn.setAttribute('aria-label', last ? 'Back to first project' : 'Next project: ' + titles[current + 1]);
+  };
+
+  const sync = () => {
+    if (gliding) return;
+    const left = track.scrollLeft;
+    let nearest = 0;
+    let best = Infinity;
+    slides.forEach((slide, i) => {
+      const gap = Math.abs(leftOf(slide) - left);
+      if (gap < best) { best = gap; nearest = i; }
+    });
+    if (nearest !== current) {
+      current = nearest;
+      paint();
+    }
+  };
+
+  let queued = false;
+  track.addEventListener('scroll', () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; sync(); });
+  }, { passive: true });
+
+  // The view is display:none until opened, so nothing can be measured before
+  // then. This also keeps the card centred across a resize.
+  new ResizeObserver(() => {
+    if (!track.clientWidth) return;
+    track.scrollTo({ left: leftOf(slides[current]), behavior: 'auto' });
+  }).observe(track);
+
+  prevBtn.addEventListener('click', () => go(Math.max(0, current - 1)));
+  nextBtn.addEventListener('click', () => go(current === slides.length - 1 ? 0 : current + 1));
+
+  // A card peeking in from the side moves into place first. Only the centred
+  // one opens GitHub.
+  track.addEventListener('click', (e) => {
+    const slide = e.target.closest('.slide');
+    if (!slide) return;
+    const i = slides.indexOf(slide);
+    if (i === current) return;
+    e.preventDefault();
+    go(i);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (!deck.closest('.view').classList.contains('is-active')) return;
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowRight' && current < slides.length - 1) go(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) go(current - 1);
+  });
+
+  paint();
+})();
+
+// "Back to top" used an in-page #top link, which the view router read as an
+// unknown view and sent the reader Home. Scroll instead.
+document.querySelector('.to-top')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
