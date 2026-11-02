@@ -1,0 +1,47 @@
+<!doctype html>
+<!-- Source for og-image.png (1200x630), the picture shown when a link to the
+     site is shared. Re-render after editing, with the site served locally:
+     chrome --headless=new --hide-scrollbars --window-size=1200,630
+            --screenshot=og-image.png http://localhost:8123/og-image.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Share Image</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: 'Manrope', system-ui, sans-serif;
+    color: #0d2019;
+    background:
+      radial-gradient(620px 520px at 8% 6%, #a4eccb, transparent 70%),
+      radial-gradient(640px 560px at 96% 8%, #b4e2ff, transparent 70%),
+      radial-gradient(560px 420px at 62% 108%, #ffd6b3, transparent 70%),
+      #f8fcfa;
+  }
+  main { display: grid; grid-template-columns: 1fr 372px; gap: 56px; align-items: center; height: 100%; padding: 0 76px; }
+  .mark { font-size: 30px; font-weight: 800; color: #0a6b4e; }
+  h1 { margin-top: 26px; font-size: 92px; font-weight: 800; line-height: 1; letter-spacing: -0.05em; }
+  h1 span { display: block; color: #0a6b4e; }
+  .role { margin-top: 26px; font-size: 27px; font-weight: 700; }
+  .tag { margin-top: 10px; font-size: 24px; font-weight: 500; color: #3f5249; }
+  .url { margin-top: 30px; font: 500 21px 'JetBrains Mono', monospace; color: #0a6b4e; }
+  img { width: 372px; height: 466px; object-fit: cover; object-position: 52% 30%; border-radius: 34px; box-shadow: 0 34px 70px -34px rgba(13, 60, 45, 0.6); }
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <p class="mark">ABJ</p>
+    <h1>Arjun Bindu <span>Jayachandran</span></h1>
+    <p class="role">Senior Software Engineer · Wells Fargo</p>
+    <p class="tag">Applied AI · Java backends · Fixed-income trading</p>
+    <p class="url">arjun-b-j.github.io</p>
+  </div>
+  <img src="headshot.jpg" alt="" />
+</main>
+</body>
+</html>
